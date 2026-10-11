@@ -64,6 +64,19 @@
     try { localStorage.setItem('theme', next); } catch (e) {}
   });
 
+  /* ---------- Compteur de visites anonyme : aucun cookie, aucune donnée personnelle ----------
+     Une simple addition (+1) envoyée à un compteur public ; si le service ne répond pas,
+     le site fonctionne normalement. Consultation : page mes-visites.html */
+  try {
+    if (!sessionStorage.getItem('vu')) {
+      sessionStorage.setItem('vu', '1');
+      var jour = new Date().toISOString().slice(0, 10);
+      ['total', 'j-' + jour].forEach(function (k) {
+        fetch('https://api.counterapi.dev/v1/gabriel-sebban-vitrine-93230/' + k + '/up').catch(function () {});
+      });
+    }
+  } catch (e) {}
+
   /* ---------- E-mail reconstruit au chargement : jamais en clair dans le code (anti-spam) ---------- */
   $$('[data-mail]').forEach(function (el) {
     var addr = el.dataset.mail.replace('*', '@');

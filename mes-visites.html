@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes visites | Gabriel Sebban</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/legal.css">
+<script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<style>
+  .stats { max-width: 48rem; }
+  .big { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+  .tile { flex: 1; min-width: 150px; border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.2rem; background: var(--surface); }
+  .tile b { display: block; font-family: var(--font-display); font-size: 2.2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .tile span { font-size: .85rem; color: var(--muted); }
+  .jours { margin-top: 2rem; display: flex; flex-direction: column; gap: .4rem; }
+  .jour { display: grid; grid-template-columns: 7.5rem 1fr 2.5rem; align-items: center; gap: .75rem; font-size: .9rem; }
+  .jour i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .barre { height: 14px; border-radius: 7px; background: var(--line); overflow: hidden; }
+  .barre b { display: block; height: 100%; background: var(--accent); border-radius: 7px; min-width: 2px; }
+  .jour s { text-decoration: none; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+  .vide { color: var(--muted); margin-top: 1.5rem; }
+  #etat { margin-top: 1rem; color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<header class="legal-top"><a class="legal-brand" href="index.html">Gabriel Sebban</a><a class="link" href="index.html">Retour au site</a></header>
+<main class="legal stats">
+<h1>Mes visites</h1>
+<p class="legal-draft">Page privée : garde cette adresse pour toi (elle n'est reliée nulle part sur le site et interdite aux moteurs de recherche).</p>
+<p id="etat">Chargement des compteurs…</p>
+<div class="big" hidden id="tuiles">
+  <div class="tile"><b id="total">–</b><span>visites au total</span></div>
+  <div class="tile"><b id="aujourdhui">–</b><span>aujourd'hui</span></div>
+  <div class="tile"><b id="semaine">–</b><span>ces 7 derniers jours</span></div>
+</div>
+<div class="jours" id="jours"></div>
+<p class="vide">Une « visite » = quelqu'un ouvre ton site (les rechargements dans la même session ne comptent qu'une fois). Compteur anonyme, sans cookie.</p>
+</main>
+<script>
+(function () {
+  var NS = 'gabriel-sebban-vitrine-93230';
+  var API = 'https://api.counterapi.dev/v1/' + NS + '/';
+  var JOURS_AFFICHES = 14;
+  var noms = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
+
+  function lire(cle) {
+    // Lecture sans incrémenter ; un compteur jamais créé répond en erreur → 0
+    return fetch(API + cle).then(function (r) {
+      if (!r.ok) return 0;
+      return r.json().then(function (j) { return (j && typeof j.count === 'number') ? j.count : 0; });
+    }).catch(function () { return null; });
+  }
+
+  var cles = [], dates = [];
+  for (var i = 0; i < JOURS_AFFICHES; i++) {
+    var d = new Date(); d.setDate(d.getDate() - i);
+    dates.push(d);
+    cles.push('j-' + d.toISOString().slice(0, 10));
+  }
+
+  Promise.all([lire('total')].concat(cles.map(lire))).then(function (res) {
+    var etat = document.getElementById('etat');
+    if (res.every(function (v) { return v === null; })) {
+      etat.textContent = 'Le service de comptage ne répond pas pour le moment. Réessaie dans quelques minutes.';
+      return;
+    }
+    var total = res[0] || 0;
+    var parJour = res.slice(1).map(function (v) { return v || 0; });
+    document.getElementById('total').textContent = total;
+    document.getElementById('aujourdhui').textContent = parJour[0];
+    document.getElementById('semaine').textContent = parJour.slice(0, 7).reduce(function (a, b) { return a + b; }, 0);
+    document.getElementById('tuiles').hidden = false;
+    etat.hidden = true;
+
+    var max = Math.max.apply(null, parJour.concat([1]));
+    var html = '';
+    for (var k = 0; k < parJour.length; k++) {
+      var d2 = dates[k];
+      var label = noms[d2.getDay()] + ' ' + d2.getDate() + '/' + (d2.getMonth() + 1);
+      html += '<div class="jour"><i>' + label + '</i><div class="barre"><b style="width:' + Math.round(parJour[k] / max * 100) + '%"></b></div><s>' + parJour[k] + '</s></div>';
+    }
+    document.getElementById('jours').innerHTML = html;
+  });
+})();
+</script>
+</body>
+</html>
