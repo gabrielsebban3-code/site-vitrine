@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Création de sites internet pour artisans à Paris — Gabriel Sebban</title>
+<!-- Adresse temporaire GitHub Pages ; quand le domaine .fr sera acheté, remplacer cette adresse dans index.html, robots.txt et sitemap.xml -->
+<link rel="canonical" href="https://gabrielsebban3-code.github.io/site-vitrine/">
+<meta name="description" content="Site internet pour artisans parisiens : plombier, serrurier, électricien. Essai gratuit d'un mois, en ligne sous 48 h, rien à payer si vous arrêtez.">
+<meta name="theme-color" content="#E9E7E3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16191D" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Votre site à l'essai pendant 1 mois">
+<meta property="og:description" content="Sites pour artisans à Paris. Une version à votre nom sous 48 h, retirée à la fin du mois si vous ne continuez pas.">
+<meta property="og:image" content="https://gabrielsebban3-code.github.io/site-vitrine/img/og.jpg">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="img/plombier-desktop.webp" imagesrcset="img/plombier-desktop-sm.webp 720w, img/plombier-desktop.webp 1440w" imagesizes="64vw" media="(min-width: 900px)">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/sections.css">
+<script>
+  /* Thème choisi à la main, appliqué avant l'affichage pour éviter un flash */
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  document.documentElement.classList.add('js');
+</script>
+<script src="js/main.js" defer></script>
+<meta property="og:url" content="https://gabrielsebban3-code.github.io/site-vitrine/">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="nav" id="haut">
+  <div class="nav__in">
+    <a class="nav__brand" href="#haut">Gabriel Sebban<span>Sites pour artisans à Paris</span></a>
+    <nav class="nav__links" id="menu" aria-label="Menu principal">
+      <a href="#les-demos">Démos</a>
+      <a href="#offre">L’essai</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#inclus">Ce qui est inclus</a>
+      <a href="#deroule">Comment ça se passe</a>
+      <a class="btn nav__cta" href="#contact">Essai gratuit</a>
+    </nav>
+    <button class="icon-btn theme-btn" type="button" aria-label="Changer de thème (clair ou sombre)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <!-- 1. ACCUEIL : la démo est la vedette. Scène épinglée : la démo grandit puis défile. -->
+  <section class="scene" id="demos" aria-labelledby="titre-accueil" data-demo="plombier">
+    <div class="scene__pin">
+      <div class="scene__intro">
+        <h1 id="titre-accueil" class="hero-title">Voici à quoi pourrait ressembler votre site.</h1>
+        <p class="hero-offer">Essai gratuit d’un mois&nbsp;: votre site internet à votre nom, en ligne sous 48&nbsp;h. Rien à payer si vous arrêtez.</p>
+        <div class="namer">
+          <label for="nom-entreprise">Essayez avec le nom de votre entreprise</label>
+          <input id="nom-entreprise" type="text" maxlength="32" autocomplete="organization" placeholder="Plomberie Rocher" spellcheck="false">
+        </div>
+        <div class="controls">
+          <div class="picker" role="group" aria-label="Choisir la démo" hidden>
+            <button type="button" class="picker__btn" data-demo="plombier" aria-pressed="true">Plombier</button>
+            <button type="button" class="picker__btn" data-demo="serrurier" aria-pressed="false">Serrurier</button>
+          </div>
+          <p class="live"><a href="demos/plombier/index.html" target="_blank" rel="noopener" data-live>Démo animée <span class="sr-only">en direct (s’ouvre dans un nouvel onglet)</span><span aria-hidden="true">↗</span></a></p>
+        </div>
+      </div>
+
+      <ol class="tour" aria-label="Ce que montre la démo plombier">
+        <li data-top="0" data-mtop="0">Le numéro dès l’arrivée</li>
+        <li data-top="0.1368" data-mtop="0.1061">Les prix affichés</li>
+        <li data-top="0.3551" data-mtop="0.2989">La zone d’intervention</li>
+        <li data-top="0.485" data-mtop="0.4213">Le déroulé d’une intervention</li>
+        <li data-top="0.579" data-mtop="0.526">Les avis clients</li>
+        <li data-top="0.7092" data-mtop="0.6617">L’appel d’urgence</li>
+        <li data-top="0.8371" data-mtop="0.8474">Les questions fréquentes</li>
+      </ol>
+
+      <div class="stage">
+        <figure class="browser">
+          <div class="browser__bar" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="browser__url"><span data-slug>plomberie-rocher</span>.fr</span>
+          </div>
+          <div class="browser__view">
+            <div class="shot shot--desktop">
+              <picture>
+                <!-- Sur téléphone le cadre ordinateur est masqué : image vide pour ne rien télécharger -->
+                <source media="(max-width: 899px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                <img fetchpriority="high" src="img/plombier-desktop.webp" srcset="img/plombier-desktop-sm.webp 720w, img/plombier-desktop.webp 1440w" sizes="(min-width: 900px) 64vw, 100vw" width="1440" height="6227" alt="Démo de site pour un plombier parisien : numéro d'appel, tarifs, zone d'intervention, avis et questions fréquentes.">
+              </picture>
+              <span class="shot__name" data-name aria-hidden="true">Plomberie Rocher</span>
+            </div>
+          </div>
+          <figcaption class="sr-only">Démo plombier, version ordinateur. Entreprise et numéro fictifs.</figcaption>
+        </figure>
+
+        <figure class="phone">
+          <div class="phone__view">
+            <div class="shot shot--mobile">
+              <img src="img/plombier-mobile.webp" width="585" height="11250" alt="La même démo plombier sur téléphone, avec le bouton d'appel toujours visible." decoding="async">
+              <span class="shot__name" data-name aria-hidden="true">Plomberie Rocher</span>
+            </div>
+          </div>
+        </figure>
+      </div>
+
+      <p class="tour-now" aria-hidden="true"></p>
+    </div>
+  </section>
+
+  <!-- Les démos : chacune filmée pendant qu'elle défile toute seule (ses vraies animations), avec son lien.
+       Les vidéos ne se chargent qu'en arrivant près de l'écran ; sans JS, ou si l'appareil réduit les animations, on voit l'image fixe. -->
+  <section class="cases" id="les-demos" aria-labelledby="titre-cases">
+    <div class="cases__head">
+      <h2 id="titre-cases" class="split">Les démos.</h2>
+      <p>Deux sites complets, chacun dans le style de son métier. Ils défilent ici tout seuls.</p>
+    </div>
+
+    <article class="case" aria-labelledby="case-plombier">
+      <div class="case__media reveal">
+        <figure class="browser case__browser">
+          <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url"><span>plomberie-rocher</span>.fr</span></div>
+          <video class="case__video" data-src="video/plombier-desktop" poster="img/plombier-desktop-poster.webp" width="1440" height="900" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </figure>
+        <figure class="phone case__phone">
+          <video class="case__video" data-src="video/plombier-mobile" poster="img/plombier-mobile-poster.webp" width="540" height="1168" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </figure>
+        <button class="case__toggle" type="button" hidden><span class="case__icon" aria-hidden="true"></span><span class="case__state">Pause</span><span class="sr-only"> la vidéo de la démo plombier</span></button>
+      </div>
+      <div class="case__text">
+        <p class="case__kicker"><span>01</span>Plombier</p>
+        <h3 id="case-plombier" class="case__name">Plomberie Rocher</h3>
+        <p class="case__style">Pour les urgences comme pour les devis.</p>
+        <ul class="case__list">
+          <li>Le numéro en haut de chaque page, un appel en un geste</li>
+          <li>Les prix affichés&nbsp;: moins d’appels pour rien</li>
+          <li>La carte des arrondissements où il se déplace</li>
+        </ul>
+        <p class="case__note">Entreprise, numéro et avis fictifs.</p>
+        <p class="case__more"><a class="link" href="demos/plombier/index.html" target="_blank" rel="noopener">Ouvrir la démo plombier <span aria-hidden="true">↗</span></a></p>
+      </div>
+    </article>
+
+    <article class="case case--flip" aria-labelledby="case-serrurier">
+      <div class="case__media reveal">
+        <figure class="browser case__browser">
+          <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url"><span>serrurerie-lenoir</span>.fr</span></div>
+          <video class="case__video" data-src="video/serrurier-desktop" poster="img/serrurier-desktop-poster.webp" width="1440" height="900" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </figure>
+        <figure class="phone case__phone">
+          <video class="case__video" data-src="video/serrurier-mobile" poster="img/serrurier-mobile-poster.webp" width="540" height="1168" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </figure>
+        <button class="case__toggle" type="button" hidden><span class="case__icon" aria-hidden="true"></span><span class="case__state">Pause</span><span class="sr-only"> la vidéo de la démo serrurier</span></button>
+      </div>
+      <div class="case__text">
+        <p class="case__kicker"><span>02</span>Serrurier</p>
+        <h3 id="case-serrurier" class="case__name">Serrurerie Lenoir</h3>
+        <p class="case__style">Pour un client bloqué devant sa porte, à toute heure.</p>
+        <ul class="case__list">
+          <li>«&nbsp;24&nbsp;h/24&nbsp;» et le numéro visibles dès l’arrivée</li>
+          <li>Les prix annoncés avant l’intervention, pour rassurer</li>
+          <li>La méthode expliquée&nbsp;: ouvrir sans casser quand c’est possible</li>
+        </ul>
+        <p class="case__note">Entreprise, numéro et avis fictifs.</p>
+        <p class="case__more"><a class="link" href="demos/serrurier/index.html" target="_blank" rel="noopener">Ouvrir la démo serrurier <span aria-hidden="true">↗</span></a></p>
+      </div>
+    </article>
+
+    <!-- La prochaine démo est annoncée sans faux contenu -->
+    <div class="case-soon">
+      <p class="case-soon__label"><span>03</span>Peintre en bâtiment</p>
+      <span class="case-soon__band" aria-hidden="true"></span>
+      <p class="case-soon__state">Démo en préparation. Vous êtes d’un autre métier&nbsp;? <a class="link" href="#contact">Je prépare la démo pour vous.</a></p>
+    </div>
+  </section>
+
+  <!-- 2. L'OFFRE : volet brique qui recouvre l'écran, « 1 mois » qui grossit -->
+  <section class="offer" id="offre" aria-labelledby="titre-offre">
+    <div class="offer__pin">
+      <div class="offer__panel">
+        <h2 id="titre-offre" class="offer__title" aria-label="Votre site à l’essai pendant un mois">
+          <span class="offer__lead">Votre site à l’essai pendant</span>
+          <span class="offer__big" data-letters><span class="ow">un</span> <span class="ow">mois</span></span>
+        </h2>
+        <div class="offer__body">
+          <p>Je crée une version de votre site, à votre nom, livrée sous 48&nbsp;h. Vous l’utilisez pendant un mois avec vos clients.</p>
+          <p><strong>Vous ne continuez pas&nbsp;? Je le retire à la fin du mois et vous n’avez rien à payer.</strong></p>
+          <p class="offer__after">Si vous continuez&nbsp;: à partir de 650&nbsp;€, puis 30&nbsp;€ par mois, ou 950&nbsp;€ une seule fois sans abonnement. <a class="link link--light" href="#tarifs">Voir les tarifs</a></p>
+          <a class="btn btn--inverse" href="#contact">Demander mon essai</a>
+          <a class="link link--light" href="conditions-essai.html">Lire les conditions de l’essai</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS : l'essai, puis les deux formules du script d'appel (avec suivi, clé en main) -->
+  <section class="pricing" id="tarifs" aria-labelledby="titre-tarifs">
+    <div class="pricing__head">
+      <h2 id="titre-tarifs" class="split">Les tarifs</h2>
+      <p>Vous commencez toujours par l’essai gratuit. Si le site vous plaît, vous choisissez une formule. Je vous fais un devis écrit avant tout paiement.</p>
+    </div>
+    <ul class="plans">
+      <li class="plan">
+        <h3 class="plan__name">L’essai</h3>
+        <p class="plan__price"><span class="plan__amount">0&nbsp;€</span><span class="plan__unit">pendant un mois</span></p>
+        <ul class="plan__list">
+          <li>Votre site à votre nom, en ligne sous 48&nbsp;h</li>
+          <li>Vous le montrez à vos clients et me demandez des changements</li>
+          <li>Vous arrêtez&nbsp;: je le retire, vous ne payez rien</li>
+        </ul>
+        <a class="btn plan__cta" href="#contact">Demander mon essai</a>
+      </li>
+      <li class="plan plan--main">
+        <h3 class="plan__name">Avec suivi</h3>
+        <p class="plan__price"><span class="plan__from">à partir de</span><span class="plan__amount">650&nbsp;€</span><span class="plan__unit">puis 30&nbsp;€ par mois</span></p>
+        <ul class="plan__list">
+          <li>La création, payée une fois</li>
+          <li>2 modifications par mois comprises (horaires, prix, photos…)</li>
+          <li>10&nbsp;€ la modification à partir de la 3<sup>e</sup> du mois</li>
+          <li>Le prix de la création monte seulement si vous voulez des pages en plus ou le paiement en ligne</li>
+        </ul>
+        <a class="btn plan__cta" href="#contact">Commencer par l’essai</a>
+      </li>
+      <li class="plan">
+        <h3 class="plan__name">Clé en main</h3>
+        <p class="plan__price"><span class="plan__amount">950&nbsp;€</span><span class="plan__unit">une seule fois, sans abonnement</span></p>
+        <ul class="plan__list">
+          <li>Le site est à vous&nbsp;: nom de domaine et hébergement à votre nom, tous les fichiers, cession écrite de mes droits</li>
+          <li>Garantie 60 jours&nbsp;: je corrige ce qui ne marche pas dans ce que j’ai livré</li>
+          <li>À votre charge ensuite&nbsp;: le renouvellement annuel du domaine et de l’hébergement, et les modifications si vous en voulez</li>
+        </ul>
+        <a class="btn plan__cta" href="#contact">Commencer par l’essai</a>
+      </li>
+    </ul>
+    <p class="pricing__note">Tarifs de lancement. TVA non applicable, article 293&nbsp;B du CGI.</p>
+  </section>
+
+  <!-- 3. CE QUI EST INCLUS : titre collé à gauche, liste qui se coche au scroll -->
+  <section class="included" id="inclus" aria-labelledby="titre-inclus">
+    <div class="included__head">
+      <h2 id="titre-inclus" class="split">Ce qui est inclus</h2>
+      <p>Pendant l’essai et avec la formule avec suivi, vous n’avez rien à gérer de technique.</p>
+    </div>
+    <ul class="checklist">
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg><div><h3>Un nom de domaine à votre nom</h3><p>Une adresse du type votre-entreprise.fr, transférée à votre nom quand vous continuez.</p></div></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg><div><h3>Un site pensé d’abord pour le téléphone</h3><p>Le bouton d’appel reste visible pendant qu’on lit la page.</p></div></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg><div><h3>Vos prestations et vos tarifs</h3><p>Rédigés avec vous, dans vos mots, avec les prix que vous choisissez d’afficher.</p></div></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg><div><h3>Votre zone d’intervention</h3><p>Les arrondissements où vous vous déplacez, pour que les clients sachent tout de suite si vous venez chez eux.</p></div></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg><div><h3>L’hébergement et la sécurité</h3><p>Le site est en ligne, en https, et je m’occupe de le maintenir.</p></div></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg><div><h3>Les petites modifications</h3><p>Horaires, prix, photos&nbsp;: vous m’envoyez un message, je fais le changement.</p></div></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg><div><h3>Les mentions légales</h3><p>Les informations obligatoires sur votre entreprise, rédigées et à jour.</p></div></li>
+    </ul>
+  </section>
+
+  <!-- 4. COMMENT ÇA SE PASSE : vraie suite d'étapes, ligne tracée au scroll -->
+  <section class="steps" id="deroule" aria-labelledby="titre-deroule">
+    <h2 id="titre-deroule" class="split">Comment ça se passe</h2>
+    <ol class="steps__list">
+      <li class="step"><span class="step__n" aria-hidden="true">1</span><div><h3>On s’appelle</h3><p>Vous me parlez de votre métier, de vos prestations et du quartier où vous travaillez. Dix minutes suffisent.</p></div></li>
+      <li class="step"><span class="step__n" aria-hidden="true">2</span><div><h3>Votre site en ligne sous&nbsp;48&nbsp;h</h3><p>À votre nom, sur votre propre adresse. Il porte la mention «&nbsp;version d’essai&nbsp;» tant que vous n’avez pas décidé.</p></div></li>
+      <li class="step"><span class="step__n" aria-hidden="true">3</span><div><h3>Un mois pour l’essayer</h3><p>Vous le montrez, vous donnez l’adresse à vos clients, vous me demandez des changements.</p></div></li>
+      <li class="step"><span class="step__n" aria-hidden="true">4</span><div><h3>Vous décidez</h3><p>Vous continuez avec la formule de votre choix, après un devis écrit. Ou vous arrêtez&nbsp;: je retire le site, vous ne payez rien.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- 5. CONTACT : la page passe en sombre ; formulaire de devis, puis le numéro qui s'écrit -->
+  <section class="contact" id="contact" aria-labelledby="titre-contact">
+    <div class="contact__grid">
+      <div class="contact__head">
+        <h2 id="titre-contact" class="split">Parlons de votre site.</h2>
+        <p class="contact__intro">Je m’appelle Gabriel, je crée des sites internet pour les artisans de Paris. Décrivez votre activité en quelques mots&nbsp;: je vous rappelle et on regarde ensemble à quoi ressemblerait le vôtre.</p>
+      </div>
+
+      <!-- Formulaire (demande d'essai) : envoyé par FormSubmit à l'e-mail de Gabriel (voir README) -->
+      <form class="quote reveal" id="devis" method="post" aria-labelledby="titre-devis" novalidate data-mailbox="gabrielsebban3*gmail.com">
+        <input type="hidden" name="_subject" value="Nouvelle demande d’essai depuis votre site">
+        <input type="hidden" name="_template" value="table">
+        <h3 id="titre-devis" class="quote__title">Demander mon essai gratuit</h3>
+
+        <fieldset class="quote__trade">
+          <legend>Votre métier <span class="quote__opt">(facultatif)</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="metier" value="Plombier"><span>Plombier</span></label>
+            <label class="chip"><input type="radio" name="metier" value="Serrurier"><span>Serrurier</span></label>
+            <label class="chip"><input type="radio" name="metier" value="Électricien"><span>Électricien</span></label>
+            <label class="chip"><input type="radio" name="metier" value="Peintre"><span>Peintre</span></label>
+            <label class="chip"><input type="radio" name="metier" value="Autre"><span>Autre métier</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="q-nom">Votre nom</label>
+          <input id="q-nom" name="nom" type="text" autocomplete="name" required aria-describedby="q-nom-err">
+          <p class="field__err" id="q-nom-err"></p>
+        </div>
+        <div class="quote__row">
+          <div class="field">
+            <label for="q-tel">Votre téléphone</label>
+            <input id="q-tel" name="telephone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="q-tel-err">
+            <p class="field__err" id="q-tel-err"></p>
+          </div>
+          <div class="field">
+            <label for="q-mail">Votre e-mail <span class="quote__opt">(facultatif)</span></label>
+            <input id="q-mail" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" aria-describedby="q-mail-err">
+            <p class="field__err" id="q-mail-err"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="q-msg">Votre besoin, en quelques mots</label>
+          <textarea id="q-msg" name="message" rows="4" maxlength="1500" required aria-describedby="q-msg-err" placeholder="Votre activité, votre quartier, ce que vous voulez sur votre site…"></textarea>
+          <p class="field__err" id="q-msg-err"></p>
+        </div>
+        <!-- pièges à robots : invisibles pour les visiteurs, remplis seulement par les robots
+             (site_web est vérifié par le script, _honey par FormSubmit) -->
+        <div class="quote__trap" aria-hidden="true"><label for="q-site">Ne pas remplir</label><input id="q-site" name="site_web" type="text" tabindex="-1" autocomplete="off"><input name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+
+        <div class="quote__foot">
+          <button class="btn quote__send" type="submit">
+            <span class="quote__label">Être rappelé</span>
+            <svg class="quote__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="quote__privacy">Vos coordonnées servent uniquement à vous répondre. <a class="link" href="mentions-legales.html#donnees">En savoir plus</a></p>
+        </div>
+        <p class="quote__status" role="status" aria-live="polite"></p>
+      </form>
+
+      <!-- Après l'envoi : le formulaire laisse la place à ce message -->
+      <div class="quote-done" id="devis-envoye" tabindex="-1" hidden>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l7 7L26 9"/></svg>
+        <h3>Demande envoyée.</h3>
+        <p data-done-text>Merci. Je vous rappelle pour en parler.</p>
+      </div>
+    </div>
+
+    <p class="contact__or">Ou appelez-moi directement</p>
+    <a class="contact__phone" href="tel:+33649298151" aria-label="Appeler le 06 49 29 81 51"><span class="typed" data-typed>06 49 29 81 51</span></a>
+    <a class="contact__mail link" data-mail="gabrielsebban3*gmail.com" href="#contact">M’écrire un e-mail</a>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Gabriel Sebban — création de sites internet pour artisans, Paris</p>
+  <nav aria-label="Pages légales">
+    <a class="link" href="mentions-legales.html">Mentions légales</a>
+    <a class="link" href="conditions-essai.html">Conditions de l’essai</a>
+  </nav>
+</footer>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Gabriel Sebban — Sites internet pour artisans",
+  "description": "Création de sites internet pour artisans à Paris (plombiers, serruriers, électriciens, peintres). Essai gratuit d'un mois : site à votre nom en ligne sous 48 h, rien à payer si vous arrêtez.",
+  "telephone": "+33649298151",
+  "areaServed": { "@type": "City", "name": "Paris" },
+  "founder": { "@type": "Person", "name": "Gabriel Sebban" },
+  "priceRange": "0 € (essai) · 650 € + 30 €/mois · 950 €",
+  "knowsLanguage": "fr"
+}
+</script>
+
+<!-- Téléphones : barre d'appel toujours visible -->
+<div class="callbar">
+  <a class="btn" href="tel:+33649298151" aria-label="Appeler le 06 49 29 81 51">Appeler</a>
+  <a class="btn callbar__alt" href="#contact">Essai gratuit</a>
+</div>
+
+</body>
+</html>

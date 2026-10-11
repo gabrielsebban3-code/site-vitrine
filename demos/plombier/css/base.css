@@ -1,0 +1,57 @@
+/* =========================================================
+   Base : remise à zéro, texte, boutons, focus
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 1rem); }
+body {
+  margin: 0; background: var(--faience); color: var(--encre);
+  font-family: var(--font); font-size: var(--t-m); line-height: 1.55;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, p, ul, ol, figure, blockquote, dl, dd { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: var(--w-display); line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
+em { font-style: italic; }
+strong { font-weight: 600; }
+
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: fixed; left: 1rem; top: -4rem; z-index: 100; padding: .75rem 1.25rem; border-radius: var(--radius); background: var(--encre); color: var(--faience); text-decoration: none; transition: top .2s; }
+.skip:focus { top: 1rem; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+/* Chapitres : numéro + intitulé en italique */
+.kicker { display: flex; align-items: center; gap: .75rem; font-family: var(--font-display); font-style: italic; font-weight: var(--w-text); font-size: var(--t-l); line-height: 1.2; color: var(--accent); }
+.kicker__n { font-style: normal; font-family: var(--font); font-size: .8rem; font-weight: 600; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+.kicker__n::after { content: ""; display: inline-block; vertical-align: middle; width: 2rem; height: 1px; margin-left: .75rem; background: currentColor; opacity: .5; }
+
+/* Boutons : pilule, l'eau monte dans le bouton au survol */
+.btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  min-height: 52px; padding: .85rem 1.5rem; border-radius: var(--radius); border: 1.5px solid transparent;
+  font-size: var(--t-s); font-weight: 600; line-height: 1.2; text-decoration: none; cursor: pointer;
+  background: var(--btn-bg); color: var(--btn-ink);
+  transition: color .35s var(--ease-out), transform .2s var(--ease-out), border-color .35s;
+}
+.btn::before {
+  content: ""; position: absolute; inset: -2px; z-index: -1; border-radius: inherit;
+  background: var(--accent); transform: translateY(102%); transition: transform .45s var(--ease-out);
+}
+.btn:hover::before { transform: none; }
+.btn:active { transform: scale(.97); }
+.btn .ico { width: 1.15em; height: 1.15em; flex: none; }
+.btn--call { background: var(--btn-bg); color: var(--btn-ink); }
+[data-tone="dark"] .btn--call:hover { color: var(--encre); }
+.btn--call::before { background: var(--eau-fonce); }
+[data-tone="dark"] .btn--call::before { background: var(--faience); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn--ghost::before { background: var(--ink); }
+.btn--ghost:hover { color: var(--bg); border-color: var(--ink); }
+
+.link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; transition: text-decoration-color .2s; }
+.link:hover { text-decoration-color: var(--accent); }

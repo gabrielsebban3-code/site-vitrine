@@ -1,0 +1,612 @@
+/* =========================================================
+   SECTIONS
+   Principe : la mise en page « statique » est écrite d'abord
+   (elle sert si les animations sont désactivées ou si le JS
+   ne charge pas). Les scènes animées au scroll sont dans le
+   bloc « MOUVEMENT » en fin de fichier.
+   Variables pilotées par js/main.js (de 0 à 1) :
+   --a  accueil : la démo grandit      --s  accueil : la capture défile
+   --w  offre : le volet monte         --g  offre : « 1 mois » grossit
+   --b  offre : le texte apparaît      --r  étapes : la ligne se trace
+   ========================================================= */
+
+/* ---------- Menu fixe ---------- */
+.nav {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  /* Encoche des iPhone : le menu descend sous la barre d'état */
+  padding-top: env(safe-area-inset-top, 0px); height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s;
+}
+/* Le flou est sur un calque à part : posé sur .nav, il casserait le menu mobile plein écran (position: fixed) */
+.nav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  transition: background-color .3s var(--ease-io);
+}
+.nav.is-scrolled { border-bottom-color: var(--line); }
+/* Au-dessus du volet de l'offre, le menu prend les couleurs du volet (pas de bande grise) */
+.nav.is-inverse { --bg: var(--ivoire); --ink: var(--graphite); --muted: var(--pierre-fonce); --line: transparent; --line-strong: color-mix(in srgb, var(--graphite) 30%, transparent); --accent: var(--graphite); --on-accent: var(--ivoire); border-bottom-color: transparent; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .nav.is-inverse { --bg: var(--graphite); --ink: var(--ivoire); --muted: var(--pierre); --line-strong: color-mix(in srgb, var(--ivoire) 32%, transparent); --accent: var(--ivoire); --on-accent: var(--graphite); }
+}
+:root[data-theme="light"] .nav.is-inverse { --bg: var(--graphite); --ink: var(--ivoire); --muted: var(--pierre); --line-strong: color-mix(in srgb, var(--ivoire) 32%, transparent); --accent: var(--ivoire); --on-accent: var(--graphite); }
+.nav.is-inverse::before { background: var(--bg); }
+.nav__in { height: 100%; display: flex; align-items: center; gap: .5rem; padding-inline: var(--gutter); }
+.nav__brand { margin-right: auto; color: var(--ink); text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.05; }
+.nav__brand span { display: block; font-family: var(--font); font-size: .8rem; font-weight: 400; letter-spacing: .01em; color: var(--muted); }
+.nav__links { display: flex; align-items: center; gap: 1.75rem; margin-right: .75rem; }
+.nav__links a:not(.btn) {
+  color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem;
+  background: linear-gradient(var(--ink), var(--ink)) 0 100% / 0 2px no-repeat;
+  transition: color .2s, background-size .3s var(--ease-out);
+}
+.nav__links a:not(.btn):hover { color: var(--ink); background-size: 100% 2px; }
+.nav__cta { min-height: 42px; padding: 0 1.25rem; font-size: .95rem; }
+.menu-btn { display: none; }
+.menu-btn { position: relative; }
+.menu-btn span { position: absolute; left: 11px; width: 22px; height: 2px; background: currentColor; transition: top .25s var(--ease-out), transform .35s var(--ease-out); }
+.menu-btn span:first-child { top: 17px; }
+.menu-btn span + span { top: 25px; }
+.menu-btn[aria-expanded="true"] span:first-child { top: 21px; transform: rotate(45deg); }
+.menu-btn[aria-expanded="true"] span + span { top: 21px; transform: rotate(-45deg); }
+
+@media (max-width: 899px) {
+  .menu-btn { display: inline-grid; place-content: center; }
+  .nav__links {
+    position: fixed; inset: var(--nav-h) 0 0; margin: 0;
+    flex-direction: column; align-items: flex-start; justify-content: center; gap: 1.25rem;
+    padding: var(--gutter); background: var(--bg);
+    clip-path: inset(0 0 100% 0); visibility: hidden;
+    transition: clip-path .5s var(--ease-io), visibility 0s .5s;
+  }
+  .nav__links a:not(.btn) { font-family: var(--font-display); font-size: var(--t-xl); font-weight: 500; letter-spacing: -0.02em; line-height: 1.05; color: var(--ink); }
+  .nav__cta { margin-top: 1rem; min-height: 52px; }
+  .nav.is-open .nav__links { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .5s var(--ease-io); }
+}
+
+/* ---------- 1. Accueil : la démo ---------- */
+.scene__pin { padding: calc(var(--nav-h) + clamp(1.5rem, 4vh, 3rem)) var(--gutter) 3rem; }
+.hero-title { font-size: clamp(3.25rem, 1rem + 7vw, 8.25rem); max-width: 11ch; }
+.hero-title .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.hero-title .w > span { display: inline-block; }
+
+.namer { margin-top: clamp(1.25rem, 3vh, 2.25rem); max-width: 26rem; }
+.namer label { display: block; font-size: var(--t-xs); font-weight: 500; color: var(--muted); margin-bottom: .4rem; }
+.namer input {
+  width: 100%; min-height: 52px; padding: 0 1rem;
+  font: 500 1.125rem var(--font); color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r-m);
+  transition: border-color .25s;
+}
+.namer input::placeholder { color: var(--muted); opacity: .8; }
+.namer input:hover { border-color: var(--ink); }
+.namer input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px var(--line); }
+
+.tour { margin-top: 2.5rem; max-width: 28rem; }
+.tour li {
+  padding: .7rem 0; border-top: 1px solid var(--line);
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(1.2rem, .55rem + .9vw, 1.6rem);
+  line-height: 1.08; letter-spacing: -0.015em;
+  /* inactif : 45 % d'opacité, reste lisible (texte de grande taille, contraste > 3:1) */
+  color: color-mix(in srgb, var(--ink) 45%, transparent);
+  transition: color .5s var(--ease-out), padding .5s var(--ease-out);
+}
+.tour li:last-child { border-bottom: 1px solid var(--line); }
+.tour li.is-on { color: var(--ink); padding-left: .6rem; }
+.tour-now { display: none; }
+
+/* Cadres : navigateur + téléphone */
+.stage { position: relative; margin-top: 2.5rem; }
+.browser {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #1F2329; border-radius: var(--r-l);
+  /* relief sur fond sombre : arête éclairée + ombre portée + halo ivoire très léger */
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / .09),
+    0 0 0 1px rgb(238 234 227 / .12),
+    0 2px 6px rgb(0 0 0 / .35),
+    0 30px 60px -20px rgb(0 0 0 / .65),
+    0 0 140px -30px rgb(238 234 227 / .12);
+}
+.browser__bar { flex: none; display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; background: linear-gradient(#2A2E35, #1F2329); border-bottom: 1px solid rgb(0 0 0 / .4); }
+.browser__bar i { width: 10px; height: 10px; border-radius: 50%; background: rgb(238 234 227 / .22); }
+.browser__url {
+  margin-left: 10px; padding: 3px 12px; border-radius: var(--r-s); background: #16191D;
+  font-size: .8125rem; font-weight: 500; color: #A39E96; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%;
+}
+.browser__url [data-slug] { color: #EEEAE3; }
+.browser { height: min(75svh, 760px); }
+/* Sans animation, on peut faire défiler la capture à la main dans le cadre */
+.browser__view { position: relative; overflow-y: auto; flex: 1; background: #F6F8F9; }
+.shot { position: relative; container-type: inline-size; will-change: transform; }
+/* Démo en direct : un vrai écran (1440 ou 390 px) réduit pour tenir dans le cadre ; les captures sont masquées */
+.live-frame { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; pointer-events: none; background: #fff; }
+.scene.is-live .shot { display: none; }
+.scene.is-live .browser__view, .scene.is-live .phone__view { position: relative; overflow: hidden; }
+.shot img { width: 100%; }
+/* Le nom tapé remplace le nom de l'entreprise dans l'en-tête de la démo (masqué sur la capture).
+   Positions mesurées sur les captures (1440 px de large sur ordinateur, 390 px sur téléphone), en % de la largeur. */
+.shot__name {
+  position: absolute; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: "Fraunces Demo", var(--font); font-weight: 580; letter-spacing: -0.015em; color: #0B2A29;
+}
+.scene[data-demo="plombier"] .shot--desktop .shot__name { left: 5.832cqw; top: 2.958cqw; font-size: 1.5cqw; line-height: 1.65cqw; max-width: 28cqw; }
+.scene[data-demo="plombier"] .shot--mobile .shot__name { left: 12.303cqw; top: 9.8cqw; font-size: 4.718cqw; line-height: 5.19cqw; max-width: 45cqw; }
+.scene[data-demo="serrurier"] .shot__name { font-family: "Instrument Serif Demo", var(--font); font-weight: 400; letter-spacing: -0.005em; color: #EFE8DA; }
+.scene[data-demo="serrurier"] .shot--desktop .shot__name { left: 5.777cqw; top: 2.92cqw; font-size: 1.722cqw; line-height: 1.722cqw; max-width: 28cqw; }
+.scene[data-demo="serrurier"] .shot--mobile .shot__name { left: 12.099cqw; top: 9.636cqw; font-size: 5.333cqw; line-height: 5.333cqw; max-width: 38cqw; }
+.shot__name.is-typing { animation: blink-name .5s var(--ease-out); }
+@keyframes blink-name { 0% { background: #FFE3A3; } 100% { background: transparent; } }
+.scene[data-demo="serrurier"] .shot__name.is-typing { animation-name: blink-name-dark; }
+@keyframes blink-name-dark { 0% { background: #6B5A2E; } 100% { background: transparent; } }
+
+/* Choix de la démo + lien vers la démo animée */
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-top: 1rem; }
+.picker { display: flex; gap: .5rem; }
+.picker[hidden] { display: none; }
+.js .picker { display: flex; }
+.picker__btn {
+  min-height: 44px; padding: 0 1.1rem; border: 1px solid var(--line-strong); border-radius: 999px;
+  font: 500 var(--t-s, 1rem) var(--font); color: var(--muted); background: transparent; cursor: pointer;
+  transition: color .25s, border-color .25s, background-color .25s;
+}
+.picker__btn:hover { color: var(--ink); border-color: var(--ink); }
+.picker__btn[aria-pressed="true"] { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+.live { font-size: var(--t-xs); font-weight: 500; }
+.live a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; }
+.live a:hover { text-decoration-thickness: 2px; }
+
+.phone {
+  /* à gauche du cadre : il ne recouvre plus les titres de la démo */
+  position: absolute; left: -12%; bottom: -3%; width: 20%; aspect-ratio: 390 / 800;
+  padding: 7px; border-radius: 28px;
+  background: linear-gradient(150deg, #3B4048 0%, #121418 32%, #0B0C0E 65%, #2A2E35 100%);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / .08),
+    inset 0 1px 1px rgb(255 255 255 / .18),
+    0 40px 70px -20px rgb(0 0 0 / .7),
+    0 0 0 1px rgb(0 0 0 / .5);
+}
+.phone__view { height: 100%; overflow-y: auto; border-radius: 19px; background: #F6F8F9; }
+
+/* ---------- Les démos : chaque démo filmée pendant qu'elle défile, avec son lien ---------- */
+.cases { padding: var(--section) var(--gutter) calc(var(--section) * .6); }
+.cases__head { display: grid; gap: 1.25rem var(--gutter); grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; margin-bottom: clamp(2.5rem, 7vh, 5rem); }
+.cases__head h2 { font-size: var(--t-h2); line-height: .92; letter-spacing: -0.03em; max-width: 14ch; }
+.cases__head p { color: var(--muted); }
+
+.case {
+  display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); align-items: center;
+  gap: 2.5rem calc(var(--gutter) * 2); padding-block: clamp(2.5rem, 7vh, 4.5rem); border-top: 1px solid var(--line);
+}
+.case--flip { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+.case--flip .case__media { order: 2; }
+
+/* Cadres : mêmes navigateur et téléphone que l'accueil ; le téléphone déborde vers le texte */
+.case__media { position: relative; padding-bottom: 4.5rem; }
+.case .browser { height: auto; }
+.case__video { display: block; width: 100%; height: auto; background: #F6F8F9; }
+.case .browser .case__video { aspect-ratio: 1440 / 900; }
+.case .phone { left: auto; right: -7%; bottom: 0; width: 21%; aspect-ratio: auto; }
+.case--flip .phone { right: auto; left: -7%; }
+.case .phone .case__video { aspect-ratio: 540 / 1168; border-radius: 19px; }
+
+/* Pause / lecture (toute vidéo qui bouge plus de 5 s doit pouvoir s'arrêter) */
+.case__toggle {
+  position: absolute; left: 0; bottom: 0;
+  display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; padding: 0 1.05rem 0 .9rem;
+  border: 1px solid var(--line-strong); border-radius: 999px; background: transparent;
+  font: 500 var(--t-xs) var(--font); color: var(--muted); cursor: pointer;
+  transition: color .25s, border-color .25s;
+}
+.case--flip .case__toggle { left: auto; right: 0; }
+.case__toggle[hidden] { display: none; }
+.case__toggle:hover { color: var(--ink); border-color: var(--ink); }
+.case__icon { width: 10px; height: 12px; border-inline: 3px solid currentColor; }
+.case__toggle.is-paused .case__icon { width: 0; height: 0; border-inline: 0; border-left: 10px solid currentColor; border-block: 6px solid transparent; }
+
+.case__kicker { display: flex; align-items: baseline; gap: .9rem; font-size: var(--t-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.case__kicker span { color: var(--ink); }
+.case__name { margin-top: 1rem; font-family: var(--font-display); font-size: var(--t-xl); font-weight: 500; line-height: .98; letter-spacing: -0.02em; text-wrap: balance; }
+.case__style { margin-top: .9rem; color: var(--muted); }
+.case__list { margin-top: 1.75rem; border-bottom: 1px solid var(--line); }
+.case__list li { padding: .75rem 0; border-top: 1px solid var(--line); }
+.case__list sup { font-size: .7em; line-height: 0; }
+.case__note { margin-top: 1.25rem; font-size: var(--t-xs); color: var(--muted); }
+
+/* Démo à venir : annoncée sans faux contenu, avec une fine bande de chantier */
+.case-soon { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem clamp(1rem, 3vw, 2.5rem); padding-block: clamp(2rem, 6vh, 3.5rem); border-block: 1px solid var(--line); }
+.case-soon__label { display: flex; align-items: baseline; gap: .9rem; font-family: var(--font-display); font-size: var(--t-l); font-weight: 500; letter-spacing: -0.02em; line-height: 1; max-width: none; }
+.case-soon__label span { font-family: var(--font); font-size: var(--t-xs); font-weight: 600; letter-spacing: .1em; color: var(--muted); }
+.case-soon__band { flex: 1; min-width: 4rem; height: .7rem; border-radius: 2px; background: repeating-linear-gradient(-45deg, var(--line-strong) 0 6px, transparent 6px 14px); opacity: .7; }
+.case-soon__state { font-size: var(--t-xs); color: var(--muted); }
+.case-soon__state .link { color: var(--ink); }
+
+/* ---------- 2. L'offre : volet ivoire, couleurs inversées ---------- */
+.offer__panel {
+  position: relative; display: grid; gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); grid-template-rows: auto 1fr;
+  min-height: 100svh; padding: calc(var(--nav-h) + var(--gutter)) var(--gutter) 0;
+  background: var(--ink); color: var(--bg); overflow: hidden;
+}
+.offer__title { grid-column: 1 / -1; grid-row: 1 / -1; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; }
+.offer__lead { font-size: var(--t-xl); max-width: 12ch; }
+/* Taille calculée pour occuper toute la largeur (« un mois » mesure 3,49 em en graisse 800) */
+.offer__big { display: block; font-size: calc((100vw - 2 * var(--gutter)) / 3.55); font-weight: 800; line-height: .8; letter-spacing: -0.04em; white-space: nowrap; overflow: hidden; padding-top: .12em; }
+.offer__big .ow { display: inline-block; }
+.offer__big .c { display: inline-block; }
+.offer__body { grid-column: 2; grid-row: 1; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; padding-top: .5rem; }
+.offer__body p { max-width: 36ch; }
+.offer__after { font-size: var(--t-xs); opacity: .9; }
+.offer__body .btn { margin-top: .5rem; }
+
+/* ---------- 3. Ce qui est inclus ---------- */
+.included { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2rem var(--gutter); padding: var(--section) var(--gutter); }
+.included__head { align-self: start; position: sticky; top: calc(var(--nav-h) + 2.5rem); }
+.included__head h2 { font-size: var(--t-h2); line-height: .92; letter-spacing: -0.03em; }
+.included__head p { margin-top: 1rem; color: var(--muted); max-width: 30ch; }
+.checklist li { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; padding: 1.6rem 0; border-top: 1px solid var(--line); }
+.checklist li:last-child { border-bottom: 1px solid var(--line); }
+.checklist svg { width: 2rem; height: 2rem; fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.checklist path { stroke-dasharray: 34; stroke-dashoffset: 0; transition: stroke-dashoffset .6s var(--ease-out); }
+.checklist p { margin-top: .35rem; color: var(--muted); }
+
+/* ---------- 4. Comment ça se passe ---------- */
+.steps { padding: var(--section) var(--gutter); }
+.steps h2 { font-size: var(--t-h2); line-height: .92; letter-spacing: -0.03em; margin-bottom: clamp(3rem, 8vh, 6rem); }
+.steps__list { --r: 1; position: relative; padding-left: clamp(4.5rem, 8vw, 7rem); display: grid; gap: clamp(3.5rem, 10vh, 7rem); }
+.steps__list::before, .steps__list::after { content: ""; position: absolute; left: calc(clamp(4.5rem, 8vw, 7rem) / 2 - 1px); top: 24px; bottom: 24px; width: 2px; border-radius: 2px; }
+.steps__list::before { background: var(--line); }
+.steps__list::after { background: var(--accent); transform-origin: top; transform: scaleY(var(--r)); }
+.step { position: relative; }
+/* chaque étape : grand titre à gauche, explication à droite */
+.step > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); gap: .6rem var(--gutter); align-items: start; min-height: 18svh; }
+.step__n {
+  position: absolute; left: calc(clamp(4.5rem, 8vw, 7rem) / -2 - 26px); top: -4px; z-index: 1;
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
+  font-family: var(--font); font-weight: 500; font-size: 1.2rem; background: var(--bg); color: var(--ink); border: 1px solid var(--line-strong);
+  transition: background-color .35s, border-color .35s, color .35s, transform .45s var(--ease-out);
+}
+.step.is-on .step__n { background: var(--accent); border-color: var(--accent); color: var(--on-accent); transform: scale(1.08); }
+.step h3 { font-family: var(--font-display); font-size: clamp(2rem, 1.2rem + 2.4vw, 3.5rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+.step p { color: var(--muted); max-width: 44ch; padding-top: .4rem; }
+
+/* ---------- 5. Contact : la page passe en sombre ---------- */
+:root.end-dark { --bg: var(--end-bg); }
+/* En thème clair, le contact passe en graphite : on bascule aussi le texte en ivoire */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]).end-dark { --ink: var(--ivoire); --muted: var(--pierre); --line: color-mix(in srgb, var(--ivoire) 14%, transparent); --line-strong: color-mix(in srgb, var(--ivoire) 32%, transparent); --accent: var(--ivoire); --on-accent: var(--graphite); --err: #FF9C8F; color-scheme: dark; }
+}
+:root[data-theme="light"].end-dark { --ink: var(--ivoire); --muted: var(--pierre); --line: color-mix(in srgb, var(--ivoire) 14%, transparent); --line-strong: color-mix(in srgb, var(--ivoire) 32%, transparent); --accent: var(--ivoire); --on-accent: var(--graphite); --err: #FF9C8F; color-scheme: dark; }
+.contact { padding: var(--section) var(--gutter); min-height: 90svh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.contact h2 { font-size: var(--t-h2); line-height: .92; letter-spacing: -0.03em; max-width: 10ch; }
+.contact__intro { margin-top: 1.5rem; color: var(--muted); max-width: 46ch; }
+.contact__grid { width: 100%; display: grid; gap: clamp(2.5rem, 6vw, 4rem); align-items: start; }
+@media (min-width: 1000px) {
+  .contact__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--gutter) * 2); }
+  .contact__head { position: sticky; top: calc(var(--nav-h) + 2.5rem); }
+  .quote, .quote-done { grid-column: 2; grid-row: 1; }
+}
+
+/* Formulaire de devis : mêmes champs et pilules que le haut de page.
+   Sans JavaScript il est masqué (rien ne pourrait l'envoyer) : restent le numéro et l'e-mail. */
+.quote { display: none; }
+.js .quote {
+  position: relative; display: grid; gap: 1.4rem; width: 100%;
+  padding: clamp(1.25rem, 3vw, 2.5rem); border: 1px solid var(--line-strong); border-radius: var(--r-l);
+  background: color-mix(in srgb, var(--ink) 3%, transparent);
+}
+.quote__title { font-family: var(--font-display); font-size: var(--t-l); font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
+.quote fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.quote legend, .field label { display: block; padding: 0; margin-bottom: .5rem; font-size: var(--t-xs); font-weight: 500; color: var(--muted); }
+.quote__opt { font-weight: 400; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip { position: relative; }
+.chip input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.chip span {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem;
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  font: 500 1rem var(--font); color: var(--muted);
+  transition: color .25s, border-color .25s, background-color .25s;
+}
+.chip:hover span { color: var(--ink); border-color: var(--ink); }
+.chip input:checked + span { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+.chip input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 3px; }
+.quote__row { display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.field input, .field textarea {
+  display: block; width: 100%; min-height: 52px; padding: .8rem 1rem;
+  font: 500 1.0625rem/1.4 var(--font); color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 5%, var(--bg));
+  border: 1px solid var(--line-strong); border-radius: var(--r-m);
+  transition: border-color .25s, box-shadow .25s, background-color .6s var(--ease-io);
+}
+.field textarea { min-height: 8.5rem; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .85; }
+.field input:hover, .field textarea:hover { border-color: var(--ink); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px var(--line); }
+.field.is-invalid input, .field.is-invalid textarea { border-color: var(--err); }
+.field__err { margin-top: .45rem; font-size: var(--t-xs); font-weight: 500; color: var(--err); }
+.field__err:empty, .quote__status:empty { display: none; }
+.quote__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.quote__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: .25rem; }
+.quote__send { gap: .65rem; min-height: 56px; padding: 0 1.75rem; font-size: 1.0625rem; }
+.quote__arrow { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .45s var(--ease-out); }
+.quote__send:hover .quote__arrow { transform: translateX(4px); }
+.quote__send[aria-busy="true"] { pointer-events: none; opacity: .7; }
+.quote__privacy { font-size: var(--t-xs); color: var(--muted); max-width: 34ch; }
+.quote__status { padding: .9rem 1rem; border-radius: var(--r-m); border: 1px solid var(--line-strong); font-size: var(--t-xs); color: var(--ink); }
+.quote__status.is-error { border-color: var(--err); }
+
+/* Après l'envoi */
+.js .quote[hidden], .quote-done[hidden] { display: none; }
+.quote-done {
+  display: grid; gap: .9rem; justify-items: start; padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid var(--line-strong); border-radius: var(--r-l); outline: none;
+}
+.quote-done svg { width: 48px; height: 48px; fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.quote-done h3 { font-family: var(--font-display); font-size: var(--t-xl); font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+.quote-done p { color: var(--muted); }
+
+.contact__or { margin-top: clamp(4rem, 10vh, 7rem); font-size: var(--t-xs); font-weight: 500; color: var(--muted); }
+.contact__or + .contact__phone { margin-top: .75rem; }
+/* Le « 1 » de la Bodoni se confond avec un « I » : les chiffres sont en Hanken Grotesk */
+.contact__phone {
+  margin-top: clamp(2rem, 6vh, 4rem); position: relative; color: var(--ink); text-decoration: none;
+  /* le numéro occupe toute la largeur (6,15 em en Hanken 300) */
+  font-family: var(--font); font-size: calc((100vw - 2 * var(--gutter)) / 6.25); font-weight: 300; letter-spacing: -0.035em; line-height: .95; white-space: nowrap;
+  transition: color .25s;
+}
+.contact__phone::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.08em; height: 1px; background: var(--accent); transform-origin: left; transform: scaleX(var(--u, 1)); transition: transform .9s var(--ease-out) .2s; }
+.contact__phone:hover { color: var(--muted); }
+.typed .c { display: inline-block; white-space: pre; }
+.contact__mail { margin-top: 2.25rem; font-size: min(var(--t-l), 7vw); overflow-wrap: anywhere; }
+
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 1.75rem var(--gutter); border-top: 1px solid var(--line); font-size: var(--t-xs); color: var(--muted); }
+.foot nav { display: flex; gap: 1.5rem; }
+
+/* ---------- Petits écrans ---------- */
+@media (max-width: 899px) {
+  .hero-title { font-size: clamp(2.75rem, 13vw, 4.5rem); max-width: none; }
+  .browser { display: none; }
+  .stage { margin-top: 2rem; }
+  .phone { position: relative; left: auto; bottom: auto; width: min(72vw, 320px); margin-inline: auto; }
+  .tour { margin-top: 2rem; }
+  .cases__head, .included { grid-template-columns: 1fr; }
+  /* Démos : nom, puis la vidéo téléphone (le cadre ordinateur est masqué), puis le détail et le lien */
+  .case, .case--flip { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .case__text { display: contents; }
+  .case__kicker { order: 1; }
+  .case__name { order: 2; }
+  .case__style { order: 3; }
+  .case__media { order: 4; margin-top: 2rem; padding-bottom: 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .case--flip .case__media { order: 4; }
+  .case__list { order: 5; }
+  .case__note { order: 7; }
+  .case .phone, .case--flip .phone { position: relative; left: auto; right: auto; bottom: auto; width: min(64vw, 290px); }
+  .case__toggle, .case--flip .case__toggle { position: static; }
+  .case-soon__label { flex-basis: 100%; }
+  .case-soon__band { height: .55rem; }
+  .included__head { position: static; }
+  .offer__panel { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+  .offer__title { grid-row: 1; }
+  .offer__body { grid-column: 1; grid-row: 2; }
+  /* sur téléphone, « un » et « mois » sur deux lignes, en très grand (« mois » = 2,09 em en 800) */
+  .offer__big { font-size: calc((100vw - 2 * var(--gutter)) / 2.15); white-space: normal; }
+  .offer__big .ow { display: block; }
+  .offer__title { justify-content: flex-start; gap: 1rem; }
+  .offer__panel { padding-bottom: var(--gutter); }
+  .step > div { grid-template-columns: 1fr; min-height: 0; }
+}
+
+/* =========================================================
+   MOUVEMENT — uniquement si le JS tourne et que l'appareil
+   n'a pas demandé à réduire les animations.
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Chargement : le titre arrive mot par mot, puis les cadres glissent */
+  .js .hero-title .w > span { transform: translateY(105%); animation: word-up .9s var(--ease-out) forwards; animation-delay: calc(var(--i) * 70ms + 100ms); }
+  @keyframes word-up { to { transform: translateY(0); } }
+  .js .namer { opacity: 0; animation: fade-in .7s var(--ease-out) .75s forwards; }
+  /* le cadre se dévoile de bas en haut (même geste que le volet de l'offre), la capture se dézoome */
+  .js .browser { animation: frame-in 1.2s cubic-bezier(.77, 0, .18, 1) .35s backwards; }
+  .js .shot--desktop img { transform-origin: 50% 0; animation: shot-in 1.8s cubic-bezier(.16, 1, .3, 1) .35s backwards; }
+  .js .phone { animation: phone-in 1.1s cubic-bezier(.16, 1, .3, 1) .8s backwards; }
+  @keyframes fade-in { to { opacity: 1; } }
+  @keyframes frame-in { from { clip-path: inset(100% -10% 0 -10% round var(--r-l)); } to { clip-path: inset(-10% -10% -25% -10% round var(--r-l)); } }
+  @keyframes shot-in { from { transform: scale(1.22); } }
+  @keyframes phone-in { from { translate: 0 40vh; } }
+
+  /* titres des sections : mot par mot, une seule fois */
+  .js .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+  .js .split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1.1s cubic-bezier(.16, 1, .3, 1) calc(var(--i) * 60ms); }
+  .js .split.is-in .w > span { transform: none; }
+
+  /* Scène d'accueil épinglée (grands écrans) */
+  @media (min-width: 900px) {
+    .js .scene { height: 360svh; --a: 0; --s: 0; }
+    .js .scene.is-live { height: 900svh; }
+    .js .scene__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+    .js .scene__intro { position: relative; z-index: 2; opacity: calc(1 - var(--a) * 1.8); transform: translateY(calc(var(--a) * -14vh)); }
+    .js .scene__intro .namer { max-width: 22rem; }
+    .js .stage {
+      position: absolute; margin: 0; right: var(--gutter); bottom: 5svh;
+      width: 64vw; height: calc(100svh - var(--nav-h) - 9svh);
+      transform-origin: 100% 100%;
+      transform: scale(calc(.8 + .2 * var(--a)));
+    }
+    .js .browser { height: 100%; }
+    .js .browser__view, .js .phone__view { overflow: hidden; }
+    .js .tour {
+      position: absolute; margin: 0; left: var(--gutter); top: calc(var(--nav-h) + 9svh);
+      width: calc(100vw - 64vw - 12.8vw - 3 * var(--gutter));
+      opacity: calc((var(--a) - .55) * 2.4); transform: translateX(calc((1 - var(--a)) * -3rem));
+    }
+    .js .scene:not(.tour-ready) .tour { visibility: hidden; }
+    .js .shot--desktop { transform: translate3d(0, calc(var(--s) * var(--max-d, 0) * -1px), 0); }
+    .js .shot--mobile { transform: translate3d(0, calc(var(--s) * var(--max-m, 0) * -1px), 0); }
+  }
+
+  /* Scène d'accueil épinglée (téléphones et tablettes) */
+  @media (max-width: 899px) {
+    .js .scene { height: 300svh; --a: 0; --s: 0; }
+    .js .scene.is-live { height: 720svh; }
+    .js .scene__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+    .js .scene__intro { position: relative; z-index: 3; opacity: calc(1 - var(--a) * 2); transform: translateY(calc(var(--a) * -10vh)); }
+    .js .tour { display: none; }
+    /* le téléphone dépasse en bas de l'écran à l'arrivée (on voit l'en-tête de la démo), puis remonte et grandit */
+    .js .stage { position: absolute; margin: 0; left: 0; right: 0; top: calc(var(--nav-h) + 5rem); height: calc(100svh - var(--nav-h) - 6.25rem); transform-origin: 50% 0; transform: translateY(calc((1 - var(--a)) * max(40svh, var(--intro-gap, 0px)))) scale(calc(.82 + .18 * var(--a))); }
+    .js .phone { width: auto; height: 100%; }
+    .js .phone__view { overflow: hidden; }
+    .js .shot--mobile { transform: translate3d(0, calc(var(--s) * var(--max-m, 0) * -1px), 0); }
+    .js .tour-now {
+      display: block; position: absolute; left: var(--gutter); right: var(--gutter); top: calc(var(--nav-h) + .6rem);
+      font-family: var(--font-display); font-weight: 500; font-size: 1.65rem; letter-spacing: -0.02em; line-height: 1.05; opacity: calc((var(--a) - .6) * 2.5);
+    }
+  }
+
+  /* Démos filmées : le cadre se dévoile de bas en haut en arrivant, puis le téléphone apparaît */
+  .js .case .browser { animation: none; height: auto; clip-path: inset(100% -10% 0 -10% round var(--r-l)); transition: clip-path 1.2s cubic-bezier(.77, 0, .18, 1); }
+  .js .case__media.is-in .browser { clip-path: inset(-10% -10% -25% -10% round var(--r-l)); }
+  .js .case .phone { animation: none; opacity: 0; transition: opacity .9s var(--ease-out) .5s; }
+  .js .case__media.is-in .phone { opacity: 1; }
+  /* grands écrans : le téléphone glisse un peu moins vite que la page (profondeur) */
+  @media (min-width: 900px) {
+    .js .case .phone { translate: 0 calc((var(--k, .5) - .5) * -16vh); }
+  }
+  @media (max-width: 899px) {
+    .js .case .phone { width: min(64vw, 290px); height: auto; }
+  }
+
+  /* Offre : volet qui monte puis « 1 mois » qui grossit */
+  .js .offer { height: 260svh; --w: 0; --g: 0; --b: 0; }
+  .js .offer__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+  .js .offer__panel { height: 100svh; clip-path: inset(calc((1 - var(--w)) * 100%) 0 0 0); }
+  .js .offer__lead { opacity: calc(var(--w) * 2 - 1); transform: translateY(calc((1 - var(--w)) * 3rem)); }
+  /* « un mois » : les lettres montent du bas du volet l'une après l'autre et s'épaississent */
+  .js .offer__big { font-weight: calc(400 + 400 * var(--g)); }
+  .js .offer__big .c { --t: clamp(0, calc(var(--g) * 1.6 - var(--i) * .09), 1); transform: translateY(calc((1 - var(--t)) * 115%)); }
+  .js .offer__body { opacity: var(--b); transform: translateY(calc((1 - var(--b)) * 2.5rem)); }
+  /* Un lien atteint au clavier est toujours visible, même avant la fin de l'animation */
+  .js .offer__body:focus-within, .js .scene__intro:focus-within { opacity: 1; transform: none; }
+  /* Le menu « L'essai » arrive directement sur l'offre déjà dévoilée (et non sur l'écran vide d'avant le volet) */
+  .js .offer { scroll-margin-top: -136svh; }
+
+  /* Liste « inclus » : chaque coche se trace en arrivant au centre de l'écran */
+  .js .checklist path { stroke-dashoffset: 34; }
+  .js .checklist li.is-on path { stroke-dashoffset: 0; }
+  .js .checklist li > div { transform: translateX(.75rem); transition: transform .6s var(--ease-out); }
+  .js .checklist li.is-on > div { transform: none; }
+
+  /* Étapes : la ligne descend avec le scroll */
+  .js .steps__list { --r: 0; }
+
+  /* Contact : le formulaire monte une fois, la coche de confirmation se trace */
+  .js .quote.reveal { opacity: 0; transform: translateY(2.5rem); transition: opacity .9s var(--ease-out), transform 1.1s cubic-bezier(.16, 1, .3, 1); }
+  .js .quote.reveal.is-in { opacity: 1; transform: none; }
+  .js .quote:focus-within { opacity: 1; transform: none; }
+  .quote-done path { stroke-dasharray: 34; stroke-dashoffset: 34; animation: draw-check .7s var(--ease-out) .15s forwards; }
+  @keyframes draw-check { to { stroke-dashoffset: 0; } }
+
+  /* Contact : le numéro s'écrit chiffre par chiffre */
+  .js .contact__phone { --u: 0; }
+  .js .contact__phone.is-on { --u: 1; }
+  .js .typed .c { opacity: 0; transform: translateY(.25em); transition: opacity .3s, transform .4s var(--ease-out); transition-delay: calc(var(--i) * 45ms); }
+  .js .contact__phone.is-on .typed .c { opacity: 1; transform: none; }
+}
+
+/* =========================================================
+   Corrections de l'audit (10/10/2026)
+   ========================================================= */
+
+/* Ligne d'offre sous le titre d'accueil : l'essai se comprend dès le premier écran */
+.hero-offer { margin-top: 1rem; font-size: var(--t-m); font-weight: 500; line-height: 1.35; max-width: 34ch; }
+/* Ordinateurs peu hauts (1366 × 768…) : le titre se réduit pour que l'offre, le champ et les boutons tiennent dans le premier écran */
+@media (min-width: 900px) { .hero-title { font-size: min(clamp(3.25rem, 1rem + 7vw, 8.25rem), 12svh); } }
+
+/* Téléphones : l'offre n'est plus épinglée. Le volet faisait la hauteur de l'écran
+   et coupait la fin du texte et le bouton « Demander mon essai ». */
+@media (prefers-reduced-motion: no-preference) and (max-width: 899px) {
+  .js .offer { height: auto; scroll-margin-top: 0; }
+  .js .offer__pin { position: static; height: auto; overflow: visible; }
+  .js .offer__panel { height: auto; min-height: 100svh; clip-path: none; }
+  .js .offer__lead, .js .offer__body { opacity: 1; transform: none; }
+  .js .offer__big { font-weight: 800; }
+  .js .offer__big .c { transform: none; }
+}
+
+/* Accueil épinglé plus court : la visite de la démo garde ses arrêts, en moins d'écrans */
+@media (prefers-reduced-motion: no-preference) {
+  .js .scene.is-live { height: 480svh; }
+  @media (max-width: 899px) { .js .scene.is-live { height: 400svh; } }
+}
+
+/* Téléphones : barre d'appel toujours visible (comme dans les démos) */
+.callbar { display: none; }
+@media (max-width: 899px) {
+  .callbar {
+    position: fixed; inset: auto 0 0; z-index: 40;
+    display: grid; grid-template-columns: 1fr 1fr; gap: .5rem;
+    padding: .6rem var(--gutter) calc(.6rem + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+    transition: background-color .6s var(--ease-io);
+  }
+  .callbar .btn { min-height: 52px; padding: 0 1rem; }
+  .callbar__alt { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .callbar__alt::before { background: var(--accent); }
+  .callbar__alt:hover { color: var(--on-accent); }
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  /* menu ouvert : la barre passe sous le menu plein écran */
+  .nav.is-open ~ .callbar { visibility: hidden; }
+}
+
+/* Liens de petite taille : zone tactile plus haute, sans changer le dessin */
+.live a, .quote__privacy .link, .foot .link { display: inline-block; padding-block: .5rem; background-position: 0 calc(100% - .5rem); }
+
+/* ---------- Tarifs : l'essai puis deux formules ---------- */
+.pricing { padding: var(--section) var(--gutter) calc(var(--section) * .6); }
+.pricing__head { display: grid; gap: 1.25rem var(--gutter); grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; margin-bottom: clamp(2.5rem, 7vh, 4.5rem); }
+.pricing__head h2 { font-size: var(--t-h2); line-height: .92; letter-spacing: -0.03em; }
+.pricing__head p { color: var(--muted); }
+.plans { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+.plan {
+  display: flex; flex-direction: column; gap: 1.25rem;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem); border: 1px solid var(--line-strong); border-radius: var(--r-l);
+}
+/* formule conseillée : couleurs inversées, comme le volet de l'offre */
+.plan--main { background: var(--ink); color: var(--bg); border-color: var(--ink); --line: color-mix(in srgb, var(--bg) 18%, transparent); }
+.plan__name { font-family: var(--font); font-size: var(--t-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.plan__price { display: flex; flex-direction: column; gap: .35rem; max-width: none; }
+.plan__from { font-size: var(--t-xs); opacity: .75; }
+/* chiffres en Hanken (le « 1 » et le « 4 » de la Bodoni se lisent mal) */
+.plan__amount { font-family: var(--font); font-size: clamp(2.75rem, 2rem + 2.5vw, 4rem); font-weight: 300; letter-spacing: -0.035em; line-height: 1; }
+.plan__unit { font-weight: 500; }
+.plan__list { flex: 1; border-bottom: 1px solid var(--line); }
+.plan__list li { padding: .7rem 0; border-top: 1px solid var(--line); font-size: var(--t-xs); line-height: 1.5; }
+.plan__list sup { font-size: .7em; line-height: 0; }
+.plan:not(.plan--main) .plan__list li { color: var(--muted); }
+.plan__cta { align-self: flex-start; }
+.plan--main .plan__cta { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+.plan--main .plan__cta::before { background: var(--ink); }
+.plan--main .plan__cta:hover { color: var(--bg); }
+.plan:not(.plan--main) .plan__cta { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.plan:not(.plan--main) .plan__cta::before { background: var(--ink); }
+.plan:not(.plan--main) .plan__cta:hover { color: var(--bg); }
+.pricing__note { margin-top: 1.5rem; font-size: var(--t-xs); color: var(--muted); }
+@media (max-width: 999px) {
+  .pricing__head { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: 1fr; }
+}
+/* Écrans entre 900 et 1100 px : le menu (avec « Tarifs ») tient sur une ligne */
+@media (min-width: 900px) and (max-width: 1100px) {
+  .nav__links { gap: 1.1rem; margin-right: .25rem; }
+  .nav__links a:not(.btn) { font-size: .875rem; white-space: nowrap; }
+  .nav__brand span { display: none; }
+}
+
+/* Lien « Ouvrir la démo » sous chaque étude de cas */
+.case__more { margin-top: 1.1rem; font-size: var(--t-s); }

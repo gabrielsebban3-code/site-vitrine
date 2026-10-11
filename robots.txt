@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /demos/
+
+Sitemap: https://gabrielsebban3-code.github.io/site-vitrine/sitemap.xml

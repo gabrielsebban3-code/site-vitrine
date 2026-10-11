@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plomberie Rocher, plombier chauffagiste à Paris 11e (démo)</title>
+<meta name="description" content="Plombier chauffagiste dans le 11e depuis 2009. Fuite, WC bouché, chauffe-eau en panne : on arrive en moins d'une heure, prix annoncé avant de commencer. Site de démonstration.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F2EFE7">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/fraunces-soft.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fraunces-soft-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/sections.css">
+<script>
+  /* Sans le script (réseau coupé, bloqueur), la page s'affiche en version fixe complète */
+  document.documentElement.classList.add('js');
+  setTimeout(function () { if (!window.rocherReady) document.documentElement.classList.remove('js'); }, 4000);
+</script>
+<script src="js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<!-- En-tête fixe : bandeau « démo » + barre avec le numéro toujours visible -->
+<header class="top">
+  <p class="banner">Site de démonstration&nbsp;: entreprise, numéro et avis fictifs.</p>
+  <div class="bar">
+    <a class="brand" href="#haut">
+      <svg class="brand__drop" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 1C8.5 7.5 2 13.6 2 20a10 10 0 0 0 20 0C22 13.6 15.5 7.5 12 1z"/></svg>
+      <span class="brand__name">Plomberie Rocher</span>
+      <span class="brand__sub">Plombier chauffagiste · Paris 11e</span>
+    </a>
+    <nav class="bar__nav" aria-label="Menu">
+      <a href="#tarifs">Tarifs</a>
+      <a href="#zone">Zone</a>
+      <a href="#avis">Avis</a>
+      <a href="#devis">Devis</a>
+    </nav>
+    <a class="btn btn--call bar__call" href="tel:+33199004217" aria-label="Appeler le 01 99 00 42 17">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="bar__num">01 99 00 42 17</span>
+    </a>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <!-- 1. ACCUEIL (reste en place) puis 2. TARIFS : l'eau monte et recouvre l'accueil -->
+  <div class="flood">
+  <section class="hero" id="haut" aria-labelledby="titre">
+    <div class="hero__in">
+      <p class="live"><i aria-hidden="true"></i><span class="live__text">7j/7, de 7&nbsp;h à 22&nbsp;h</span></p>
+      <h1 id="titre" class="hero__title">Une fuite&nbsp;? On arrive<br class="hero__br"> <em>en moins d’une heure.</em></h1>
+      <div class="hero__foot">
+        <p class="hero__lead">Fuite, WC bouché, chauffe-eau en panne&nbsp;: plombier chauffagiste installé rue Oberkampf depuis 2009. Le prix est annoncé avant de commencer.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--call" href="tel:+33199004217">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Appeler le 01 99 00 42 17
+          </a>
+          <a class="btn btn--ghost" href="#devis">Demander un devis gratuit</a>
+        </div>
+        <ul class="facts">
+          <li><b>45&nbsp;min</b><span>délai moyen dans Paris</span></li>
+          <li><b>4,9/5</b><span>sur 127 avis (exemple)</span></li>
+          <li><b>2009</b><span>installé dans le 11e</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TARIFS : sous l'eau, carte façon menu de bistrot -->
+  <section class="prices" id="tarifs" data-tone="dark" aria-labelledby="titre-tarifs">
+    <div class="waves" aria-hidden="true">
+      <svg class="wave wave--back" viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="M0,32 Q100.0,18 200.0,32 T400.0,32 T600.0,32 T800.0,32 T1000.0,32 T1200.0,32 T1400.0,32 T1600.0,32 T1800.0,32 T2000.0,32 T2200.0,32 T2400.0,32 L2400,60 L0,60 Z"/></svg>
+      <svg class="wave wave--front" viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="M0,36 Q75.0,26 150.0,36 T300.0,36 T450.0,36 T600.0,36 T750.0,36 T900.0,36 T1050.0,36 T1200.0,36 T1350.0,36 T1500.0,36 T1650.0,36 T1800.0,36 T1950.0,36 T2100.0,36 T2250.0,36 T2400.0,36 L2400,60 L0,60 Z"/></svg>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Devis gratuit</span><span>Garantie décennale</span><span>TVA à 10&nbsp;% en rénovation</span><span>CB, chèque, virement</span>
+        <span>Devis gratuit</span><span>Garantie décennale</span><span>TVA à 10&nbsp;% en rénovation</span><span>CB, chèque, virement</span>
+      </div>
+    </div>
+    <ul class="sr-only">
+      <li>Devis gratuit avant toute intervention</li>
+      <li>Garantie décennale, attestation sur demande</li>
+      <li>TVA à 10&nbsp;% sur la rénovation</li>
+      <li>Paiement par CB, chèque ou virement</li>
+    </ul>
+
+    <div class="prices__head">
+      <p class="kicker"><span class="kicker__n">01</span>Tarifs</p>
+      <h2 id="titre-tarifs" class="split">Les prix, affichés avant qu’on se déplace.</h2>
+      <p class="prices__intro">Les arnaques au dépannage sont fréquentes à Paris. Ici, vous connaissez le tarif de base avant d’appeler.</p>
+    </div>
+
+    <ol class="menu">
+      <li class="menu__row" data-reveal>
+        <h3>Recherche et réparation de fuite</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 120&nbsp;€</p>
+        <p class="menu__detail">Robinet, raccord, flexible, siphon. Pièces courantes incluses.</p>
+      </li>
+      <li class="menu__row" data-reveal>
+        <h3>Débouchage WC, évier, douche</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 95&nbsp;€</p>
+        <p class="menu__detail">Furet manuel ou électrique. Hydrocurage sur devis.</p>
+      </li>
+      <li class="menu__row" data-reveal>
+        <h3>Remplacement de chauffe-eau</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 890&nbsp;€</p>
+        <p class="menu__detail">Ballon de 100 à 200&nbsp;L posé, dépose et recyclage de l’ancien inclus.</p>
+      </li>
+      <li class="menu__row" data-reveal>
+        <h3>Entretien de chaudière gaz</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 140&nbsp;€</p>
+        <p class="menu__detail">Attestation d’entretien annuel remise sur place.</p>
+      </li>
+      <li class="menu__row" data-reveal>
+        <h3>Rénovation de salle de bains</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">sur devis</p>
+        <p class="menu__detail">Douche à l’italienne, remplacement de baignoire, accès PMR. Visite gratuite.</p>
+      </li>
+    </ol>
+    <p class="prices__note">Prix TTC avec une TVA à 10&nbsp;% (logement de plus de 2 ans, 20&nbsp;% sinon). Déplacement offert dans l’Est parisien, 29&nbsp;€ ailleurs dans Paris, déduit si vous acceptez le devis. Majoration de 30&nbsp;% le dimanche et après 20&nbsp;h, toujours annoncée au téléphone.</p>
+
+    <svg class="edge" viewBox="0 0 2400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 Q150.0,14 300.0,30 T600.0,30 T900.0,30 T1200.0,30 T1500.0,30 T1800.0,30 T2100.0,30 T2400.0,30 L2400,60 L0,60 Z"/></svg>
+  </section>
+
+  </div>
+
+  <!-- 3. ZONE : une onde part de l'atelier (11e) et gagne tout Paris -->
+  <section class="zone" id="zone" aria-labelledby="titre-zone">
+    <div class="zone__pin">
+      <div class="zone__text">
+        <p class="kicker"><span class="kicker__n">02</span>Zone d’intervention</p>
+        <h2 id="titre-zone" class="split">Tout Paris, en priorité l’Est.</h2>
+        <p class="zone__intro">L’atelier est rue Oberkampf, dans le 11e. Plus vous êtes proche, plus on arrive vite.</p>
+        <ul class="legend">
+          <li class="legend__item legend__item--near"><span class="legend__dot" aria-hidden="true"></span><div><b>Moins de 30&nbsp;min, déplacement offert</b><span>3e, 4e, 10e, 11e, 12e et 20e</span></div></li>
+          <li class="legend__item legend__item--far"><span class="legend__dot" aria-hidden="true"></span><div><b>Moins d’une heure, déplacement 29&nbsp;€</b><span>Le reste de Paris</span></div></li>
+        </ul>
+      </div>
+      <figure class="map" aria-hidden="true">
+        <svg class="map__svg" viewBox="0 0 739 591">
+          <defs><clipPath id="paris"><path d="M146.5,169.3 C158.2,153.6 165.5,136.4 188.2,118.2 C210.9,100.0 255.6,72.9 282.7,59.9 C309.8,46.9 327.9,44.6 350.8,40.0 C373.7,35.4 397.8,33.0 420.2,32.0 C442.6,31.0 466.8,34.3 485.3,34.0 C503.8,33.7 511.8,29.0 531.0,30.0 C550.2,31.0 583.9,28.4 600.4,40.0 C616.9,51.6 614.7,77.0 629.9,99.7 C645.1,122.4 679.3,148.9 691.4,176.0 C703.5,203.1 699.5,229.0 702.4,262.2 C705.3,295.4 711.6,343.5 709.0,375.0 C706.4,406.5 695.1,428.6 687.0,451.3 C678.9,474.0 686.6,495.0 660.6,511.0 C634.6,527.0 560.3,539.2 531.0,547.5 C501.7,555.8 517.4,562.4 484.8,560.7 C452.2,559.0 374.9,546.9 335.4,537.5 C295.8,528.1 275.0,514.8 247.5,504.3 C220.0,493.8 206.1,486.1 170.6,474.5 C135.1,462.9 57.8,452.4 34.4,434.7 C11.0,417.0 21.2,397.1 30.0,368.3 C38.8,339.6 72.4,288.2 87.1,262.2 C101.8,236.2 108.0,227.9 117.9,212.4 C127.8,196.9 134.8,185.0 146.5,169.3 Z"/></clipPath></defs>
+        <path class="map__outline" d="M146.5,169.3 C158.2,153.6 165.5,136.4 188.2,118.2 C210.9,100.0 255.6,72.9 282.7,59.9 C309.8,46.9 327.9,44.6 350.8,40.0 C373.7,35.4 397.8,33.0 420.2,32.0 C442.6,31.0 466.8,34.3 485.3,34.0 C503.8,33.7 511.8,29.0 531.0,30.0 C550.2,31.0 583.9,28.4 600.4,40.0 C616.9,51.6 614.7,77.0 629.9,99.7 C645.1,122.4 679.3,148.9 691.4,176.0 C703.5,203.1 699.5,229.0 702.4,262.2 C705.3,295.4 711.6,343.5 709.0,375.0 C706.4,406.5 695.1,428.6 687.0,451.3 C678.9,474.0 686.6,495.0 660.6,511.0 C634.6,527.0 560.3,539.2 531.0,547.5 C501.7,555.8 517.4,562.4 484.8,560.7 C452.2,559.0 374.9,546.9 335.4,537.5 C295.8,528.1 275.0,514.8 247.5,504.3 C220.0,493.8 206.1,486.1 170.6,474.5 C135.1,462.9 57.8,452.4 34.4,434.7 C11.0,417.0 21.2,397.1 30.0,368.3 C38.8,339.6 72.4,288.2 87.1,262.2 C101.8,236.2 108.0,227.9 117.9,212.4 C127.8,196.9 134.8,185.0 146.5,169.3 Z" pathLength="1"/>
+          <path class="map__seine" clip-path="url(#paris)" d="M632.1,520.9 C628.4,517.0 621.1,512.6 610.1,497.7 C599.1,482.8 581.9,450.2 566.1,431.4 C550.4,412.6 531.0,398.2 515.6,384.9 C500.2,371.6 487.4,360.6 473.8,351.8 C460.2,343.0 445.7,339.3 434.3,331.9 C422.9,324.5 413.4,312.8 405.7,307.3 C398.0,301.8 404.3,306.0 388.2,298.7 C372.1,291.4 326.7,269.8 309.1,263.5 C291.5,257.2 295.5,260.7 282.7,260.9 C269.9,261.1 247.5,259.7 232.1,264.9 C216.7,270.1 202.8,282.1 190.4,292.1 C178.0,302.2 166.9,315.2 157.4,325.2 C147.9,335.1 140.6,342.6 133.3,351.8 C126.0,361.0 120.5,368.2 113.5,380.3 C106.5,392.4 101.0,409.0 91.5,424.7 C82.0,440.4 62.2,466.2 56.4,474.5" pathLength="1"/>
+          <circle class="map__ring map__ring--far" clip-path="url(#paris)" cx="574.9" cy="294.7" r="590"/>
+          <circle class="map__ring map__ring--near" clip-path="url(#paris)" cx="574.9" cy="294.7" r="153"/>
+          <g class="map__arr is-far" data-d="3.22" transform="translate(383.3 272.1)"><circle class="map__dot"/><text dy=".36em">1er</text></g>
+          <g class="map__arr is-far" data-d="2.91" transform="translate(411.4 233.7)"><circle class="map__dot"/><text dy=".36em">2e</text></g>
+          <g class="map__arr is-near" data-d="1.53" transform="translate(487.0 268.8)"><circle class="map__dot"/><text dy=".36em">3e</text></g>
+          <g class="map__arr is-near" data-d="1.72" transform="translate(476.5 326.5)"><circle class="map__dot"/><text dy=".36em">4e</text></g>
+          <g class="map__arr is-far" data-d="2.69" transform="translate(446.2 392.2)"><circle class="map__dot"/><text dy=".36em">5e</text></g>
+          <g class="map__arr is-far" data-d="3.62" transform="translate(367.9 361.0)"><circle class="map__dot"/><text dy=".36em">6e</text></g>
+          <g class="map__arr is-far" data-d="4.98" transform="translate(277.0 313.9)"><circle class="map__dot"/><text dy=".36em">7e</text></g>
+          <g class="map__arr is-far" data-d="5.17" transform="translate(278.3 204.5)"><circle class="map__dot"/><text dy=".36em">8e</text></g>
+          <g class="map__arr is-far" data-d="3.69" transform="translate(388.2 175.3)"><circle class="map__dot"/><text dy=".36em">9e</text></g>
+          <g class="map__arr is-near" data-d="2.36" transform="translate(490.1 181.3)"><circle class="map__dot"/><text dy=".36em">10e</text></g>
+          <g class="map__arr map__arr--home is-near" data-d="0.0" transform="translate(574.9 294.7)"><circle class="map__pulse"/><circle class="map__dot"/><text dy=".36em">11e</text></g>
+          <g class="map__arr is-near" data-d="2.19" transform="translate(610.1 421.4)"><circle class="map__dot"/><text dy=".36em">12e</text></g>
+          <g class="map__arr is-far" data-d="3.64" transform="translate(497.1 499.0)"><circle class="map__dot"/><text dy=".36em">13e</text></g>
+          <g class="map__arr is-far" data-d="5.12" transform="translate(340.3 493.1)"><circle class="map__dot"/><text dy=".36em">14e</text></g>
+          <g class="map__arr is-far" data-d="6.72" transform="translate(191.7 420.8)"><circle class="map__dot"/><text dy=".36em">15e</text></g>
+          <g class="map__arr is-far" data-d="8.06" transform="translate(91.5 288.7)"><circle class="map__dot"/><text dy=".36em">16e</text></g>
+          <g class="map__arr is-far" data-d="6.21" transform="translate(252.8 107.6)"><circle class="map__dot"/><text dy=".36em">17e</text></g>
+          <g class="map__arr is-far" data-d="4.36" transform="translate(436.1 73.1)"><circle class="map__dot"/><text dy=".36em">18e</text></g>
+          <g class="map__arr is-far" data-d="3.12" transform="translate(596.0 108.9)"><circle class="map__dot"/><text dy=".36em">19e</text></g>
+          <g class="map__arr is-near" data-d="1.62" transform="translate(667.6 266.2)"><circle class="map__dot"/><text dy=".36em">20e</text></g>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4. DÉROULÉ : le tuyau se remplit d'une étape à l'autre -->
+  <section class="steps" aria-labelledby="titre-etapes">
+    <div class="steps__head">
+      <p class="kicker"><span class="kicker__n">03</span>Comment ça se passe</p>
+      <h2 id="titre-etapes" class="split">Trois étapes, sans surprise.</h2>
+    </div>
+    <div class="steps__body">
+      <div class="pipe" aria-hidden="true"><span class="pipe__water"></span></div>
+      <ol class="steps__list">
+        <li class="step"><span class="step__node" aria-hidden="true">1</span><h3>Vous appelez</h3><p>Vous décrivez le problème, on vous donne une fourchette de prix au téléphone.</p></li>
+        <li class="step"><span class="step__node" aria-hidden="true">2</span><h3>On diagnostique</h3><p>Sur place, devis écrit à signer avant de commencer. Vous pouvez refuser.</p></li>
+        <li class="step"><span class="step__node" aria-hidden="true">3</span><h3>On répare</h3><p>Facture détaillée, garantie sur la pièce et la main-d’œuvre.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. AVIS : un avis à la fois, sur fond eau -->
+  <section class="reviews" id="avis" data-tone="eau" aria-labelledby="titre-avis">
+    <div class="crest" aria-hidden="true"><svg viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="M0,30 Q150.0,14 300.0,30 T600.0,30 T900.0,30 T1200.0,30 T1500.0,30 T1800.0,30 T2100.0,30 T2400.0,30 L2400,60 L0,60 Z"/></svg></div>
+    <div class="reviews__pin">
+      <div class="reviews__head">
+        <p class="kicker"><span class="kicker__n">04</span>Avis clients</p>
+        <h2 id="titre-avis">Ce qu’en disent les voisins.</h2>
+        <p class="reviews__note">Exemples d’avis pour la démonstration.</p>
+      </div>
+      <div class="reviews__stage">
+        <figure class="review">
+          <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+          <blockquote><p>Fuite sous l’évier un dimanche soir. Arrivé en 40 minutes, prix annoncé au téléphone respecté.</p></blockquote>
+          <figcaption>Claire M. · Paris 11e</figcaption>
+        </figure>
+        <figure class="review">
+          <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+          <blockquote><p>Chauffe-eau changé dans la journée. Propre, ponctuel, il a même repris l’ancien ballon.</p></blockquote>
+          <figcaption>Karim B. · Paris 20e</figcaption>
+        </figure>
+        <figure class="review">
+          <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg class="is-empty" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">4 étoiles sur 5</span></p>
+          <blockquote><p>Bon travail sur la salle de bains, devis clair. Un jour de retard sur le chantier, mais il m’avait prévenue.</p></blockquote>
+          <figcaption>Hélène D. · Paris 12e</figcaption>
+        </figure>
+      </div>
+      <p class="reviews__count" aria-hidden="true"><span><span class="reviews__now">1</span>&nbsp;/&nbsp;3</span><span class="reviews__bar"><i></i></span></p>
+    </div>
+  </section>
+
+  <!-- 6. URGENCE ET DEVIS -->
+  <section class="quote" id="devis" data-tone="dark" aria-labelledby="titre-devis">
+    <div class="crest" aria-hidden="true"><svg viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="M0,30 Q150.0,14 300.0,30 T600.0,30 T900.0,30 T1200.0,30 T1500.0,30 T1800.0,30 T2100.0,30 T2400.0,30 L2400,60 L0,60 Z"/></svg></div>
+    <div class="quote__call">
+      <p class="kicker"><span class="kicker__n">05</span>Devis gratuit</p>
+      <h2 id="titre-devis" class="split">Une urgence&nbsp;? Appelez directement.</h2>
+      <a class="quote__phone" href="tel:+33199004217" aria-label="Appeler le 01 99 00 42 17"><span data-typed>01 99 00 42 17</span></a>
+      <p class="quote__tip"><b>En attendant&nbsp;:</b> coupez l’arrivée d’eau générale, sous l’évier ou près du compteur.</p>
+      <p class="quote__text">Pour un projet (salle de bains, chauffe-eau, entretien), laissez votre demande&nbsp;: réponse sous 24&nbsp;h ouvrées.</p>
+    </div>
+    <form class="form" id="formulaire" novalidate>
+      <fieldset class="chips">
+        <legend>Votre projet</legend>
+        <label><input type="radio" name="type" value="Chauffe-eau" required><span>Chauffe-eau</span></label>
+        <label><input type="radio" name="type" value="Salle de bains"><span>Salle de bains</span></label>
+        <label><input type="radio" name="type" value="Entretien"><span>Entretien</span></label>
+        <label><input type="radio" name="type" value="Autre"><span>Autre</span></label>
+      </fieldset>
+      <div class="form__row">
+        <label class="field"><span>Nom <small>(obligatoire)</small></span><input name="nom" autocomplete="name" required></label>
+        <label class="field"><span>Téléphone <small>(obligatoire)</small></span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" required></label>
+      </div>
+      <label class="field"><span>Arrondissement</span>
+        <select name="arr" required>
+          <option value="" disabled selected>Choisir…</option><option>1er</option><option>2e</option><option>3e</option><option>4e</option><option>5e</option><option>6e</option><option>7e</option><option>8e</option><option>9e</option><option>10e</option><option>11e</option><option>12e</option><option>13e</option><option>14e</option><option>15e</option><option>16e</option><option>17e</option><option>18e</option><option>19e</option><option>20e</option><option>Hors Paris</option>
+        </select>
+      </label>
+      <label class="field"><span>Votre besoin</span><textarea name="msg" rows="3" placeholder="Ex. : le ballon ne chauffe plus depuis hier, modèle 150 L"></textarea></label>
+      <button class="btn btn--call form__send" type="submit">Envoyer ma demande</button>
+      <p class="form__sent" role="status" hidden>Démonstration&nbsp;: sur le vrai site, la demande arrive par e-mail ou SMS à l’artisan.</p>
+    </form>
+  </section>
+
+  <!-- 7. QUESTIONS -->
+  <section class="faq" aria-labelledby="titre-faq">
+    <div class="faq__head">
+      <p class="kicker"><span class="kicker__n">06</span>Questions fréquentes</p>
+      <h2 id="titre-faq" class="split">Avant d’appeler.</h2>
+    </div>
+    <div class="faq__list">
+      <details><summary>Combien coûte un déplacement&nbsp;?</summary><div class="faq__a"><p>Il est offert dans les 3e, 4e, 10e, 11e, 12e et 20e arrondissements, et coûte 29&nbsp;€ ailleurs dans Paris. Il est déduit si vous acceptez le devis.</p></div></details>
+      <details><summary>Intervenez-vous le week-end&nbsp;?</summary><div class="faq__a"><p>Oui, 7j/7 de 7&nbsp;h à 22&nbsp;h. Une majoration de 30&nbsp;% s’applique le dimanche et après 20&nbsp;h, toujours annoncée avant.</p></div></details>
+      <details><summary>Que faire en attendant le plombier&nbsp;?</summary><div class="faq__a"><p>Coupez l’arrivée d’eau générale, souvent sous l’évier ou près du compteur. S’il y a de l’eau près des prises, coupez aussi l’électricité au tableau.</p></div></details>
+      <details><summary>Travaillez-vous pour les syndics et les propriétaires bailleurs&nbsp;?</summary><div class="faq__a"><p>Oui. La facture est établie au nom du syndic ou du propriétaire, avec un rapport photo pour les dégâts des eaux.</p></div></details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" data-tone="dark">
+  <div class="crest" aria-hidden="true"><svg viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="M0,30 Q150.0,14 300.0,30 T600.0,30 T900.0,30 T1200.0,30 T1500.0,30 T1800.0,30 T2100.0,30 T2400.0,30 L2400,60 L0,60 Z"/></svg></div>
+  <a class="foot__phone" href="tel:+33199004217" aria-label="Appeler le 01 99 00 42 17">01 99 00 42 17</a>
+  <div class="foot__info">
+    <p class="foot__name">Plomberie Rocher</p>
+    <p>00 rue Oberkampf, 75011 Paris (adresse fictive)<br>Lundi au dimanche, 7&nbsp;h à 22&nbsp;h</p>
+    <p class="foot__legal">Mentions légales&nbsp;: SIRET et assurance décennale à renseigner pour le vrai client.</p>
+  </div>
+</footer>
+
+<!-- Démo : les boutons d'appel n'appellent personne -->
+<p class="toast" role="status" aria-live="polite" hidden>Démonstration&nbsp;: sur le vrai site, ce bouton appelle directement l’artisan.</p>
+
+<!-- Mobile : appel et devis toujours à portée de pouce -->
+<nav class="callbar" data-tone="dark" aria-label="Contact rapide">
+  <a class="btn btn--call" href="tel:+33199004217">
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Appeler
+  </a>
+  <a class="btn btn--ghost" href="#devis">Devis</a>
+</nav>
+</body>
+</html>

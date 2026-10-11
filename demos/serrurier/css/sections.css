@@ -1,0 +1,595 @@
+/* =========================================================
+   Sections, dans l'ordre de la page.
+   Mise en page complète sans animation d'abord ;
+   le bloc « MOUVEMENT » en bas ajoute les scènes au scroll.
+   ========================================================= */
+
+/* ---------- En-tête fixe ---------- */
+.top { position: fixed; inset: 0 0 auto; z-index: 40; }
+.banner {
+  height: var(--banner-h); line-height: var(--banner-h); padding: 0 .75rem; text-align: center;
+  background: var(--nuit); color: color-mix(in srgb, var(--ivoire) 80%, transparent);
+  font-size: .76rem; font-weight: 500; letter-spacing: .02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.bar {
+  position: relative; height: var(--bar-h); display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.5rem);
+  padding: 0 var(--gutter); color: var(--ink); border-bottom: 1px solid var(--line);
+  transition: color .4s var(--ease-out), border-color .4s;
+}
+.bar::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  transition: background .4s var(--ease-out);
+}
+.brand { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: .65rem; align-items: center; min-width: 0; text-decoration: none; line-height: 1.1; }
+.brand__mark { grid-row: 1 / 3; width: 1.05rem; height: auto; fill: var(--accent); }
+.brand__name { font-family: var(--font-display); font-size: 1.55rem; line-height: 1; letter-spacing: -0.005em; }
+.brand__sub { font-family: var(--font-mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: .2rem; }
+.brand__name, .brand__sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar__nav { margin-left: auto; display: flex; gap: clamp(1rem, 2.2vw, 2rem); }
+.bar__nav a { position: relative; text-decoration: none; font-size: .92rem; font-weight: 500; padding: .5rem 0; }
+.bar__nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: .25rem; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s var(--ease-out); }
+.bar__nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+.bar__call { min-height: 44px; padding: .55rem 1.1rem; white-space: nowrap; flex: none; font-family: var(--font-mono); font-size: .82rem; font-weight: 500; letter-spacing: .02em; }
+
+/* ---------- 1. Accueil : la nuit, la porte cochère ---------- */
+.scene, .stage { position: relative; }
+.hero {
+  position: relative; overflow: hidden; background: var(--bg); color: var(--ink);
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: end; column-gap: var(--gutter);
+  min-height: 100svh; padding: calc(var(--top-h) + clamp(1.5rem, 5vh, 4rem)) var(--gutter) clamp(2.5rem, 7vh, 4.5rem);
+}
+/* Halo chaud au pied de la porte, comme une lumière restée allumée */
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 55% at 78% 100%, color-mix(in srgb, var(--laiton) 12%, transparent), transparent 70%);
+}
+.hero__text { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(1.1rem, 2.6vh, 1.75rem); align-self: center; }
+.live { display: inline-flex; align-items: center; gap: .7rem; font-family: var(--font-mono); font-size: .72rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.live i { position: relative; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--laiton); }
+.live i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--laiton); opacity: 0; }
+@keyframes ping { from { transform: scale(1); opacity: .9; } to { transform: scale(3.2); opacity: 0; } }
+.hero__title { font-size: min(7.8vw, 13.5svh); line-height: .9; letter-spacing: -0.015em; text-wrap: wrap; }
+.hero__title em { color: var(--laiton); }
+.hero__lead { max-width: 36ch; color: var(--muted); }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: .75rem; }
+.facts { display: flex; gap: clamp(1.5rem, 3vw, 3rem); margin-top: clamp(.25rem, 1vh, .75rem); padding-top: clamp(1rem, 2.4vh, 1.5rem); border-top: 1px solid var(--line); }
+.facts li { display: grid; gap: .25rem; }
+.facts b { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.8rem, 1.2rem + 1.3vw, 2.75rem); line-height: 1; }
+.facts span { font-size: .82rem; color: var(--muted); }
+
+/* La porte : cadre en pierre sombre, deux battants à moulures, bouton et entrée de serrure en laiton */
+.door { position: relative; z-index: 1; justify-self: center; align-self: end; height: min(70svh, 42rem); aspect-ratio: .58; transform-origin: 50% 50%; container-type: inline-size; --glow: .3; }
+.door::before {
+  content: ""; position: absolute; inset: -18% -45% -4%; z-index: -1; pointer-events: none;
+  background: radial-gradient(45% 50% at 50% 70%, color-mix(in srgb, var(--laiton) 22%, transparent), transparent 70%);
+  opacity: var(--glow);
+}
+.door::after {
+  content: ""; position: absolute; left: -40%; right: -40%; top: 100%; height: 14%; pointer-events: none;
+  background: radial-gradient(42% 70% at 50% 0, color-mix(in srgb, var(--laiton-clair) 60%, transparent), transparent 75%);
+  opacity: var(--glow);
+}
+.door__frame {
+  position: absolute; inset: 0; padding: 5% 5.5% 0;
+  border-radius: 50% 50% 0 0 / 24% 24% 0 0;
+  background: linear-gradient(180deg, #2B2721, #1D1B17);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--laiton) 34%, transparent), inset 0 0 0 7px #1B1915, inset 0 0 0 8px color-mix(in srgb, var(--laiton) 16%, transparent);
+}
+.door__in {
+  position: relative; height: 100%; overflow: hidden; isolation: isolate;
+  border-radius: 50% 50% 0 0 / 21% 21% 0 0;
+  background: var(--pierre); perspective: 1100px; perspective-origin: 50% 55%;
+}
+/* Lumière intérieure : chaude au centre ; elle s'efface quand on entre */
+.door__in::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(60% 50% at 50% 62%, #FFF8E8, transparent 70%), linear-gradient(180deg, #E6DBC6, var(--pierre) 50%, #D9CCB3);
+  opacity: calc(1 - var(--z, 0));
+}
+.leaf {
+  position: absolute; top: 0; bottom: 1.4%; width: calc(50% - 1px);
+  display: grid; grid-template-rows: 30fr 46fr 24fr; gap: 4%; padding: 46% 14% 9%;
+  background: linear-gradient(90deg, #181612, #221F1A 55%, #1B1915);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.leaf::after { content: ""; position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+.leaf--l { left: 0; z-index: 2; transform-origin: 0 50%; }
+.leaf--r { right: 0; z-index: 1; transform-origin: 100% 50%; }
+.panel {
+  display: block; border: 1px solid color-mix(in srgb, var(--laiton) 22%, transparent);
+  box-shadow: inset 0 0 0 6px #1B1915, inset 0 0 0 7px color-mix(in srgb, var(--laiton) 13%, transparent), inset 0 24px 30px -24px rgb(0 0 0 / .7);
+}
+.leaf--l .panel:first-child { border-top-left-radius: 90% 45%; }
+.leaf--r .panel:first-child { border-top-right-radius: 90% 45%; }
+.knob {
+  position: absolute; right: -10%; top: 50%; z-index: 1; width: 20%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F8E7B9, var(--laiton) 45%, #7E5B1F);
+  box-shadow: 0 4px 10px rgb(0 0 0 / .55);
+}
+.plate {
+  position: absolute; left: 11%; top: 60%; width: 11%; height: 11%; border-radius: 45% 45% 35% 35% / 30% 30% 20% 20%;
+  background: linear-gradient(180deg, var(--laiton-clair), var(--laiton) 50%, #86621F);
+  box-shadow: 0 3px 6px rgb(0 0 0 / .5);
+}
+.plate i { position: absolute; left: 50%; top: 26%; width: 34%; aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: var(--nuit); }
+.plate i::after { content: ""; position: absolute; left: 50%; top: 70%; width: 60%; height: 140%; translate: -50% 0; background: var(--nuit); clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%); }
+/* Numéro de l'immeuble, plaque ronde au-dessus de l'arche */
+.door__num {
+  position: absolute; left: 50%; top: -1.6%; translate: -50% -50%; z-index: 2;
+  display: grid; place-items: center; width: 16%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--nuit); border: 1px solid color-mix(in srgb, var(--laiton) 55%, transparent);
+  font-family: var(--font-display); font-size: 1.35rem; font-size: 9cqw; line-height: 1; color: var(--laiton);
+}
+.hero__floor {
+  position: absolute; left: 0; right: 0; bottom: clamp(2.5rem, 7vh, 4.5rem); height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--laiton) 40%, transparent) 65%, transparent);
+}
+
+/* ---------- Derrière la porte : les trois règles sur les prix ---------- */
+.inside { position: relative; background: var(--pierre); color: var(--encre); padding: var(--section) var(--gutter) clamp(2rem, 5vh, 3rem); }
+.inside__in { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; gap: 1.25rem var(--gutter); }
+.inside .kicker { grid-column: 1 / -1; }
+.inside h2 { font-size: var(--t-h2); line-height: .9; letter-spacing: -0.015em; }
+.inside h2 em { color: var(--laiton-fonce); }
+.inside__intro { color: var(--muted); max-width: 36ch; }
+.promises { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem var(--gutter); margin-top: clamp(1.75rem, 5vh, 3.5rem); }
+.promises li { display: flex; align-items: baseline; gap: 1rem; padding-top: 1.1rem; border-top: 1px solid var(--line-strong); }
+.promises__n { flex: none; font-family: var(--font-mono); font-size: .78rem; font-weight: 500; color: var(--laiton-fonce); }
+.promises h3 { font-size: var(--t-l); line-height: 1.1; margin-bottom: .35rem; }
+.promises p { color: var(--muted); font-size: .98rem; max-width: 30ch; }
+
+/* ---------- 2. Les prix : plaque en laiton brossé, texte gravé ---------- */
+.prices { position: relative; background: var(--pierre); padding: clamp(1rem, 3vh, 2rem) var(--gutter) var(--section); }
+.plaque {
+  position: relative; max-width: 62rem; margin-inline: auto; padding: clamp(1.75rem, 4vw, 3.25rem) clamp(1.5rem, 5vw, 4.5rem); border-radius: 4px; color: #23190A;
+  background:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / .05) 0 1px, transparent 1px 3px),
+    linear-gradient(125deg, #E7D3A3, #D3AF66 28%, #E9D19B 50%, #C69E52 76%, #DDBF84);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / .35),
+    inset 0 0 0 9px rgb(201 162 87 / .35), inset 0 0 0 10px rgb(80 58 18 / .35),
+    0 34px 60px -34px rgb(60 40 10 / .55);
+}
+.screw {
+  position: absolute; width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F6E7BF, #B58E43 70%);
+  box-shadow: inset 0 0 0 1px rgb(70 50 15 / .5), 0 1px 0 rgb(255 255 255 / .45);
+}
+.screw::after { content: ""; position: absolute; left: 2px; right: 2px; top: 6px; height: 2px; border-radius: 1px; background: rgb(70 50 15 / .7); rotate: var(--r, 35deg); }
+.screw:nth-child(1) { top: 20px; left: 20px; --r: 35deg; }
+.screw:nth-child(2) { top: 20px; right: 20px; --r: -20deg; }
+.screw:nth-child(3) { bottom: 20px; left: 20px; --r: 80deg; }
+.screw:nth-child(4) { bottom: 20px; right: 20px; --r: 10deg; }
+.menu__row {
+  display: grid; grid-template-columns: auto minmax(1.5rem, 1fr) auto; grid-template-areas: "name dots price" "detail detail detail";
+  column-gap: 1rem; row-gap: .25rem; padding: clamp(.8rem, 1.8vh, 1.2rem) 0; border-bottom: 1px solid rgb(70 50 15 / .26);
+  box-shadow: 0 1px 0 rgb(255 255 255 / .28);
+}
+.menu__row:last-child { border-bottom: 0; box-shadow: none; }
+.menu__row h3 { grid-area: name; font-size: var(--t-xl); line-height: 1.02; color: #1E1608; text-shadow: 0 1px 0 rgb(255 255 255 / .4); }
+.menu__dots { grid-area: dots; align-self: end; height: 3px; margin-bottom: .6em; background: radial-gradient(circle, rgb(70 50 15 / .45) 1.2px, transparent 1.5px) 0 50% / 9px 3px repeat-x; }
+.menu__price { grid-area: price; align-self: end; font-family: var(--font-mono); font-size: clamp(.95rem, .75rem + .55vw, 1.3rem); font-weight: 500; white-space: nowrap; color: #1E1608; text-shadow: 0 1px 0 rgb(255 255 255 / .4); }
+.menu__detail { grid-area: detail; color: #45351A; font-size: .97rem; max-width: 60ch; }
+.prices__note { max-width: 74ch; margin: 1.75rem 0 0 max(0px, (100% - 62rem) / 2); font-size: .92rem; color: var(--muted); }   /* aligné sur la plaque */
+
+/* ---------- 3. Méthode : la serrure en coupe ---------- */
+.method { position: relative; background: var(--bg); color: var(--ink); }
+.method__pin {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  grid-template-areas: "lock head" "lock steps" "lock count"; grid-template-rows: auto auto 1fr;
+  gap: 1.75rem var(--gutter); padding: var(--section) var(--gutter); align-items: start;
+}
+.method__head { grid-area: head; }
+.method__head h2 { margin-top: 1rem; font-size: clamp(2.6rem, 1rem + 3.6vw, 5rem); line-height: .92; letter-spacing: -0.015em; }
+.lock { grid-area: lock; align-self: center; }
+.lock__svg { width: 100%; height: auto; overflow: visible; }
+.msteps { grid-area: steps; display: grid; gap: 1.25rem; }
+.mstep { display: flex; align-items: baseline; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--line-strong); transition: opacity .5s var(--ease-out), border-color .5s; }
+.mstep__n { flex: none; font-family: var(--font-mono); font-size: .78rem; font-weight: 500; color: var(--laiton); }
+.mstep h3 { font-size: var(--t-l); line-height: 1.1; margin-bottom: .35rem; }
+.mstep p { color: var(--muted); max-width: 36ch; }
+.method__count { display: none; }
+
+.lk-housing { fill: url(#lg-housing); stroke: color-mix(in srgb, var(--laiton) 24%, transparent); stroke-width: 1.5; }
+.lk-plug { fill: url(#lg-plug); }
+.lk-keyway { fill: #0B0A08; opacity: .5; }
+.lk-ch { fill: #100F0D; stroke: rgb(0 0 0 / .5); stroke-width: 1; }
+.lk-shear { stroke: var(--laiton); stroke-width: 1.5; stroke-dasharray: 6 8; opacity: .5; }
+.lk-shear-glow { stroke: var(--laiton-clair); stroke-width: 9; stroke-linecap: round; opacity: 0; }
+.lk-spring { fill: none; stroke: #9C9586; stroke-width: 2.5; stroke-linejoin: round; }
+.lk-dp { fill: url(#lg-steel); }
+.lk-kp { fill: url(#lg-pin); }
+.lk-key__bow, .lk-key__blade { fill: url(#lg-brass); }
+.lk-key__groove { fill: none; stroke: rgb(90 60 15 / .45); stroke-width: 3; }
+.lk-face-lip { fill: #3D362B; }
+.lk-face__ring { fill: #1F1C17; stroke: color-mix(in srgb, var(--laiton) 32%, transparent); stroke-width: 1.5; }
+.lk-face__plug circle { fill: #3B3429; stroke: rgb(255 255 255 / .1); stroke-width: 1; }
+.lk-face__plug path { fill: #0B0A08; }
+.lk-face__state { font-family: var(--font-mono); font-size: 15px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; text-anchor: middle; fill: var(--cendre); display: none; }
+
+/* ---------- 4. Zone ---------- */
+.zone { background: var(--pierre); }
+.zone__pin { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: 2rem var(--gutter); padding: var(--section) var(--gutter); }
+.zone__text h2 { margin-top: 1rem; font-size: clamp(2.8rem, 1rem + 4.6vw, 6rem); line-height: .92; letter-spacing: -0.015em; }
+.zone__intro { margin-top: 1.25rem; color: var(--muted); max-width: 34ch; }
+.delays { margin-top: clamp(1.5rem, 4vh, 2.5rem); }
+.delays__item { display: grid; gap: .15rem; padding: .9rem 0; border-top: 1px solid var(--line); }
+.delays dt { display: flex; align-items: center; gap: .8rem; font-family: var(--font-display); font-size: var(--t-l); line-height: 1.1; }
+.delays dd { padding-left: calc(14px + .8rem); font-size: .95rem; color: var(--muted); }
+.delays__dot { flex: none; width: 14px; height: 14px; border-radius: 50%; }
+.delays__item--near .delays__dot { background: var(--encre); }
+.delays__item--far .delays__dot { border: 1.5px solid var(--encre); }
+.map { margin: 0; }
+.map__svg { width: 100%; height: auto; overflow: visible; }
+.map__outline { fill: var(--pierre-2); stroke: var(--encre); stroke-width: 1.25; stroke-linejoin: round; }
+.map__seine { fill: none; stroke: var(--pierre-3); stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; }
+.map__spiral { fill: none; stroke: var(--laiton-fonce); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.map__dot { r: 17px; fill: var(--pierre); stroke: var(--encre); stroke-width: 1.25; transition: fill .45s var(--ease-out), stroke .45s, opacity .45s; }
+.map__n { font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-anchor: middle; fill: var(--encre); transition: fill .45s var(--ease-out), opacity .45s; }
+.map__arr--near .map__dot { fill: var(--encre); }
+.map__arr--near .map__n { fill: var(--pierre); }
+.map__arr--home .map__dot, .map__arr--home.map__arr--near .map__dot { r: 23px; fill: var(--laiton); stroke: var(--encre); stroke-width: 1.5; }
+.map__arr--home .map__n { fill: var(--encre); font-size: 14px; }
+.map__label { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; text-anchor: middle; fill: var(--laiton-fonce); }
+.map__pulse { r: 23px; fill: none; stroke: var(--laiton-fonce); stroke-width: 2; opacity: 0; }
+.map__tip { display: none; fill: var(--laiton-fonce); stroke: var(--pierre); stroke-width: 3; }
+
+/* ---------- 5. Avis : cartes sombres sur fond laiton ---------- */
+.reviews { position: relative; background: var(--bg); color: var(--ink); overflow-x: clip; }
+.reviews__pin { padding: var(--section) 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 5vh, 3.5rem); }
+.reviews__head { padding: 0 var(--gutter); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; gap: 1rem var(--gutter); }
+.reviews__head .kicker { grid-column: 1 / -1; }
+.reviews__head h2 { font-size: clamp(2.8rem, 1rem + 4.6vw, 6rem); line-height: .92; letter-spacing: -0.015em; max-width: 13ch; }
+.reviews__note { color: var(--muted); font-size: .95rem; max-width: 30ch; }
+.reviews__viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-bottom: .5rem; }
+.reviews__viewport:focus-visible { outline-offset: -3px; }
+.reviews__track { display: flex; gap: clamp(1rem, 2vw, 1.5rem); width: max-content; padding: 0 var(--gutter); }
+.review {
+  scroll-snap-align: start; scroll-margin-left: var(--gutter);
+  flex: none; width: min(25rem, 80vw); display: flex; flex-direction: column; gap: 1.1rem;
+  padding: clamp(1.4rem, 3vw, 2rem); border-radius: var(--radius); background: var(--nuit); color: var(--ivoire);
+  box-shadow: 0 30px 50px -30px rgb(40 28 6 / .6);
+}
+.review__tag { font-family: var(--font-mono); font-size: .7rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--laiton); }
+.review blockquote { margin: 0; flex: 1; }
+.review blockquote p { font-family: var(--font-display); font-style: italic; font-size: clamp(1.6rem, 1.2rem + 1vw, 2.15rem); line-height: 1.1; }
+.review__stars span[aria-hidden] { display: flex; gap: .2rem; }
+.review__stars svg { width: 1rem; height: 1rem; fill: var(--laiton); }
+.review__stars svg.is-empty { fill: none; stroke: var(--laiton); stroke-width: 1.5; }
+.review__who { font-size: .9rem; color: var(--cendre); }
+.reviews__progress { display: none; }
+
+/* ---------- 6. Urgence ---------- */
+.urgent { position: relative; background: var(--bg); color: var(--ink); padding: var(--section) var(--gutter); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: start; gap: 3rem calc(var(--gutter) * 1.5); }
+.urgent__call h2 { margin-top: 1rem; font-size: var(--t-h2); line-height: .9; letter-spacing: -0.015em; max-width: 10ch; }
+.clock { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem 1rem; margin-top: clamp(1.5rem, 4vh, 2.5rem); }
+.clock__time { font-family: var(--font-mono); font-size: clamp(1.9rem, 1.3rem + 1.8vw, 3.1rem); font-weight: 400; line-height: 1; letter-spacing: -0.04em; color: var(--laiton); font-variant-numeric: tabular-nums; }
+.clock__time i { font-style: normal; }
+.clock__text { color: var(--muted); font-size: .95rem; }
+.urgent__phone {
+  display: inline-block; margin: clamp(1rem, 3vh, 1.75rem) 0 1.5rem;
+  font-family: var(--font-display); font-size: clamp(3.1rem, 1rem + 6.6vw, 7.75rem); line-height: .95; letter-spacing: -0.01em;
+  color: var(--ivoire); text-decoration: none; white-space: nowrap;
+  background: linear-gradient(var(--laiton), var(--laiton)) 0 100% / 0 2px no-repeat; padding-bottom: .08em;
+  transition: background-size .5s var(--ease-out), color .3s;
+}
+.urgent__phone:hover { background-size: 100% 2px; color: var(--laiton-clair); }
+.urgent__phone .c { display: inline-block; white-space: pre; }
+.urgent__tip { max-width: 42ch; margin-bottom: 1rem; padding-left: 1rem; border-left: 2px solid var(--laiton); }
+.urgent__text { color: var(--muted); max-width: 42ch; }
+/* Formulaire : filets et champs soulignés */
+.form { display: grid; gap: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-strong); }
+.chips { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.chips legend { padding: 0; margin-bottom: .8rem; font-size: .95rem; font-weight: 600; }
+.chips label { position: relative; }
+.chips input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chips span { display: inline-flex; align-items: center; min-height: 44px; padding: .5rem 1rem; border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--ivoire) 40%, transparent); font-size: .93rem; font-weight: 500; transition: background .25s, color .25s, border-color .25s; }
+.chips label:hover span { border-color: var(--ivoire); }
+.chips input:checked + span { background: var(--laiton); color: var(--nuit); border-color: var(--laiton); }
+.chips input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 3px; }
+.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.field { display: grid; gap: .3rem; }
+.field > span { font-size: .95rem; font-weight: 600; }
+.field small { font-weight: 400; color: var(--muted); }
+.field input, .field select, .field textarea {
+  width: 100%; min-height: 48px; padding: .6rem 0; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--ivoire) 45%, transparent); border-radius: 0;
+  background: transparent; color: var(--ivoire); font-size: 1.05rem; transition: border-color .2s;
+}
+.field textarea { resize: vertical; min-height: 5.5rem; }
+.field select { appearance: none; -webkit-appearance: none; padding-right: 2rem; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23EFE8DA' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right .25rem center no-repeat; }
+.field select option { background: var(--nuit); color: var(--ivoire); }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--ivoire) 58%, transparent); }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: none; border-bottom-color: var(--laiton); box-shadow: 0 2px 0 var(--laiton); }
+.field [aria-invalid="true"] { border-bottom-color: #F0A08C; }
+.chips legend small { font-weight: 400; color: var(--muted); }
+.chips input[aria-invalid="true"] + span { border-color: #F0A08C; }
+.form__error { color: #F0A08C; font-size: .95rem; }
+.form__error:empty, .form__sent:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.form__send { justify-self: start; }
+.form__sent { color: var(--laiton); font-size: .95rem; }
+
+/* ---------- 7. Questions ---------- */
+.faq { background: var(--pierre); padding: var(--section) var(--gutter); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2rem var(--gutter); align-items: start; }
+.faq__head { position: sticky; top: calc(var(--top-h) + 2rem); }
+.faq__head h2 { margin-top: 1rem; font-size: var(--t-h2); line-height: .9; letter-spacing: -0.015em; }
+.faq__list { border-top: 1px solid var(--line-strong); }
+.faq details { border-bottom: 1px solid var(--line-strong); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+  padding: 1.35rem 0; font-family: var(--font-display); font-size: var(--t-l); line-height: 1.15;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: none; width: 1.05rem; height: 1.05rem;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+  transition: rotate .45s var(--ease-out);
+}
+.faq details[open]:not(.is-closing) summary::after { rotate: 45deg; }
+.faq summary:hover { color: var(--laiton-fonce); }
+.faq__a { overflow: hidden; }
+.faq__a p { padding-bottom: 1.5rem; color: var(--muted); max-width: 60ch; }
+
+/* ---------- Pied de page : le numéro en grand ---------- */
+.foot { position: relative; background: var(--bg); color: var(--ink); padding: clamp(3rem, 8vh, 5rem) var(--gutter); display: grid; gap: clamp(2rem, 5vh, 3rem); font-size: .95rem; }
+.foot__phone { font-family: var(--font-display); font-size: calc((100vw - 2 * var(--gutter)) / 4.45); line-height: .9; letter-spacing: -0.02em; color: var(--laiton); text-decoration: none; white-space: nowrap; }
+.foot__phone:hover { color: var(--laiton-clair); }
+.foot__info { display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: 1rem var(--gutter); padding-top: 1.5rem; border-top: 1px solid var(--line-strong); }
+.foot__name { font-family: var(--font-display); font-size: 1.75rem; line-height: 1; }
+.foot__legal { color: var(--muted); font-size: .85rem; max-width: 36ch; }
+
+/* ---------- Message « démonstration » des boutons d'appel ---------- */
+.toast {
+  position: fixed; z-index: 60; left: 50%; bottom: 1.5rem; translate: -50% 0; width: max-content; max-width: calc(100vw - 2rem);
+  padding: .9rem 1.25rem; border-radius: var(--radius); background: var(--nuit); color: var(--ivoire); font-size: .95rem;
+  border: 1px solid color-mix(in srgb, var(--laiton) 45%, transparent);
+  box-shadow: 0 14px 40px -12px rgb(0 0 0 / .5);
+}
+.toast:empty { opacity: 0; pointer-events: none; }
+
+/* ---------- Barre d'appel mobile ---------- */
+.callbar { display: none; }
+
+/* =========================================================
+   Téléphones et tablettes
+   ========================================================= */
+@media (max-width: 899px) {
+  html { scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
+  .bar__nav { display: none; }
+  .bar { justify-content: space-between; }
+  .brand__name { font-size: 1.3rem; }
+  .brand__sub { font-size: .56rem; }
+  .bar__call { min-height: 44px; padding: .5rem .8rem; font-size: .76rem; gap: .45rem; }
+  .hero { grid-template-columns: 1fr; grid-template-rows: auto auto; row-gap: clamp(1.5rem, 4vh, 2.5rem); }
+  .hero__br { display: none; }
+  .hero__title { font-size: min(clamp(2.8rem, 14vw, 5rem), 8.4svh); }
+  .hero__ctas { width: 100%; }
+  .hero__ctas .btn { flex: 1 1 14rem; }
+  .facts { width: 100%; justify-content: space-between; gap: 1rem; }
+  .facts b { font-size: 1.6rem; }
+  .facts span { font-size: .76rem; }
+  .door { height: 46svh; }
+  .inside__in { grid-template-columns: 1fr; }
+  .promises { grid-template-columns: 1fr; gap: 1rem; }
+  .plaque { padding: 2.25rem 1.25rem 2rem; }
+  .screw { width: 11px; height: 11px; }
+  .screw::after { top: 4.5px; }
+  .screw:nth-child(1), .screw:nth-child(2) { top: 12px; }
+  .screw:nth-child(3), .screw:nth-child(4) { bottom: 12px; }
+  .screw:nth-child(1), .screw:nth-child(3) { left: 12px; }
+  .screw:nth-child(2), .screw:nth-child(4) { right: 12px; }
+  .menu__row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name price" "detail detail"; }
+  .menu__dots { display: none; }
+  .menu__row h3 { font-size: 1.6rem; }
+  .menu__price { font-size: .92rem; }
+  .method__pin { grid-template-columns: 1fr; grid-template-areas: "head" "lock" "steps" "count"; grid-template-rows: none; }
+  .zone__pin { grid-template-columns: 1fr; }
+  .map__dot, .map__pulse { r: 22px; }
+  .map__n { font-size: 17px; }
+  .map__arr--home .map__dot, .map__arr--home.map__arr--near .map__dot, .map__arr--home .map__pulse { r: 27px; }
+  .map__arr--home .map__n { font-size: 19px; }
+  .map__label { font-size: 16px; }
+  .reviews__head { grid-template-columns: 1fr; }
+  .urgent { grid-template-columns: 1fr; }
+  .urgent__phone { font-size: min(17vw, 4.75rem); }
+  .form__row { grid-template-columns: 1fr; }
+  .faq { grid-template-columns: 1fr; }
+  .faq__head { position: static; }
+  .foot__info { grid-template-columns: 1fr; }
+  .callbar {
+    position: fixed; z-index: 45; left: .75rem; right: .75rem; bottom: calc(.75rem + env(safe-area-inset-bottom));
+    display: grid; grid-template-columns: 1.6fr 1fr; gap: .5rem; padding: .45rem; border-radius: 6px;
+    background: color-mix(in srgb, var(--nuit) 92%, transparent);
+    border: 1px solid color-mix(in srgb, var(--laiton) 28%, transparent);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5);
+    transition: transform .5s var(--ease-out), opacity .3s;
+  }
+  /* Masquée tant que les boutons de l'accueil sont visibles */
+  .js .callbar:not(.is-shown) { transform: translateY(140%); opacity: 0; pointer-events: none; visibility: hidden; transition: transform .5s var(--ease-out), opacity .3s, visibility 0s .5s; }
+  .callbar .btn { min-height: 50px; }
+  .toast { bottom: calc(6rem + env(safe-area-inset-bottom)); }
+  .foot { padding-bottom: calc(clamp(3rem, 8vh, 5rem) + 5rem); }
+}
+@media (max-width: 389px) {
+  .bar__call .ico { display: none; }
+  .bar__call { padding: .5rem .7rem; }
+  .brand__sub { display: none; }
+}
+@media (max-width: 339px) {
+  .bar__num { display: none; }
+  .bar__call .ico { display: block; }
+}
+
+/* =========================================================
+   MOUVEMENT : seulement si l'appareil accepte les animations
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Accueil : le texte monte, la lumière s'allume derrière la porte */
+  .js .hero__text > * { animation: rise .9s var(--ease-out) both; }
+  .js .hero__text > :nth-child(2) { animation-delay: .08s; }
+  .js .hero__text > :nth-child(3) { animation-delay: .22s; }
+  .js .hero__text > :nth-child(4) { animation-delay: .3s; }
+  .js .hero__text > :nth-child(5) { animation-delay: .38s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(1.25rem); } }
+  .js .hero__title em { display: inline-block; animation: unveil 1.3s var(--ease-out) .35s both; }
+  @keyframes unveil { from { clip-path: inset(-.3em 100% -.3em -.2em); } to { clip-path: inset(-.3em -5% -.3em -.2em); } }
+  .js .door__in { animation: light-on 1.6s steps(1, end) .4s both; }
+  @keyframes light-on { 0% { background: #2A261F; } 12% { background: var(--pierre); } 18% { background: #2A261F; } 30% { background: var(--pierre); } }
+  .js .live i::after { animation: ping 2.2s var(--ease-out) infinite; }
+
+  /* Titres de section : les mots montent un par un */
+  .js .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+  .js .split .w > span { display: inline-block; transform: translateY(108%); transition: transform 1.1s cubic-bezier(.16, 1, .3, 1) calc(var(--i) * 60ms); }
+  .js .split.is-in .w > span { transform: none; }
+
+  /* Plaque des prix : on visse, un reflet passe sur le laiton, chaque ligne glisse comme un pêne */
+  .js .plaque { overflow: hidden; }
+  .js .plaque::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(100deg, transparent 30%, rgb(255 250 230 / .5) 48%, transparent 66%);
+    transform: translateX(-110%);
+  }
+  .js .plaque.is-in::after { transform: translateX(110%); transition: transform 1.8s cubic-bezier(.45, 0, .2, 1) .3s; }
+  .js .plaque .screw::after { rotate: calc(var(--r) - 540deg); transition: rotate 1.4s var(--ease-out) .1s; }
+  .js .plaque.is-in .screw::after { rotate: var(--r); }
+  .js .menu__row h3, .js .menu__row .menu__detail { opacity: 0; transform: translateX(-2rem); transition: opacity .6s var(--ease-out), transform .7s var(--ease-snap); }
+  .js .menu__dots { transform: scaleX(0); transform-origin: left; transition: transform .9s var(--ease-out) .1s; }
+  .js .menu__price { opacity: 0; clip-path: inset(0 0 0 100%); transition: opacity .2s .25s, clip-path .55s var(--ease-out) .25s; }
+  .js .menu__row .menu__detail { transition-delay: .1s; }
+  .js .menu__row.is-in h3, .js .menu__row.is-in .menu__detail { opacity: 1; transform: none; }
+  .js .menu__row.is-in .menu__dots { transform: none; }
+  .js .menu__row.is-in .menu__price { opacity: 1; clip-path: inset(0 0 0 0); }
+
+  /* Urgence : le numéro s'écrit chiffre par chiffre, les deux points de l'horloge battent */
+  .js .urgent__phone .c { opacity: 0; transform: translateY(.3em); transition: opacity .35s, transform .5s var(--ease-out); transition-delay: calc(var(--i) * 40ms); }
+  .js .urgent__phone.is-in .c { opacity: 1; transform: none; }
+  .js .clock__time i { animation: blink 2s steps(1, end) infinite; }
+  @keyframes blink { 50% { opacity: .2; } }
+
+  /* Zone : pulsation de l'atelier */
+  .js .map__pulse { animation: halo 2.6s var(--ease-out) infinite; }
+  @keyframes halo { from { r: 23px; opacity: .9; } to { r: 54px; opacity: 0; } }
+
+  /* ---------- Scènes épinglées : seulement si l'écran est assez haut ----------
+     (ordinateur d’au moins 520 px de haut, téléphone d'au moins 600 px ;
+     sinon la page reste en version fixe complète. Mêmes seuils dans pinned() du script) */
+  @media (min-width: 900px) and (min-height: 520px), (max-width: 899px) and (min-height: 600px) {
+    /* Accueil : la porte vient au centre, s'ouvre, on la franchit, on arrive sur les prix */
+    .js .scene { height: 245svh; background: var(--nuit); }
+    .js .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+    .js .hero { position: absolute; inset: 0; min-height: 0; }
+    .js .door { will-change: transform; }
+    .js .leaf--l { transform: rotateY(calc(var(--a, 0) * 1deg)); }
+    .js .leaf--r { transform: rotateY(calc(var(--a, 0) * -1deg)); }
+    .js .leaf { opacity: calc(1 - var(--z, 0) * 4); }
+    .js .leaf::after { opacity: calc(var(--a, 0) / 140); }
+    .js .door__num { opacity: calc(1 - var(--z, 0) * 3); }
+    .js .inside {
+      position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; justify-content: flex-start;
+      padding: calc(var(--top-h) + clamp(1.5rem, 8vh, 5.5rem)) var(--gutter) clamp(1.5rem, 5vh, 3rem);
+      opacity: var(--io, 0); pointer-events: none;
+    }
+    .js .inside.is-shown { pointer-events: auto; }
+    /* Une bouffée de lumière chaude au passage du seuil */
+    .js .inside::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 55% at 50% 55%, #FFF8E8, transparent 75%); opacity: calc((1 - var(--io, 0)) * 1.4); }
+    .js .inside__in { position: relative; translate: 0 calc((1 - var(--io, 0)) * 2.5rem); }
+    .js .promises li { translate: 0 calc((1 - var(--io, 0)) * 2rem); }
+    .js .promises li:nth-child(2) { translate: 0 calc((1 - var(--io, 0)) * 3.5rem); }
+    .js .promises li:nth-child(3) { translate: 0 calc((1 - var(--io, 0)) * 5rem); }
+    /* La plaque des prix monte sur la fin de la scène : pas d'écran vide entre les deux */
+    .js .prices { z-index: 1; margin-top: -22svh; padding-top: clamp(1.5rem, 4vh, 2.5rem); }
+
+    /* Méthode : la clé entre, les goupilles s'alignent (déclic), le rotor tourne */
+    .js .method { height: 300svh; scroll-margin-top: calc(-1 * (var(--top-h) + 1rem)); }
+    .js .method__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; grid-template-rows: auto auto 1fr; padding-top: calc(var(--top-h) + clamp(1.5rem, 5vh, 3.5rem)); padding-bottom: clamp(1.5rem, 5vh, 3rem); }
+    .js .lock { align-self: center; min-height: 0; }
+    .js .lk-shear-glow { transition: opacity .6s var(--ease-out); }
+    .js .method.is-aligned .lk-shear-glow { opacity: .5; animation: click .7s var(--ease-out); }
+    @keyframes click { 0% { opacity: 0; stroke-width: 2; } 25% { opacity: 1; stroke-width: 16; } 100% { opacity: .5; stroke-width: 9; } }
+    .js .lk-face__state { display: block; transition: opacity .3s; }
+    .js .lk-face__state--open { fill: var(--laiton); opacity: 0; }
+    .js .method.is-open .lk-face__state--open { opacity: 1; }
+    .js .method.is-open .lk-face__state--shut { opacity: 0; }
+    /* Étape en cours : titre clair et filet laiton ; les autres restent lisibles, en retrait */
+    .js .mstep h3 { color: var(--cendre); transition: color .5s var(--ease-out); }
+    .js .mstep p { color: color-mix(in srgb, var(--cendre) 85%, var(--nuit)); transition: color .5s var(--ease-out); }
+    .js .mstep__n { color: var(--cendre); transition: color .5s var(--ease-out); }
+    .js .mstep.is-on { border-top-color: var(--laiton); }
+    .js .mstep.is-on h3 { color: var(--ivoire); }
+    .js .mstep.is-on p { color: var(--cendre); }
+    .js .mstep.is-on .mstep__n { color: var(--laiton); }
+    .js .method__count { display: flex; grid-area: count; align-self: end; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: .85rem; color: var(--muted); }
+    .js .method__state { margin-left: .5rem; padding: .3rem .6rem; border: 1px solid var(--line-strong); border-radius: var(--radius); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; transition: color .3s, border-color .3s; }
+    .js .method.is-open .method__state { color: var(--laiton); border-color: var(--laiton); }
+    .js .track { position: relative; display: block; width: 7rem; height: 2px; background: var(--line-strong); overflow: hidden; }
+    .js .track i { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(var(--v, 0)); }
+
+    /* Zone : le tracé suit l'escargot des arrondissements, du 1er au 20e */
+    .js .zone { height: 220svh; scroll-margin-top: calc(-1 * (var(--top-h) + 1rem)); }
+    .js .zone__pin { position: sticky; top: 0; height: 100svh; align-items: start; align-content: center; padding-top: calc(var(--top-h) + clamp(1rem, 4vh, 3rem)); padding-bottom: clamp(1rem, 4vh, 3rem); }
+    .js .map__spiral { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--d, 0)); }
+    .js .map__tip { display: block; }
+    .js .map__dot { transform-box: fill-box; transform-origin: center; }
+    .js .map__arr.is-lit .map__dot { animation: pop .55s var(--ease-snap); }
+    @keyframes pop { from { transform: scale(.5); } }
+    .js .map__arr:not(.map__arr--home):not(.is-lit) .map__dot { fill: var(--pierre-2); stroke: color-mix(in srgb, var(--encre) 25%, transparent); }
+    .js .map__arr:not(.map__arr--home):not(.is-lit) .map__n { fill: color-mix(in srgb, var(--encre) 45%, transparent); }
+
+    /* Avis : la bande défile à l'horizontale et marque une pause sur chaque carte
+       (hauteur de la section calculée par le script selon la longueur de la bande) */
+    .js .reviews { height: 300svh; scroll-margin-top: calc(-1 * (var(--top-h) + 1rem)); }
+    .js .reviews__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(1.25rem, 3.5vh, 2.5rem); padding: calc(var(--top-h) + clamp(1.25rem, 4.5vh, 3rem)) 0 clamp(1.5rem, 5vh, 3rem); }
+    .js .reviews__viewport { overflow: visible; display: flex; align-items: flex-start; min-height: 0; padding: 0; }
+    .js .reviews__track { transform: translate3d(var(--tx, 0px), 0, 0); will-change: transform; }
+    .js .review { max-height: 100%; overflow: hidden; }
+    .js .review blockquote p { font-size: min(clamp(1.6rem, 1.2rem + 1vw, 2.15rem), 4.2svh); }
+    .js .reviews__progress { display: flex; padding: 0 var(--gutter); }
+
+    .js .urgent { scroll-margin-top: -1rem; }
+  }
+
+  /* Téléphones : scènes recadrées au-dessus de la barre d'appel */
+  @media (max-width: 899px) and (min-height: 600px) {
+    .js .hero { grid-template-rows: auto minmax(0, 1fr); align-items: stretch; padding-bottom: calc(5.75rem + env(safe-area-inset-bottom)); row-gap: clamp(1rem, 3vh, 2rem); }
+    .js .hero__text { gap: clamp(.8rem, 2vh, 1.25rem); align-self: start; }
+    .js .facts { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .js .door { height: 100%; min-height: 0; align-self: end; }
+    .js .hero__floor { bottom: calc(5.75rem + env(safe-area-inset-bottom)); }
+    .js .inside { padding-top: calc(var(--top-h) + clamp(1rem, 4vh, 2rem)); padding-bottom: calc(5.75rem + env(safe-area-inset-bottom)); }
+    .js .inside h2 { font-size: clamp(2.6rem, 12vw, 3.6rem); }
+    .js .promises { margin-top: 1.25rem; gap: .75rem; }
+    .js .promises li { padding-top: .75rem; }
+    .js .prices { margin-top: -16svh; }
+    .js .method__pin { grid-template-areas: "head" "lock" "steps" "count"; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 1rem; padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
+    .js .method__head h2 { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+    .js .lock { display: flex; align-items: center; height: 100%; min-height: 0; }
+    /* Sur téléphone, la vue de face est retirée : l'état « Fermé / Ouvert » est sous la serrure */
+    .js .lk-face { display: none; }
+    .js .lock__svg { width: 104%; max-width: none; max-height: 100%; margin-left: -3%; }
+    .js .msteps { display: grid; }
+    .js .mstep { grid-area: 1 / 1; opacity: 0; transform: translateY(.75rem); transition: opacity .45s var(--ease-out), transform .45s var(--ease-out); }
+    .js .mstep.is-on { opacity: 1; transform: none; }
+    .js .zone { height: 200svh; }
+    .js .zone__pin { grid-template-rows: auto minmax(0, 1fr); align-content: stretch; gap: 1rem; padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
+    .js .zone__text h2 { font-size: clamp(2.2rem, 10vw, 3.2rem); max-width: none; }
+    .js .zone__intro { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .js .delays { margin-top: .75rem; display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .js .delays__item { padding: .6rem 0; }
+    .js .delays dt { font-size: 1.15rem; }
+    .js .delays dd { padding-left: 0; font-size: .82rem; }
+    .js .map { min-height: 0; height: 100%; display: flex; justify-content: center; }
+    .js .map__svg { width: auto; height: 100%; max-width: 100%; }
+    .js .reviews__pin { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
+    .js .reviews__head { gap: .6rem; }
+    .js .reviews__head h2 { font-size: clamp(2.1rem, 9.5vw, 3rem); }
+    .js .reviews__note { font-size: .82rem; }
+    .js .review blockquote p { font-size: min(clamp(1.4rem, 6.2vw, 1.85rem), 3.6svh); }
+  }
+  /* Téléphones peu hauts : on allège l'écran, le texte reste lisible par les lecteurs d'écran */
+  @media (max-width: 899px) and (min-height: 600px) and (max-height: 760px) {
+    .js .hero__lead, .js .promises p, .js .inside__intro { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  }
+}

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serrurerie Lenoir, serrurier à Paris 9e, 24 h/24 (démo)</title>
+<meta name="description" content="Serrurier dans le 9e depuis 2011. Porte claquée, serrure à changer, mise en sécurité : on intervient dans tout Paris, 24 h/24, prix annoncé au téléphone. Site de démonstration.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F0E0C">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/martian-mono.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/sections.css">
+<script>
+  /* Sans le script (réseau coupé, bloqueur), la page s'affiche en version fixe complète */
+  document.documentElement.classList.add('js');
+  setTimeout(function () { if (!window.lenoirReady) document.documentElement.classList.remove('js'); }, 4000);
+</script>
+<script src="js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<!-- En-tête fixe : bandeau « démo » + barre avec le numéro toujours visible -->
+<header class="top">
+  <p class="banner">Site de démonstration&nbsp;: entreprise, numéro et avis fictifs.</p>
+  <div class="bar" data-tone="dark">
+    <a class="brand" href="#haut">
+      <svg class="brand__mark" viewBox="0 0 24 32" aria-hidden="true"><path fill-rule="evenodd" d="M12 0a12 12 0 0 1 12 12v8A12 12 0 0 1 0 20v-8A12 12 0 0 1 12 0zm0 8.5a3.6 3.6 0 0 0-1.9 6.65L8.9 23.5h6.2l-1.2-8.35A3.6 3.6 0 0 0 12 8.5z"/></svg>
+      <span class="brand__name">Serrurerie Lenoir</span>
+      <span class="brand__sub">Serrurier · Paris 9e · 24&nbsp;h/24</span>
+    </a>
+    <nav class="bar__nav" aria-label="Menu">
+      <a href="#tarifs">Tarifs</a>
+      <a href="#methode">Méthode</a>
+      <a href="#zone">Zone</a>
+      <a href="#avis">Avis</a>
+      <a href="#urgence">Urgence</a>
+    </nav>
+    <a class="btn btn--call bar__call" href="tel:+33199005831" aria-label="Appeler le 01 99 00 58 31">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="bar__num">01 99 00 58 31</span>
+    </a>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <!-- 1. ACCUEIL : la nuit, une porte cochère. Au scroll elle s'ouvre, on passe la porte… -->
+  <div class="scene" id="haut">
+  <div class="stage">
+  <section class="hero" data-tone="dark" aria-labelledby="titre">
+    <div class="hero__text">
+      <p class="live"><i aria-hidden="true"></i><span class="live__text">Ouvert 24&nbsp;h/24, 7&nbsp;j/7</span></p>
+      <h1 id="titre" class="hero__title">Porte claquée&nbsp;?<br class="hero__br"> <em>On vous ouvre, jour et nuit.</em></h1>
+      <p class="hero__lead">Serrurier dans le 9e depuis 2011. Le prix vous est annoncé au téléphone, avant qu’on se déplace.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--call" href="tel:+33199005831"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Appeler le 01 99 00 58 31</a>
+        <a class="btn btn--ghost" href="#tarifs">Voir les tarifs</a>
+      </div>
+      <ul class="facts">
+        <li><b>dès 89&nbsp;€</b><span>porte claquée, déplacement inclus</span></li>
+        <li><b>24&nbsp;h/24</b><span>7 jours sur 7</span></li>
+        <li><b>4,8/5</b><span>sur 212 avis (exemple)</span></li>
+      </ul>
+    </div>
+    <div class="door" aria-hidden="true">
+      <div class="door__frame">
+        <div class="door__in">
+          <div class="leaf leaf--l"><i class="panel"></i><i class="panel"></i><i class="panel"></i><b class="knob"></b></div>
+          <div class="leaf leaf--r"><i class="panel"></i><i class="panel"></i><i class="panel"></i><b class="plate"><i></i></b></div>
+        </div>
+      </div>
+      <span class="door__num">9</span>
+    </div>
+    <span class="hero__floor" aria-hidden="true"></span>
+  </section>
+
+  <!-- … et on arrive chez vous : les trois règles sur les prix -->
+  <section class="inside" aria-labelledby="titre-tarifs">
+    <div class="inside__in">
+      <p class="kicker"><span class="kicker__n">01</span>Tarifs</p>
+      <h2 id="titre-tarifs">Le prix, avant <em>d’ouvrir.</em></h2>
+      <p class="inside__intro">Les arnaques au dépannage de serrurerie sont fréquentes à Paris. Ici, trois règles, sans exception.</p>
+      <ol class="promises">
+        <li><span class="promises__n">1</span><div><h3>Le prix au téléphone</h3><p>Vous connaissez le tarif avant qu’on se déplace.</p></div></li>
+        <li><span class="promises__n">2</span><div><h3>Le devis avant d’ouvrir</h3><p>Devis gratuit, signé avant qu’on touche à la porte. Si vous refusez, vous ne payez rien.</p></div></li>
+        <li><span class="promises__n">3</span><div><h3>Une facture détaillée</h3><p>Pièces, main-d’œuvre, supplément éventuel&nbsp;: tout est écrit.</p></div></li>
+      </ol>
+    </div>
+  </section>
+  </div>
+  </div>
+
+  <!-- 2. LES PRIX : une plaque en laiton vissée -->
+  <section class="prices" id="tarifs" aria-labelledby="titre-liste">
+    <h2 id="titre-liste" class="sr-only">Liste des tarifs</h2>
+    <div class="plaque" data-reveal>
+      <span class="screw" aria-hidden="true"></span><span class="screw" aria-hidden="true"></span><span class="screw" aria-hidden="true"></span><span class="screw" aria-hidden="true"></span>
+      <ol class="menu">
+        <li class="menu__row" data-reveal><h3>Ouverture de porte claquée</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 89&nbsp;€</p><p class="menu__detail">Sans perçage dans la plupart des cas. S’il faut percer, on vous le dit avant.</p></li>
+        <li class="menu__row" data-reveal><h3>Ouverture de porte fermée à clé</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 149&nbsp;€</p><p class="menu__detail">Ouverture fine (sans casse) si la serrure le permet. Sinon, cylindre remplacé&nbsp;: dès 120&nbsp;€ en plus, annoncé avant.</p></li>
+        <li class="menu__row" data-reveal><h3>Remplacement de cylindre</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 120&nbsp;€</p><p class="menu__detail">Cylindre standard et pose compris, 3 clés. Haute sécurité sur devis.</p></li>
+        <li class="menu__row" data-reveal><h3>Serrure 3 points</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 450&nbsp;€</p><p class="menu__detail">Fournie et posée, avec 5 clés et carte de propriété.</p></li>
+        <li class="menu__row" data-reveal><h3>Mise en sécurité après effraction</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">dès 150&nbsp;€</p><p class="menu__detail">Fermeture provisoire le jour même, facture pour l’assurance.</p></li>
+        <li class="menu__row" data-reveal><h3>Porte blindée, blindage</h3><span class="menu__dots" aria-hidden="true"></span><p class="menu__price">sur devis</p><p class="menu__detail">Visite et devis gratuits à domicile.</p></li>
+      </ol>
+    </div>
+    <p class="prices__note">Prix TTC, déplacement inclus dans tout Paris. De 20&nbsp;h à 7&nbsp;h, le dimanche et les jours fériés&nbsp;: supplément de 50&nbsp;€, toujours annoncé au téléphone. Devis gratuit, écrit et signé avant toute intervention. Paiement par carte, après l’intervention.</p>
+  </section>
+
+  <!-- 3. MÉTHODE : la clé entre, les goupilles s'alignent, le cylindre tourne -->
+  <section class="method" id="methode" data-tone="dark" aria-labelledby="titre-methode">
+    <div class="method__pin">
+      <div class="method__head">
+        <p class="kicker"><span class="kicker__n">02</span>Méthode</p>
+        <h2 id="titre-methode" class="split">Le bon geste, la perceuse en dernier.</h2>
+      </div>
+      <figure class="lock" aria-hidden="true">
+        <svg class="lock__svg" viewBox="0 0 1000 520" data-lock='{"top":[[220,300],[366,300],[392,320],[408,320],[434,300],[466,300],[492,350],[508,350],[534,300],[566,300],[592,310],[608,310],[634,300],[666,300],[692,340],[708,340],[734,300],[766,300],[792,330],[808,330],[834,300],[850,300],[905,425]],"x":[400,500,600,700,800],"l":[70,100,60,90,80],"shear":250,"rest":410,"k0":-720,"axis":350}'>
+        <defs>
+        <linearGradient id="lg-housing" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A352D"/><stop offset="1" stop-color="#25221D"/></linearGradient>
+        <linearGradient id="lg-plug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A5143"/><stop offset=".5" stop-color="#433C31"/><stop offset="1" stop-color="#504839"/></linearGradient>
+        <linearGradient id="lg-brass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1D594"/><stop offset=".45" stop-color="#D4A84F"/><stop offset="1" stop-color="#A47A2C"/></linearGradient>
+        <linearGradient id="lg-pin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A97F2F"/><stop offset=".45" stop-color="#E7C77F"/><stop offset="1" stop-color="#B48934"/></linearGradient>
+        <linearGradient id="lg-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8B8476"/><stop offset=".45" stop-color="#D3CCBC"/><stop offset="1" stop-color="#8B8476"/></linearGradient>
+        </defs>
+        <rect class="lk-housing" x="220" y="40" width="750" height="450" rx="30"/>
+        <rect class="lk-plug" x="220" y="250" width="700" height="200"/>
+        <rect class="lk-ch" x="376" y="62" width="48" height="192" rx="4"/>
+        <rect class="lk-ch" x="476" y="62" width="48" height="192" rx="4"/>
+        <rect class="lk-ch" x="576" y="62" width="48" height="192" rx="4"/>
+        <rect class="lk-ch" x="676" y="62" width="48" height="192" rx="4"/>
+        <rect class="lk-ch" x="776" y="62" width="48" height="192" rx="4"/>
+        <g class="lk-turn">
+        <rect class="lk-keyway" x="220" y="292" width="700" height="152"/>
+        <rect class="lk-ch lk-ch--plug" x="376" y="246" width="48" height="50"/>
+        <rect class="lk-ch lk-ch--plug" x="476" y="246" width="48" height="50"/>
+        <rect class="lk-ch lk-ch--plug" x="576" y="246" width="48" height="50"/>
+        <rect class="lk-ch lk-ch--plug" x="676" y="246" width="48" height="50"/>
+        <rect class="lk-ch lk-ch--plug" x="776" y="246" width="48" height="50"/>
+        </g>
+        <path class="lk-spring" d="M0,0 L-13,4.0 L13,13.2 L-13,22.4 L13,31.599999999999998 L-13,40.8 L13,50.0 L-13,59.199999999999996 L13,68.39999999999999 L-13,77.6 L13,86.8 L0,100" vector-effect="non-scaling-stroke" transform="translate(400 62) scale(1 1.18)"/>
+        <path class="lk-spring" d="M0,0 L-13,4.0 L13,13.2 L-13,22.4 L13,31.599999999999998 L-13,40.8 L13,50.0 L-13,59.199999999999996 L13,68.39999999999999 L-13,77.6 L13,86.8 L0,100" vector-effect="non-scaling-stroke" transform="translate(500 62) scale(1 1.18)"/>
+        <path class="lk-spring" d="M0,0 L-13,4.0 L13,13.2 L-13,22.4 L13,31.599999999999998 L-13,40.8 L13,50.0 L-13,59.199999999999996 L13,68.39999999999999 L-13,77.6 L13,86.8 L0,100" vector-effect="non-scaling-stroke" transform="translate(600 62) scale(1 1.18)"/>
+        <path class="lk-spring" d="M0,0 L-13,4.0 L13,13.2 L-13,22.4 L13,31.599999999999998 L-13,40.8 L13,50.0 L-13,59.199999999999996 L13,68.39999999999999 L-13,77.6 L13,86.8 L0,100" vector-effect="non-scaling-stroke" transform="translate(700 62) scale(1 1.18)"/>
+        <path class="lk-spring" d="M0,0 L-13,4.0 L13,13.2 L-13,22.4 L13,31.599999999999998 L-13,40.8 L13,50.0 L-13,59.199999999999996 L13,68.39999999999999 L-13,77.6 L13,86.8 L0,100" vector-effect="non-scaling-stroke" transform="translate(800 62) scale(1 1.18)"/>
+        <rect class="lk-dp" width="40" height="70" rx="6" transform="translate(380 180)"/>
+        <rect class="lk-dp" width="40" height="70" rx="6" transform="translate(480 180)"/>
+        <rect class="lk-dp" width="40" height="70" rx="6" transform="translate(580 180)"/>
+        <rect class="lk-dp" width="40" height="70" rx="6" transform="translate(680 180)"/>
+        <rect class="lk-dp" width="40" height="70" rx="6" transform="translate(780 180)"/>
+        <g class="lk-turn">
+        <g class="lk-key" transform="translate(0 0)"><path class="lk-key__bow" fill-rule="evenodd" d="M110,290 a78,78 0 1 1 0,156 a78,78 0 1 1 0,-156 Z M92,368 m-24,0 a24,24 0 1 0 48,0 a24,24 0 1 0 -48,0 Z"/><path class="lk-key__blade" d="M180,300 L220,300 L366,300 L392,320 L408,320 L434,300 L466,300 L492,350 L508,350 L534,300 L566,300 L592,310 L608,310 L634,300 L666,300 L692,340 L708,340 L734,300 L766,300 L792,330 L808,330 L834,300 L850,300 L905,425 L905,440 L180,440 Z"/><path class="lk-key__groove" d="M240,392 H880"/></g>
+        <path class="lk-kp" d="M0,0 H40 V58 L28,70 H12 L0,58 Z" transform="translate(380 250)"/>
+        <path class="lk-kp" d="M0,0 H40 V88 L28,100 H12 L0,88 Z" transform="translate(480 250)"/>
+        <path class="lk-kp" d="M0,0 H40 V48 L28,60 H12 L0,48 Z" transform="translate(580 250)"/>
+        <path class="lk-kp" d="M0,0 H40 V78 L28,90 H12 L0,78 Z" transform="translate(680 250)"/>
+        <path class="lk-kp" d="M0,0 H40 V68 L28,80 H12 L0,68 Z" transform="translate(780 250)"/>
+        </g>
+        <line class="lk-shear-glow" x1="220" y1="250" x2="920" y2="250"/>
+        <line class="lk-shear" x1="220" y1="250" x2="920" y2="250"/>
+        <rect class="lk-face-lip" x="214" y="250" width="12" height="200" rx="3"/>
+        <g class="lk-face" transform="translate(110 122)"><circle class="lk-face__ring" r="74"/><g class="lk-face__plug"><circle r="50"/><path d="M-7,-34 h14 v44 l6,8 v18 h-26 v-18 l6,-8 z"/></g><text class="lk-face__state lk-face__state--shut" y="112">Fermé</text><text class="lk-face__state lk-face__state--open" y="112">Ouvert</text></g>
+        </svg>
+      </figure>
+      <ol class="msteps">
+        <li class="mstep"><span class="mstep__n">01</span><div><h3>Vous appelez</h3><p>On vous pose trois questions sur la porte et la serrure, puis on vous donne le prix.</p></div></li>
+        <li class="mstep"><span class="mstep__n">02</span><div><h3>On arrive, on vous montre le devis</h3><p>Rien n’est touché avant votre signature.</p></div></li>
+        <li class="mstep"><span class="mstep__n">03</span><div><h3>On ouvre sans casser, si c’est possible</h3><p>Sinon, on vous explique pourquoi avant de percer.</p></div></li>
+      </ol>
+      <p class="method__count" aria-hidden="true"><span><span class="method__now">1</span>&nbsp;/&nbsp;3</span><span class="track"><i></i></span><span class="method__state">Fermé</span></p>
+    </div>
+  </section>
+
+  <!-- 4. ZONE : du 1er au 20e, le tracé suit l'escargot des arrondissements -->
+  <section class="zone" id="zone" aria-labelledby="titre-zone">
+    <div class="zone__pin">
+      <div class="zone__text">
+        <p class="kicker"><span class="kicker__n">03</span>Zone d’intervention</p>
+        <h2 id="titre-zone" class="split">Tout Paris, à&nbsp;toute heure.</h2>
+        <p class="zone__intro">L’atelier est dans le 9e. Le déplacement est inclus, quel que soit l’arrondissement.</p>
+        <dl class="delays">
+          <div class="delays__item delays__item--near"><dt><span class="delays__dot" aria-hidden="true"></span>15 à 25&nbsp;min</dt><dd>Du 1er au 11e, 17e, 18e et 19e</dd></div>
+          <div class="delays__item delays__item--far"><dt><span class="delays__dot" aria-hidden="true"></span>30 à 40&nbsp;min</dt><dd>Du 12e au 16e, et le 20e</dd></div>
+        </dl>
+      </div>
+      <figure class="map" aria-hidden="true">
+        <svg class="map__svg" viewBox="0 0 739 591">
+        <defs><clipPath id="paris"><path d="M146.5,169.3 C158.2,153.6 165.5,136.4 188.2,118.2 C210.9,100.0 255.6,72.9 282.7,59.9 C309.8,46.9 327.9,44.6 350.8,40.0 C373.7,35.4 397.8,33.0 420.2,32.0 C442.6,31.0 466.8,34.3 485.3,34.0 C503.8,33.7 511.8,29.0 531.0,30.0 C550.2,31.0 583.9,28.4 600.4,40.0 C616.9,51.6 614.7,77.0 629.9,99.7 C645.1,122.4 679.3,148.9 691.4,176.0 C703.5,203.1 699.5,229.0 702.4,262.2 C705.3,295.4 711.6,343.5 709.0,375.0 C706.4,406.5 695.1,428.6 687.0,451.3 C678.9,474.0 686.6,495.0 660.6,511.0 C634.6,527.0 560.3,539.2 531.0,547.5 C501.7,555.8 517.4,562.4 484.8,560.7 C452.2,559.0 374.9,546.9 335.4,537.5 C295.8,528.1 275.0,514.8 247.5,504.3 C220.0,493.8 206.1,486.1 170.6,474.5 C135.1,462.9 57.8,452.4 34.4,434.7 C11.0,417.0 21.2,397.1 30.0,368.3 C38.8,339.6 72.4,288.2 87.1,262.2 C101.8,236.2 108.0,227.9 117.9,212.4 C127.8,196.9 134.8,185.0 146.5,169.3 Z"/></clipPath></defs>
+        <path class="map__outline" d="M146.5,169.3 C158.2,153.6 165.5,136.4 188.2,118.2 C210.9,100.0 255.6,72.9 282.7,59.9 C309.8,46.9 327.9,44.6 350.8,40.0 C373.7,35.4 397.8,33.0 420.2,32.0 C442.6,31.0 466.8,34.3 485.3,34.0 C503.8,33.7 511.8,29.0 531.0,30.0 C550.2,31.0 583.9,28.4 600.4,40.0 C616.9,51.6 614.7,77.0 629.9,99.7 C645.1,122.4 679.3,148.9 691.4,176.0 C703.5,203.1 699.5,229.0 702.4,262.2 C705.3,295.4 711.6,343.5 709.0,375.0 C706.4,406.5 695.1,428.6 687.0,451.3 C678.9,474.0 686.6,495.0 660.6,511.0 C634.6,527.0 560.3,539.2 531.0,547.5 C501.7,555.8 517.4,562.4 484.8,560.7 C452.2,559.0 374.9,546.9 335.4,537.5 C295.8,528.1 275.0,514.8 247.5,504.3 C220.0,493.8 206.1,486.1 170.6,474.5 C135.1,462.9 57.8,452.4 34.4,434.7 C11.0,417.0 21.2,397.1 30.0,368.3 C38.8,339.6 72.4,288.2 87.1,262.2 C101.8,236.2 108.0,227.9 117.9,212.4 C127.8,196.9 134.8,185.0 146.5,169.3 Z"/>
+        <path class="map__seine" clip-path="url(#paris)" d="M632.1,520.9 C628.4,517.0 621.1,512.6 610.1,497.7 C599.1,482.8 581.9,450.2 566.1,431.4 C550.4,412.6 531.0,398.2 515.6,384.9 C500.2,371.6 487.4,360.6 473.8,351.8 C460.2,343.0 445.7,339.3 434.3,331.9 C422.9,324.5 413.4,312.8 405.7,307.3 C398.0,301.8 404.3,306.0 388.2,298.7 C372.1,291.4 326.7,269.8 309.1,263.5 C291.5,257.2 295.5,260.7 282.7,260.9 C269.9,261.1 247.5,259.7 232.1,264.9 C216.7,270.1 202.8,282.1 190.4,292.1 C178.0,302.2 166.9,315.2 157.4,325.2 C147.9,335.1 140.6,342.6 133.3,351.8 C126.0,361.0 120.5,368.2 113.5,380.3 C106.5,392.4 101.0,409.0 91.5,424.7 C82.0,440.4 62.2,466.2 56.4,474.5"/>
+        <path class="map__spiral" d="M383.3,272.1 C388.0,265.7 394.1,234.2 411.4,233.7 C428.7,233.1 476.1,253.3 487.0,268.8 C497.9,284.3 483.3,305.9 476.5,326.5 C469.7,347.1 464.3,386.4 446.2,392.2 C428.1,397.9 396.1,374.1 367.9,361.0 C339.7,347.9 291.9,340.0 277.0,313.9 C262.1,287.8 259.8,227.6 278.3,204.5 C296.8,181.4 352.9,179.2 388.2,175.3 C423.5,171.4 459.0,161.4 490.1,181.3 C521.2,201.2 554.9,254.7 574.9,294.7 C594.9,334.7 623.1,387.3 610.1,421.4 C597.1,455.4 542.1,487.1 497.1,499.0 C452.1,510.9 391.2,506.1 340.3,493.1 C289.4,480.1 233.2,454.9 191.7,420.8 C150.2,386.7 81.3,340.9 91.5,288.7 C101.7,236.5 195.4,143.5 252.8,107.6 C310.2,71.7 378.9,72.9 436.1,73.1 C493.3,73.3 557.4,76.7 596.0,108.9 C634.6,141.1 655.7,240.0 667.6,266.2" pathLength="1"/>
+        <circle class="map__tip" r="7" cx="0" cy="0"/>
+        <g class="map__arr map__arr--near" data-at="0.0" transform="translate(383.3 272.1)"><circle class="map__dot"/><text class="map__n" dy=".36em">1</text></g>
+        <g class="map__arr map__arr--near" data-at="0.0201" transform="translate(411.4 233.7)"><circle class="map__dot"/><text class="map__n" dy=".36em">2</text></g>
+        <g class="map__arr map__arr--near" data-at="0.0542" transform="translate(487.0 268.8)"><circle class="map__dot"/><text class="map__n" dy=".36em">3</text></g>
+        <g class="map__arr map__arr--near" data-at="0.0787" transform="translate(476.5 326.5)"><circle class="map__dot"/><text class="map__n" dy=".36em">4</text></g>
+        <g class="map__arr map__arr--near" data-at="0.1087" transform="translate(446.2 392.2)"><circle class="map__dot"/><text class="map__n" dy=".36em">5</text></g>
+        <g class="map__arr map__arr--near" data-at="0.1431" transform="translate(367.9 361.0)"><circle class="map__dot"/><text class="map__n" dy=".36em">6</text></g>
+        <g class="map__arr map__arr--near" data-at="0.185" transform="translate(277.0 313.9)"><circle class="map__dot"/><text class="map__n" dy=".36em">7</text></g>
+        <g class="map__arr map__arr--near" data-at="0.2307" transform="translate(278.3 204.5)"><circle class="map__dot"/><text class="map__n" dy=".36em">8</text></g>
+        <g class="map__arr map__arr--near map__arr--home" data-at="0.2773" transform="translate(388.2 175.3)"><circle class="map__pulse"/><circle class="map__dot"/><text class="map__n" dy=".36em">9</text><text class="map__label" y="-40">L’atelier</text></g>
+        <g class="map__arr map__arr--near" data-at="0.3193" transform="translate(490.1 181.3)"><circle class="map__dot"/><text class="map__n" dy=".36em">10</text></g>
+        <g class="map__arr map__arr--near" data-at="0.3767" transform="translate(574.9 294.7)"><circle class="map__dot"/><text class="map__n" dy=".36em">11</text></g>
+        <g class="map__arr map__arr--far" data-at="0.4308" transform="translate(610.1 421.4)"><circle class="map__dot"/><text class="map__n" dy=".36em">12</text></g>
+        <g class="map__arr map__arr--far" data-at="0.4875" transform="translate(497.1 499.0)"><circle class="map__dot"/><text class="map__n" dy=".36em">13</text></g>
+        <g class="map__arr map__arr--far" data-at="0.5511" transform="translate(340.3 493.1)"><circle class="map__dot"/><text class="map__n" dy=".36em">14</text></g>
+        <g class="map__arr map__arr--far" data-at="0.618" transform="translate(191.7 420.8)"><circle class="map__dot"/><text class="map__n" dy=".36em">15</text></g>
+        <g class="map__arr map__arr--far" data-at="0.6877" transform="translate(91.5 288.7)"><circle class="map__dot"/><text class="map__n" dy=".36em">16</text></g>
+        <g class="map__arr map__arr--near" data-at="0.7868" transform="translate(252.8 107.6)"><circle class="map__dot"/><text class="map__n" dy=".36em">17</text></g>
+        <g class="map__arr map__arr--near" data-at="0.8628" transform="translate(436.1 73.1)"><circle class="map__dot"/><text class="map__n" dy=".36em">18</text></g>
+        <g class="map__arr map__arr--near" data-at="0.9299" transform="translate(596.0 108.9)"><circle class="map__dot"/><text class="map__n" dy=".36em">19</text></g>
+        <g class="map__arr map__arr--far" data-at="1.0" transform="translate(667.6 266.2)"><circle class="map__dot"/><text class="map__n" dy=".36em">20</text></g>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5. AVIS : ils défilent à l'horizontale, sur fond laiton -->
+  <section class="reviews" id="avis" data-tone="laiton" aria-labelledby="titre-avis">
+    <div class="reviews__pin">
+      <div class="reviews__head">
+        <p class="kicker"><span class="kicker__n">04</span>Avis clients</p>
+        <h2 id="titre-avis">Ceux qu’on a dépannés en parlent.</h2>
+        <p class="reviews__note">4,8/5 sur 212 avis. Exemples pour la démonstration.</p>
+      </div>
+      <div class="reviews__viewport" tabindex="0" role="region" aria-label="Avis clients, faire défiler horizontalement">
+        <ol class="reviews__track">
+          <li class="review">
+            <p class="review__tag">Porte claquée · 23&nbsp;h&nbsp;40</p>
+            <blockquote><p>Bloquée dehors en rentrant du travail. Le prix annoncé au téléphone était le bon, et la porte n’a rien.</p></blockquote>
+            <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+            <p class="review__who">Sophie R. · Paris 17e</p>
+          </li>
+          <li class="review">
+            <p class="review__tag">Clés perdues · 8&nbsp;h&nbsp;15</p>
+            <blockquote><p>Il m’a expliqué pourquoi il fallait changer le cylindre et m’a montré le devis avant. Clair et rapide.</p></blockquote>
+            <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+            <p class="review__who">Thomas L. · Paris 10e</p>
+          </li>
+          <li class="review">
+            <p class="review__tag">Après cambriolage · 2&nbsp;h</p>
+            <blockquote><p>Porte fracturée en pleine nuit. Mise en sécurité dans l’heure, facture détaillée pour l’assurance.</p></blockquote>
+            <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+            <p class="review__who">Nadia B. · Paris 18e</p>
+          </li>
+          <li class="review">
+            <p class="review__tag">Serrure 3 points · sur rendez-vous</p>
+            <blockquote><p>Bon conseil sur le choix de la serrure, pose propre. Trois jours d’attente pour le rendez-vous, mais il avait prévenu.</p></blockquote>
+            <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24" class="is-empty"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">4 étoiles sur 5</span></p>
+            <p class="review__who">Marc D. · Paris 9e</p>
+          </li>
+          <li class="review">
+            <p class="review__tag">Porte blindée · devis</p>
+            <blockquote><p>Devis détaillé, aucune pression pour signer. On a pris le temps de comparer, il a rappelé une seule fois.</p></blockquote>
+            <p class="review__stars"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+            <p class="review__who">Isabelle V. · Paris 16e</p>
+          </li>
+        </ol>
+      </div>
+      <p class="reviews__progress" aria-hidden="true"><span class="track"><i></i></span></p>
+    </div>
+  </section>
+
+  <!-- 6. URGENCE : l'heure de Paris en direct, le numéro, le formulaire -->
+  <section class="urgent" id="urgence" data-tone="dark" aria-labelledby="titre-urgence">
+    <div class="urgent__call">
+      <p class="kicker"><span class="kicker__n">05</span>Urgence</p>
+      <h2 id="titre-urgence" class="split">Bloqué dehors&nbsp;? Appelez.</h2>
+      <p class="clock"><span class="clock__time" aria-hidden="true" hidden></span><span class="clock__text">On décroche à toute heure.</span></p>
+      <a class="urgent__phone" href="tel:+33199005831" aria-label="Appeler le 01 99 00 58 31"><span data-typed>01 99 00 58 31</span></a>
+      <p class="urgent__tip"><b>En attendant&nbsp;:</b> si un voisin ou le gardien a un double de vos clés, c’est le plus rapide, et c’est gratuit. Un enfant seul ou une casserole sur le feu à l’intérieur&nbsp;: appelez le 18 ou le 112.</p>
+      <p class="urgent__text">Bloqué dehors ou après un cambriolage, appelez&nbsp;: c’est le plus rapide. Pour une serrure, des clés ou une porte blindée, laissez votre demande&nbsp;: on vous rappelle le jour même, ou le lendemain matin si vous écrivez après 20&nbsp;h.</p>
+    </div>
+    <form class="form" id="formulaire" novalidate>
+      <fieldset class="chips">
+        <legend>Votre projet <small>(obligatoire)</small></legend>
+        <label><input type="radio" name="type" value="Serrure à changer" required><span>Serrure à changer</span></label>
+        <label><input type="radio" name="type" value="Cylindre ou clés"><span>Cylindre ou clés</span></label>
+        <label><input type="radio" name="type" value="Porte blindée"><span>Porte blindée</span></label>
+        <label><input type="radio" name="type" value="Blindage"><span>Blindage</span></label>
+        <label><input type="radio" name="type" value="Autre"><span>Autre</span></label>
+      </fieldset>
+      <div class="form__row">
+        <label class="field"><span>Nom <small>(obligatoire)</small></span><input name="nom" autocomplete="name" required></label>
+        <label class="field"><span>Téléphone <small>(obligatoire)</small></span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" required></label>
+      </div>
+      <label class="field"><span>Arrondissement <small>(obligatoire)</small></span>
+        <select name="arr" required>
+          <option value="" disabled selected>Choisir…</option><option>1er</option><option>2e</option><option>3e</option><option>4e</option><option>5e</option><option>6e</option><option>7e</option><option>8e</option><option>9e</option><option>10e</option><option>11e</option><option>12e</option><option>13e</option><option>14e</option><option>15e</option><option>16e</option><option>17e</option><option>18e</option><option>19e</option><option>20e</option><option>Hors Paris</option>
+        </select>
+      </label>
+      <label class="field"><span>Précisions</span><textarea name="msg" rows="3" placeholder="Ex. : serrure 3 points sur porte palière, 2 clés seulement"></textarea></label>
+      <p class="form__error" id="form-erreur" role="alert"></p>
+      <button class="btn btn--call form__send" type="submit">Envoyer ma demande</button>
+      <p class="form__sent" role="status"></p>
+    </form>
+  </section>
+
+  <!-- 7. QUESTIONS -->
+  <section class="faq" aria-labelledby="titre-faq">
+    <div class="faq__head">
+      <p class="kicker"><span class="kicker__n">06</span>Questions fréquentes</p>
+      <h2 id="titre-faq" class="split">Avant d’appeler.</h2>
+    </div>
+    <div class="faq__list">
+      <details><summary>Combien coûte l’ouverture d’une porte claquée&nbsp;?</summary><div class="faq__a"><p>Dès 89&nbsp;€ en journée, dès 139&nbsp;€ la nuit, le dimanche et les jours fériés, déplacement inclus partout dans Paris. Le prix vous est donné au téléphone. Si la serrure n’est pas celle décrite, le devis sur place le dit avant toute intervention, et vous pouvez refuser sans frais.</p></div></details>
+      <details><summary>La nuit, c’est plus cher&nbsp;?</summary><div class="faq__a"><p>Oui&nbsp;: + 50&nbsp;€ de 20&nbsp;h à 7&nbsp;h, le dimanche et les jours fériés (non cumulables). C’est le seul supplément lié à l’horaire, toujours annoncé au téléphone.</p></div></details>
+      <details><summary>Comment reconnaître un serrurier honnête&nbsp;?</summary><div class="faq__a"><p>Méfiez-vous des prospectus aux allures officielles («&nbsp;mairie&nbsp;», «&nbsp;numéros utiles&nbsp;») et des numéros sans adresse. Un serrurier sérieux annonce son prix au téléphone et vous fait signer un devis avant de commencer.</p></div></details>
+      <details><summary>Faut-il changer la serrure après une perte de clés&nbsp;?</summary><div class="faq__a"><p>Si vos clés ont été volées avec vos papiers, ou si elles portaient votre adresse, oui&nbsp;: changez au moins le cylindre. Sinon, c’est à vous de voir. On vous conseille, sans vous forcer.</p></div></details>
+      <details><summary>Travaillez-vous avec les assurances&nbsp;?</summary><div class="faq__a"><p>Vous êtes libre de choisir votre serrurier. On vous remet une facture détaillée, avec photos si besoin, à transmettre à votre assureur.</p></div></details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" data-tone="dark">
+  <a class="foot__phone" href="tel:+33199005831" aria-label="Appeler le 01 99 00 58 31">01 99 00 58 31</a>
+  <div class="foot__info">
+    <p class="foot__name">Serrurerie Lenoir</p>
+    <p>00 rue des Martyrs, 75009 Paris (adresse fictive)<br>Ouvert 24&nbsp;h/24, 7&nbsp;j/7</p>
+    <p class="foot__legal">Mentions légales&nbsp;: SIRET, n°&nbsp;RM, assurance RC pro et médiateur de la consommation à renseigner pour le vrai client.</p>
+  </div>
+</footer>
+
+<!-- Démo : les boutons d'appel n'appellent personne -->
+<p class="toast" role="status" aria-live="polite"></p>
+
+<!-- Mobile : appel et tarifs toujours à portée de pouce -->
+<nav class="callbar" data-tone="dark" aria-label="Contact rapide">
+  <a class="btn btn--call" href="tel:+33199005831"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Appeler</a>
+  <a class="btn btn--ghost" href="#tarifs">Tarifs</a>
+</nav>
+</body>
+</html>

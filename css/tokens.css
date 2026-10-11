@@ -1,0 +1,95 @@
+/* =========================================================
+   DESIGN SYSTEM « haut de gamme » — le seul fichier à modifier
+   pour changer les couleurs, les polices ou les espacements.
+   Le site est pensé sombre d'abord ; le thème clair est l'inverse.
+   ========================================================= */
+
+/* Polices hébergées sur le site (licence SIL OFL), rien n'est chargé chez Google */
+@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni-moda.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Hanken Grotesk"; src: url("../fonts/hanken-grotesk.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+/* Chiffres des titres : le « 1 » de la Bodoni ressemble à un « I » et le « 4 » à un « /1 ».
+   Ce calque ne contient que les chiffres (0 à 9), pris dans Hanken Grotesk, placé avant la Bodoni. */
+@font-face { font-family: "Chiffres"; src: url("../fonts/hanken-grotesk.woff2") format("woff2"); font-weight: 100 900; unicode-range: U+0030-0039; size-adjust: 96%; font-display: swap; }
+/* Polices des en-têtes des démos (pour réécrire le nom tapé) */
+@font-face { font-family: "Fraunces Demo"; src: url("../demos/plombier/fonts/fraunces-soft.woff2") format("woff2"); font-weight: 300 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Serif Demo"; src: url("../demos/serrurier/fonts/instrument-serif.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+
+:root {
+  /* Couleurs de base */
+  --graphite: #16191D;       /* fond (sombre) / texte (clair) */
+  --graphite-haut: #1E2228;  /* cadres et champs sur fond sombre */
+  --ivoire: #EEEAE3;         /* texte (sombre) / volet de l'offre */
+  --pierre: #A39E96;         /* texte secondaire sur fond sombre (6,6:1) */
+  --pierre-fonce: #55595F;   /* texte secondaire sur fond clair (5,7:1) */
+  --calcaire: #E9E7E3;       /* fond clair */
+
+  /* Rôles, thème sombre par défaut */
+  --bg: var(--graphite);
+  --surface: var(--graphite-haut);
+  --ink: var(--ivoire);
+  --muted: var(--pierre);
+  --line: color-mix(in srgb, var(--ivoire) 14%, transparent);
+  --line-strong: color-mix(in srgb, var(--ivoire) 32%, transparent);
+  --accent: var(--ivoire);          /* boutons, lignes, coches : l'ivoire joue le rôle de couleur */
+  --on-accent: var(--graphite);
+  --hatch: color-mix(in srgb, var(--ivoire) 5%, transparent);
+  --end-bg: #0F1114;
+  --err: #FF9C8F;                   /* messages d'erreur du formulaire (7:1 sur le fond sombre) */                /* fond du contact en fin de page */
+
+  /* Typographie : Bodoni Moda (titres, très contrastée) + Hanken Grotesk (texte) */
+  --font-display: "Chiffres", "Bodoni Moda", "Didot", "Bodoni 72", "Times New Roman", serif;
+  --font: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --t-xs: 0.875rem;
+  --t-s: 1.0625rem;
+  --t-m: clamp(1.25rem, 1.1rem + 0.5vw, 1.375rem);
+  --t-l: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
+  --t-xl: clamp(2.75rem, 1.6rem + 4vw, 4.25rem);
+  --t-xxl: clamp(3.25rem, 1rem + 8vw, 9.5rem);
+  --t-h2: clamp(3rem, 0.75rem + 6vw, 7rem);   /* titres des sections du milieu */
+
+  /* Espaces et formes */
+  --gutter: clamp(1rem, 0.4rem + 2.6vw, 3.5rem);
+  --section: clamp(6rem, 4rem + 9vw, 12rem);
+  --r-s: 4px;
+  --r-m: 8px;
+  --r-l: 14px;
+  --nav-h: 68px;
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+
+  color-scheme: dark;
+}
+
+/* Thème clair : automatique selon l'appareil, sauf si on a choisi « sombre » à la main */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: var(--calcaire);
+    --surface: #F4F3F0;
+    --ink: var(--graphite);
+    --muted: var(--pierre-fonce);
+    --line: color-mix(in srgb, var(--graphite) 14%, transparent);
+    --line-strong: color-mix(in srgb, var(--graphite) 30%, transparent);
+    --accent: var(--graphite);
+    --on-accent: var(--ivoire);
+    --err: #A3271A;
+    --hatch: color-mix(in srgb, var(--graphite) 6%, transparent);
+    --end-bg: var(--graphite);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: var(--calcaire);
+  --surface: #F4F3F0;
+  --ink: var(--graphite);
+  --muted: var(--pierre-fonce);
+  --line: color-mix(in srgb, var(--graphite) 14%, transparent);
+  --line-strong: color-mix(in srgb, var(--graphite) 30%, transparent);
+  --accent: var(--graphite);
+  --on-accent: var(--ivoire);
+  --err: #A3271A;
+  --hatch: color-mix(in srgb, var(--graphite) 6%, transparent);
+  --end-bg: var(--graphite);
+  color-scheme: light;
+}

@@ -1,0 +1,88 @@
+/* =========================================================
+   Serrurerie Lenoir (démo) : couleurs, polices, tailles
+   Toutes les couleurs du site sont ici.
+   ========================================================= */
+
+/* Polices auto-hébergées (licence SIL OFL) */
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/instrument-serif.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/instrument-serif-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Mona Sans"; src: url("../fonts/mona-sans.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Martian Mono"; src: url("../fonts/martian-mono.woff2") format("woff2"); font-weight: 400 600; font-style: normal; font-display: swap; }
+
+:root {
+  /* Matières : la nuit (fond sombre), le laiton (accent), la pierre de Paris (fond clair) */
+  --nuit: #0F0E0C;
+  --nuit-2: #1A1815;
+  --nuit-3: #25221D;
+  --laiton: #D4A84F;
+  --laiton-clair: #E9CB85;
+  --laiton-fonce: #7A5716;
+  --pierre: #EDE7DB;
+  --pierre-2: #E2DACA;
+  --pierre-3: #D2C7B2;
+  --encre: #17140F;
+  --ivoire: #EFE8DA;
+  --cendre: #A39B8B;
+  --sepia: #625A4C;
+
+  /* Rôles sur fond clair (par défaut) */
+  --bg: var(--pierre);
+  --ink: var(--encre);
+  --muted: var(--sepia);
+  --line: color-mix(in srgb, var(--encre) 14%, transparent);
+  --line-strong: color-mix(in srgb, var(--encre) 30%, transparent);
+  --accent: var(--laiton-fonce);
+  --btn-bg: var(--encre);
+  --btn-ink: var(--ivoire);
+  --focus: var(--laiton-fonce);
+
+  --font-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font: "Mona Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --t-xs: .8125rem;
+  --t-s: .95rem;
+  --t-m: 1.0625rem;
+  --t-l: clamp(1.3rem, 1.1rem + .6vw, 1.7rem);
+  --t-xl: clamp(1.75rem, 1.2rem + 1.7vw, 2.9rem);
+  --t-h2: clamp(3rem, 1.1rem + 5.8vw, 7.25rem);
+
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --section: clamp(5rem, 12vh, 9rem);
+  --banner-h: 28px;
+  --bar-h: 68px;
+  --top-h: calc(var(--banner-h) + var(--bar-h));
+  --radius: 3px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-snap: cubic-bezier(.34, 1.4, .64, 1);
+}
+
+/* Sections sombres (la nuit) : on inverse les rôles */
+[data-tone="dark"] {
+  --bg: var(--nuit);
+  --ink: var(--ivoire);
+  --muted: var(--cendre);
+  --line: color-mix(in srgb, var(--ivoire) 13%, transparent);
+  --line-strong: color-mix(in srgb, var(--ivoire) 28%, transparent);
+  --accent: var(--laiton);
+  --btn-bg: var(--laiton);
+  --btn-ink: var(--nuit);
+  --focus: var(--laiton);
+}
+
+/* Section laiton (avis) */
+[data-tone="laiton"] {
+  --bg: var(--laiton);
+  --ink: var(--nuit);
+  --muted: #3D2F17;
+  --line: color-mix(in srgb, var(--nuit) 18%, transparent);
+  --line-strong: color-mix(in srgb, var(--nuit) 36%, transparent);
+  --accent: var(--nuit);
+  --btn-bg: var(--nuit);
+  --btn-ink: var(--laiton);
+  --focus: var(--nuit);
+}
+
+@media (max-width: 899px) {
+  :root { --banner-h: 26px; --bar-h: 58px; }
+}
