@@ -45,38 +45,54 @@
 <script>
 (function () {
   var NS = 'gabriel-sebban-vitrine-93230';
-  var API = 'https://api.counterapi.dev/v1/' + NS + '/';
   var JOURS_AFFICHES = 14;
   var noms = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
 
-  function lire(cle) {
-    // Lecture sans incrémenter ; un compteur jamais créé répond en erreur → 0
-    return fetch(API + cle).then(function (r) {
-      if (!r.ok) return 0;
-      return r.json().then(function (j) { return (j && typeof j.count === 'number') ? j.count : 0; });
-    }).catch(function () { return null; });
-  }
+  // Deux services de comptage ; on garde le premier qui répond
+  var SERVICES = [
+    { nom: 'Abacus', lire: function (k) {
+        return fetch('https://abacus.jasoncameron.dev/get/' + NS + '/' + k).then(function (r) {
+          if (r.status === 404) return 0;
+          if (!r.ok) throw 0;
+          return r.json().then(function (j) { return (j && typeof j.value === 'number') ? j.value : 0; });
+        });
+      } },
+    { nom: 'CounterAPI', lire: function (k) {
+        return fetch('https://api.counterapi.dev/v1/' + NS + '/' + k).then(function (r) {
+          if (r.status === 404) return 0;
+          if (!r.ok) throw 0;
+          return r.json().then(function (j) { return (j && typeof j.count === 'number') ? j.count : 0; });
+        });
+      } }
+  ];
 
-  var cles = [], dates = [];
+  var cles = ['total'], dates = [];
   for (var i = 0; i < JOURS_AFFICHES; i++) {
     var d = new Date(); d.setDate(d.getDate() - i);
     dates.push(d);
     cles.push('j-' + d.toISOString().slice(0, 10));
   }
 
-  Promise.all([lire('total')].concat(cles.map(lire))).then(function (res) {
-    var etat = document.getElementById('etat');
-    if (res.every(function (v) { return v === null; })) {
-      etat.textContent = 'Le service de comptage ne répond pas pour le moment. Réessaie dans quelques minutes.';
+  function essayer(idx) {
+    if (idx >= SERVICES.length) {
+      document.getElementById('etat').textContent = 'Les services de comptage ne répondent pas pour le moment. Réessaie dans quelques minutes.';
       return;
     }
+    var svc = SERVICES[idx];
+    Promise.all(cles.map(function (k) { return svc.lire(k); })).then(function (res) {
+      afficher(res, svc.nom);
+    }).catch(function () { essayer(idx + 1); });
+  }
+
+  function afficher(res, nomSvc) {
     var total = res[0] || 0;
     var parJour = res.slice(1).map(function (v) { return v || 0; });
     document.getElementById('total').textContent = total;
     document.getElementById('aujourdhui').textContent = parJour[0];
     document.getElementById('semaine').textContent = parJour.slice(0, 7).reduce(function (a, b) { return a + b; }, 0);
     document.getElementById('tuiles').hidden = false;
-    etat.hidden = true;
+    var etat = document.getElementById('etat');
+    etat.textContent = 'Compteur : ' + nomSvc + '.';
 
     var max = Math.max.apply(null, parJour.concat([1]));
     var html = '';
@@ -86,7 +102,9 @@
       html += '<div class="jour"><i>' + label + '</i><div class="barre"><b style="width:' + Math.round(parJour[k] / max * 100) + '%"></b></div><s>' + parJour[k] + '</s></div>';
     }
     document.getElementById('jours').innerHTML = html;
-  });
+  }
+
+  essayer(0);
 })();
 </script>
 </body>

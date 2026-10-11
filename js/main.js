@@ -72,6 +72,7 @@
       sessionStorage.setItem('vu', '1');
       var jour = new Date().toISOString().slice(0, 10);
       ['total', 'j-' + jour].forEach(function (k) {
+        fetch('https://abacus.jasoncameron.dev/hit/gabriel-sebban-vitrine-93230/' + k).catch(function () {});
         fetch('https://api.counterapi.dev/v1/gabriel-sebban-vitrine-93230/' + k + '/up').catch(function () {});
       });
     }
