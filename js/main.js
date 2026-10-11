@@ -551,8 +551,11 @@
       if (phone) phone.classList.toggle('is-on', phone.getBoundingClientRect().top < vh * 0.85);
     }
 
-    // Contact : la page passe en sombre en arrivant dessus
-    if (contact) root.classList.toggle('end-dark', contact.getBoundingClientRect().top < vh * 0.55);
+    // Contact : la page passe en sombre pendant qu'on est sur le formulaire, puis redevient claire
+    if (contact) {
+      var cr = contact.getBoundingClientRect();
+      root.classList.toggle('end-dark', cr.top < vh * 0.55 && cr.bottom > vh * 0.3);
+    }
   }
 
   function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
