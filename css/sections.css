@@ -610,3 +610,30 @@
 
 /* Lien « Ouvrir la démo » sous chaque étude de cas */
 .case__more { margin-top: 1.1rem; font-size: var(--t-s); }
+
+/* ---------- Questions fréquentes : objections répondues avant l'appel ---------- */
+.faq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2rem var(--gutter); padding: var(--section) var(--gutter); }
+.faq__head { align-self: start; position: sticky; top: calc(var(--nav-h) + 2.5rem); }
+.faq__head h2 { font-size: var(--t-h2); line-height: .92; letter-spacing: -0.03em; }
+.faq__head p { margin-top: 1rem; color: var(--muted); max-width: 30ch; }
+.faq__list { border-top: 1px solid var(--line); }
+.faq__item { border-bottom: 1px solid var(--line); }
+.faq__item summary {
+  list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem;
+  cursor: pointer; padding: 1.4rem 0; font-size: var(--t-m); font-weight: 600; letter-spacing: -0.01em;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary:hover { color: var(--ink); }
+.faq__ico { position: relative; flex: none; width: 14px; height: 14px; }
+.faq__ico::before, .faq__ico::after {
+  content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 2px; margin-top: -1px;
+  background: var(--muted); border-radius: 1px; transition: transform .4s var(--ease-out);
+}
+.faq__ico::after { transform: rotate(90deg); }
+.faq__item[open] .faq__ico::after { transform: rotate(0deg); }
+.faq__a { overflow: hidden; }
+.faq__a p { padding: 0 2.5rem 1.5rem 0; color: var(--muted); max-width: 58ch; }
+@media (max-width: 899px) {
+  .faq { grid-template-columns: 1fr; }
+  .faq__head { position: static; }
+}

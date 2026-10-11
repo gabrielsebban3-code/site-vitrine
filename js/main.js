@@ -276,6 +276,29 @@
     });
   }
 
+  /* ---------- Questions : ouverture et fermeture en douceur ---------- */
+  $$('.faq details').forEach(function (d) {
+    var summary = $('summary', d), body = $('.faq__a', d), anim = null;
+    summary.addEventListener('click', function (e) {
+      if (reduced.matches || !body.animate) return;
+      e.preventDefault();
+      var from = body.offsetHeight;
+      var closing = d.open && !d.classList.contains('is-closing');
+      if (anim) { anim.cancel(); anim = null; }
+      if (closing) {
+        d.classList.add('is-closing');
+        anim = body.animate([{ height: from + 'px' }, { height: '0px' }], { duration: 380, easing: 'cubic-bezier(.16,1,.3,1)' });
+        anim.onfinish = function () { d.open = false; d.classList.remove('is-closing'); anim = null; };
+      } else {
+        d.classList.remove('is-closing');
+        d.open = true;
+        var full = body.scrollHeight;
+        anim = body.animate([{ height: (from || 0) + 'px' }, { height: full + 'px' }], { duration: 480, easing: 'cubic-bezier(.16,1,.3,1)' });
+        anim.onfinish = function () { anim = null; };
+      }
+    });
+  });
+
   /* ---------- Démos filmées ----------
      Chaque vidéo n'est chargée qu'en arrivant près de l'écran et ne tourne que si on la voit.
      Le cadre ordinateur est masqué sur téléphone : sa vidéo n'est alors jamais chargée.
