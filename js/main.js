@@ -249,9 +249,14 @@
       setStatus('', false);
       fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
         .then(function (res) { if (!res.ok) throw new Error(res.status); return res.json().catch(function () { return {}; }); })
-        .then(function (json) { if (json && String(json.success) === 'false') throw new Error(json.message); finish(); })
-        .catch(function () {
-          setStatus('L’envoi n’a pas marché. Réessayez, ou appelez-moi directement au numéro ci-dessous.', true);
+        .then(function (json) { if (json && String(json.success) === 'false') throw new Error(json.message || ''); finish(); })
+        .catch(function (err) {
+          // Première utilisation : FormSubmit demande d'abord une confirmation par e-mail au propriétaire du site
+          if (err && /activat|confirm|verif/i.test(err.message || '')) {
+            setStatus('Le formulaire est en cours d’activation. Appelez-moi directement au numéro ci-dessous, ou réessayez dans quelques minutes.', true);
+          } else {
+            setStatus('L’envoi n’a pas marché. Réessayez, ou appelez-moi directement au numéro ci-dessous.', true);
+          }
         })
         .then(function () { quoteSend.removeAttribute('aria-busy'); quoteLabel.textContent = 'Être rappelé'; });
     });
