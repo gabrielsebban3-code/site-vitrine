@@ -563,6 +563,22 @@
   window.addEventListener('resize', function () { measure(); request(); });
   window.addEventListener('load', function () { measure(); request(); });
   $$('.shot img').forEach(function (img) { if (!img.complete) img.addEventListener('load', function () { measure(); request(); }); });
+  /* ---------- Lien personnalisé pour la prospection ----------
+     ?nom=Plomberie+Durand&metier=serrurier : la démo s'ouvre déjà au nom du prospect. */
+  try {
+    var params = new URLSearchParams(location.search);
+    var pNom = (params.get('nom') || '').trim().slice(0, 32)
+      .replace(/\b([a-z\u00e0-\u00ff])/g, function (c) { return c.toUpperCase(); });
+    var pMetier = (params.get('metier') || '').toLowerCase();
+    var applyNom = function () {
+      if (pNom && input) { input.value = pNom; input.dispatchEvent(new Event('input')); }
+    };
+    if (pMetier && DEMOS[pMetier] && pMetier !== currentDemo) {
+      setDemo(pMetier);
+      setTimeout(applyNom, 340);
+    } else applyNom();
+  } catch (e) {}
+
   measure();
   update();
   liveStart();
