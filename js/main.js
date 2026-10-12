@@ -68,10 +68,21 @@
      Une simple addition (+1) envoyée à un compteur public ; si le service ne répond pas,
      le site fonctionne normalement. Consultation : page mes-visites.html */
   try {
-    if (!sessionStorage.getItem('vu')) {
+    // « Ne pas compter mes visites » (réglé depuis mes-visites.html) : rien n'est envoyé depuis cet appareil
+    var moi = false;
+    try { moi = localStorage.getItem('gs-moi') === '1'; } catch (e) {}
+    if (!moi && !sessionStorage.getItem('vu')) {
       sessionStorage.setItem('vu', '1');
-      var jour = new Date().toISOString().slice(0, 10);
-      ['total', 'j-' + jour].forEach(function (k) {
+      // Jour à l'heure de Paris (AAAA-MM-JJ)
+      var jour = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' });
+      // Provenance : lien personnalisé de prospection, Google, réseaux sociaux, accès direct ou autre site
+      var ref = (document.referrer || '').toLowerCase(), src = 'autre';
+      if (/[?&]nom=/.test(location.search)) src = 'lien-perso';
+      else if (!ref || ref.indexOf(location.host) !== -1) src = 'direct';
+      else if (/google\.|bing\.|qwant\.|duckduckgo\.|ecosia\.|yahoo\./.test(ref)) src = 'google';
+      else if (/whatsapp|facebook|fb\.|instagram|linkedin|t\.co|twitter|x\.com|snapchat|tiktok|messenger/.test(ref)) src = 'reseaux';
+      var appareil = window.matchMedia('(pointer: coarse)').matches ? 'tel' : 'ordi';
+      ['total', 'j-' + jour, 'src-' + src, 'app-' + appareil].forEach(function (k) {
         fetch('https://abacus.jasoncameron.dev/hit/gabriel-sebban-vitrine-93230/' + k).catch(function () {});
         fetch('https://api.counterapi.dev/v1/gabriel-sebban-vitrine-93230/' + k + '/up').catch(function () {});
       });

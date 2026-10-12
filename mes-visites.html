@@ -13,95 +13,303 @@
 <link rel="stylesheet" href="css/legal.css">
 <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 <style>
-  .stats { max-width: 48rem; }
-  .big { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
-  .tile { flex: 1; min-width: 150px; border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.2rem; background: var(--surface); }
+  .stats { max-width: 56rem; }
+  .bloc { margin-top: 2.5rem; }
+  .bloc h2 { margin-bottom: .25rem; }
+  .sous { color: var(--muted); font-size: var(--t-xs); margin: 0 0 1rem; }
+
+  /* Choix de la période */
+  .periodes { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; margin-top: 1.25rem; }
+  .periodes button { font: inherit; font-size: var(--t-xs); color: var(--muted); background: none; border: 0; border-radius: 999px; padding: .45rem 1rem; cursor: pointer; }
+  .periodes button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+  .periodes button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Chiffres clés */
+  .tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .75rem; margin-top: 1.25rem; }
+  .tile { border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.2rem; background: var(--surface); }
   .tile b { display: block; font-family: var(--font-display); font-size: 2.2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
   .tile span { font-size: .85rem; color: var(--muted); }
-  .jours { margin-top: 2rem; display: flex; flex-direction: column; gap: .4rem; }
-  .jour { display: grid; grid-template-columns: 7.5rem 1fr 2.5rem; align-items: center; gap: .75rem; font-size: .9rem; }
-  .jour i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .barre { height: 14px; border-radius: 7px; background: var(--line); overflow: hidden; }
-  .barre b { display: block; height: 100%; background: var(--accent); border-radius: 7px; min-width: 2px; }
-  .jour s { text-decoration: none; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
-  .vide { color: var(--muted); margin-top: 1.5rem; }
+
+  /* Graphique */
+  .graphe { position: relative; margin-top: 1.25rem; }
+  .graphe svg { display: block; width: 100%; height: 260px; overflow: visible; }
+  .graphe .grille { stroke: var(--line); stroke-width: 1; }
+  .graphe .base { stroke: var(--line-strong); stroke-width: 1; }
+  .graphe .axe { fill: var(--muted); font-size: 11px; font-family: var(--font); font-variant-numeric: tabular-nums; }
+  .graphe .barre { fill: var(--accent); pointer-events: none; }
+  .graphe .barre.vide { fill: var(--line); }
+  .graphe .cible { fill: transparent; cursor: default; }
+  .graphe .cible:hover + .barre, .graphe .barre.actif { opacity: .7; }
+  .graphe .moy { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 4; }
+  .infobulle { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font-size: var(--t-xs); padding: .4rem .65rem; border-radius: 8px; white-space: nowrap; transform: translate(-50%, calc(-100% - 8px)); opacity: 0; transition: opacity .12s; }
+  .infobulle.on { opacity: 1; }
+  .infobulle b { font-variant-numeric: tabular-nums; }
+
+  /* Listes à barres (provenance, appareils) */
+  .liste { display: flex; flex-direction: column; gap: .55rem; }
+  .ligne { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr 4.5rem; align-items: center; gap: .75rem; font-size: .92rem; }
+  .ligne .piste { height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
+  .ligne .piste i { display: block; height: 100%; background: var(--accent); border-radius: 6px; min-width: 2px; }
+  .ligne s { text-decoration: none; text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .ligne s b { color: var(--ink); }
+  @media (max-width: 520px) { .ligne { grid-template-columns: 7rem 1fr 5.2rem; font-size: .85rem; gap: .6rem; } }
+
+  /* Tableau */
+  details { margin-top: 1rem; }
+  summary { cursor: pointer; color: var(--muted); font-size: var(--t-xs); }
+  table { border-collapse: collapse; margin-top: .75rem; font-size: .9rem; font-variant-numeric: tabular-nums; }
+  td, th { padding: .3rem 1.5rem .3rem 0; text-align: left; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; }
+
+  /* Exclure mes visites */
+  .moi { margin-top: 2.5rem; border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.2rem; }
+  .moi h2 { margin-top: 0; }
+  .moi p { margin: .35rem 0 .9rem; color: var(--muted); font-size: .92rem; }
+  .moi button { font: inherit; font-weight: 600; font-size: var(--t-xs); padding: .6rem 1.1rem; border-radius: 999px; cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); }
+  .moi button.off { background: none; color: var(--ink); }
   #etat { margin-top: 1rem; color: var(--muted); font-size: .9rem; }
+  .note { color: var(--muted); font-size: var(--t-xs); margin-top: 2rem; }
 </style>
 </head>
 <body>
 <header class="legal-top"><a class="legal-brand" href="index.html">GS Web</a><a class="link" href="index.html">Retour au site</a></header>
 <main class="legal stats">
 <h1>Mes visites</h1>
-<p class="legal-draft">Page privée : garde cette adresse pour toi (elle n'est reliée nulle part sur le site et interdite aux moteurs de recherche).</p>
-<p id="etat">Chargement des compteurs…</p>
-<div class="big" hidden id="tuiles">
-  <div class="tile"><b id="total">–</b><span>visites au total</span></div>
-  <div class="tile"><b id="aujourdhui">–</b><span>aujourd'hui</span></div>
-  <div class="tile"><b id="semaine">–</b><span>ces 7 derniers jours</span></div>
+<p class="legal-draft">Page privée : gardez cette adresse pour vous. Elle n'est reliée nulle part sur le site et les moteurs de recherche ne l'affichent pas.</p>
+<p id="etat" role="status">Chargement des compteurs…</p>
+
+<div id="contenu" hidden>
+  <div class="periodes" role="group" aria-label="Période affichée">
+    <button type="button" data-p="7">7 jours</button>
+    <button type="button" data-p="30" aria-pressed="true">30 jours</button>
+    <button type="button" data-p="90">90 jours</button>
+  </div>
+
+  <div class="tuiles">
+    <div class="tile"><b id="t-aujourdhui">–</b><span>aujourd'hui</span></div>
+    <div class="tile"><b id="t-periode">–</b><span id="t-periode-l">sur 30 jours</span></div>
+    <div class="tile"><b id="t-moyenne">–</b><span>par jour en moyenne</span></div>
+    <div class="tile"><b id="t-total">–</b><span>depuis le début</span></div>
+  </div>
+
+  <section class="bloc" aria-labelledby="h-jours">
+    <h2 id="h-jours">Visites par jour</h2>
+    <p class="sous">Heure de Paris. Passez sur une barre pour voir le détail. Pointillés : moyenne de la période.</p>
+    <div class="graphe" id="graphe"><div class="infobulle" id="bulle"></div></div>
+    <details>
+      <summary>Voir les chiffres en tableau</summary>
+      <table><thead><tr><th scope="col">Jour</th><th scope="col">Visites</th></tr></thead><tbody id="tableau"></tbody></table>
+    </details>
+  </section>
+
+  <section class="bloc" aria-labelledby="h-src">
+    <h2 id="h-src">D'où viennent les visiteurs</h2>
+    <p class="sous">Depuis le 12 octobre 2026. Les liens ouverts depuis WhatsApp arrivent souvent sans provenance : ils comptent alors en « accès direct ».</p>
+    <div class="liste" id="sources"></div>
+  </section>
+
+  <section class="bloc" aria-labelledby="h-app">
+    <h2 id="h-app">Téléphone ou ordinateur</h2>
+    <p class="sous">Depuis le 12 octobre 2026.</p>
+    <div class="liste" id="appareils"></div>
+  </section>
 </div>
-<div class="jours" id="jours"></div>
-<p class="vide">Une « visite » = quelqu'un ouvre ton site (les rechargements dans la même session ne comptent qu'une fois). Compteur anonyme, sans cookie.</p>
+
+<section class="moi" aria-labelledby="h-moi">
+  <h2 id="h-moi">Ne pas compter mes visites</h2>
+  <p id="moi-texte">Activez-le sur chaque appareil et navigateur que vous utilisez (ordinateur, téléphone), pour que vos tests ne gonflent pas les chiffres.</p>
+  <button type="button" id="moi-btn">Ne plus compter cet appareil</button>
+</section>
+
+<p class="note">Une « visite » = quelqu'un ouvre votre site. Les rechargements dans la même session ne comptent qu'une fois. Compteur anonyme, sans cookie.</p>
 </main>
 <script>
 (function () {
   var NS = 'gabriel-sebban-vitrine-93230';
-  var JOURS_AFFICHES = 14;
-  var noms = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
-
-  // Deux services de comptage ; on garde le premier qui répond
-  var SERVICES = [
-    { nom: 'Abacus', lire: function (k) {
-        return fetch('https://abacus.jasoncameron.dev/get/' + NS + '/' + k).then(function (r) {
-          if (r.status === 404) return 0;
-          if (!r.ok) throw 0;
-          return r.json().then(function (j) { return (j && typeof j.value === 'number') ? j.value : 0; });
-        });
-      } },
-    { nom: 'CounterAPI', lire: function (k) {
-        return fetch('https://api.counterapi.dev/v1/' + NS + '/' + k).then(function (r) {
-          if (r.status === 404) return 0;
-          if (!r.ok) throw 0;
-          return r.json().then(function (j) { return (j && typeof j.count === 'number') ? j.count : 0; });
-        });
-      } }
+  var MAX_JOURS = 90;
+  var SOURCES = [
+    ['direct', 'Accès direct'], ['lien-perso', 'Lien personnalisé (prospection)'],
+    ['google', 'Moteurs de recherche'], ['reseaux', 'Réseaux sociaux, WhatsApp'], ['autre', 'Autres sites']
   ];
+  var APPAREILS = [['tel', 'Téléphone, tablette'], ['ordi', 'Ordinateur']];
+  var JOURS = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
+  var MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+  var $ = function (id) { return document.getElementById(id); };
 
-  var cles = ['total'], dates = [];
-  for (var i = 0; i < JOURS_AFFICHES; i++) {
-    var d = new Date(); d.setDate(d.getDate() - i);
-    dates.push(d);
-    cles.push('j-' + d.toISOString().slice(0, 10));
+  /* ---------- Bouton « ne pas compter mes visites » (même réglage que js/main.js) ---------- */
+  var moiBtn = $('moi-btn');
+  function majMoi() {
+    var on = false;
+    try { on = localStorage.getItem('gs-moi') === '1'; } catch (e) {}
+    moiBtn.textContent = on ? 'Recompter cet appareil' : 'Ne plus compter cet appareil';
+    moiBtn.classList.toggle('off', on);
+    $('moi-texte').textContent = on
+      ? 'Cet appareil n’est plus compté. Pensez à faire pareil sur vos autres appareils et navigateurs.'
+      : 'Activez-le sur chaque appareil et navigateur que vous utilisez (ordinateur, téléphone), pour que vos tests ne gonflent pas les chiffres.';
   }
+  moiBtn.addEventListener('click', function () {
+    try {
+      if (localStorage.getItem('gs-moi') === '1') localStorage.removeItem('gs-moi');
+      else localStorage.setItem('gs-moi', '1');
+    } catch (e) {}
+    majMoi();
+  });
+  majMoi();
 
-  function essayer(idx) {
-    if (idx >= SERVICES.length) {
-      document.getElementById('etat').textContent = 'Les services de comptage ne répondent pas pour le moment. Réessaie dans quelques minutes.';
+  /* ---------- Dates à l'heure de Paris ---------- */
+  var auj = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' }).split('-').map(Number);
+  var dates = [];  // du plus ancien au plus récent
+  for (var i = MAX_JOURS - 1; i >= 0; i--) dates.push(new Date(Date.UTC(auj[0], auj[1] - 1, auj[2] - i)));
+  var iso = function (d) { return d.toISOString().slice(0, 10); };
+  var nomJour = function (d) { return JOURS[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MOIS[d.getUTCMonth()]; };
+
+  var cles = ['total']
+    .concat(SOURCES.map(function (s) { return 'src-' + s[0]; }))
+    .concat(APPAREILS.map(function (a) { return 'app-' + a[0]; }))
+    .concat(dates.map(function (d) { return 'j-' + iso(d); }));
+
+  /* ---------- Lecture des compteurs : deux services, on garde le premier qui répond ---------- */
+  var SERVICES = [
+    { nom: 'Abacus', url: function (k) { return 'https://abacus.jasoncameron.dev/get/' + NS + '/' + k; }, val: function (j) { return j && j.value; } },
+    { nom: 'CounterAPI', url: function (k) { return 'https://api.counterapi.dev/v1/' + NS + '/' + k; }, val: function (j) { return j && j.count; } }
+  ];
+  function lire(svc, k) {
+    return fetch(svc.url(k)).then(function (r) {
+      if (r.status === 404) return 0;
+      if (!r.ok) throw new Error(r.status);
+      return r.json().then(function (j) { var v = svc.val(j); return typeof v === 'number' ? v : 0; });
+    });
+  }
+  // 6 requêtes à la fois, pour ne pas se faire bloquer par le service
+  function toutLire(svc) {
+    var res = {}, idx = 0;
+    function suivant() {
+      if (idx >= cles.length) return Promise.resolve();
+      var k = cles[idx++];
+      return lire(svc, k).then(function (v) { res[k] = v; return suivant(); });
+    }
+    var fils = [];
+    for (var n = 0; n < 6; n++) fils.push(suivant());
+    return Promise.all(fils).then(function () { return res; });
+  }
+  function essayer(n) {
+    if (n >= SERVICES.length) {
+      $('etat').textContent = 'Les services de comptage ne répondent pas pour le moment. Réessayez dans quelques minutes.';
       return;
     }
-    var svc = SERVICES[idx];
-    Promise.all(cles.map(function (k) { return svc.lire(k); })).then(function (res) {
-      afficher(res, svc.nom);
-    }).catch(function () { essayer(idx + 1); });
+    toutLire(SERVICES[n]).then(function (res) { demarrer(res, SERVICES[n].nom); }).catch(function () { essayer(n + 1); });
   }
 
-  function afficher(res, nomSvc) {
-    var total = res[0] || 0;
-    var parJour = res.slice(1).map(function (v) { return v || 0; });
-    document.getElementById('total').textContent = total;
-    document.getElementById('aujourdhui').textContent = parJour[0];
-    document.getElementById('semaine').textContent = parJour.slice(0, 7).reduce(function (a, b) { return a + b; }, 0);
-    document.getElementById('tuiles').hidden = false;
-    var etat = document.getElementById('etat');
-    etat.textContent = 'Compteur : ' + nomSvc + '.';
+  /* ---------- Affichage ---------- */
+  var donnees, periode = 30;
+  function demarrer(res, nomSvc) {
+    donnees = res;
+    $('etat').textContent = 'Compteur : ' + nomSvc + '. Chiffres à jour au chargement de la page.';
+    $('contenu').hidden = false;
+    $('t-total').textContent = res.total || 0;
+    $('t-aujourdhui').textContent = res['j-' + iso(dates[dates.length - 1])] || 0;
+    listeBarres('sources', SOURCES, 'src-');
+    listeBarres('appareils', APPAREILS, 'app-');
+    majPeriode();
+    window.addEventListener('resize', function () { dessiner(); });
+  }
 
-    var max = Math.max.apply(null, parJour.concat([1]));
-    var html = '';
-    for (var k = 0; k < parJour.length; k++) {
-      var d2 = dates[k];
-      var label = noms[d2.getDay()] + ' ' + d2.getDate() + '/' + (d2.getMonth() + 1);
-      html += '<div class="jour"><i>' + label + '</i><div class="barre"><b style="width:' + Math.round(parJour[k] / max * 100) + '%"></b></div><s>' + parJour[k] + '</s></div>';
+  function listeBarres(id, items, prefixe) {
+    var vals = items.map(function (it) { return donnees[prefixe + it[0]] || 0; });
+    var somme = vals.reduce(function (a, b) { return a + b; }, 0);
+    var max = Math.max.apply(null, vals.concat([1]));
+    var ordre = items.map(function (it, k) { return k; }).sort(function (a, b) { return vals[b] - vals[a]; });
+    $(id).innerHTML = somme === 0
+      ? '<p class="sous">Pas encore de données : elles apparaîtront avec les prochaines visites.</p>'
+      : ordre.map(function (k) {
+          var pct = Math.round(vals[k] / somme * 100);
+          return '<div class="ligne"><span>' + items[k][1] + '</span><div class="piste"><i style="width:' + (vals[k] / max * 100) + '%"></i></div><s><b>' + vals[k] + '</b> · ' + pct + ' %</s></div>';
+        }).join('');
+  }
+
+  function serie() {
+    return dates.slice(-periode).map(function (d) { return { d: d, v: donnees['j-' + iso(d)] || 0 }; });
+  }
+
+  function majPeriode() {
+    Array.prototype.forEach.call(document.querySelectorAll('.periodes button'), function (b) {
+      b.setAttribute('aria-pressed', String(+b.dataset.p === periode));
+    });
+    var s = serie();
+    var somme = s.reduce(function (a, p) { return a + p.v; }, 0);
+    $('t-periode').textContent = somme;
+    $('t-periode-l').textContent = 'sur ' + periode + ' jours';
+    $('t-moyenne').textContent = (somme / periode).toLocaleString('fr-FR', { maximumFractionDigits: 1 });
+    $('tableau').innerHTML = s.slice().reverse().map(function (p) {
+      return '<tr><td>' + nomJour(p.d) + '</td><td>' + p.v + '</td></tr>';
+    }).join('');
+    dessiner();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.periodes button'), function (b) {
+    b.addEventListener('click', function () { periode = +b.dataset.p; majPeriode(); });
+  });
+
+  // Graduations « rondes » pour l'axe vertical
+  function pas(max) {
+    var brut = max / 4, p = Math.pow(10, Math.floor(Math.log10(Math.max(brut, 1))));
+    var choix = [1, 2, 5, 10].map(function (m) { return m * p; }).filter(function (x) { return x >= brut; });
+    return Math.max(1, choix[0] || 10 * p);
+  }
+
+  function dessiner() {
+    if (!donnees) return;
+    var box = $('graphe'), bulle = $('bulle');
+    var W = box.clientWidth, H = 260, G = 34, B = 24, T = 8;   // marges : gauche (axe), bas (dates), haut
+    var s = serie();
+    var maxV = Math.max.apply(null, s.map(function (p) { return p.v; }).concat([1]));
+    var st = pas(maxV), haut = Math.ceil(maxV / st) * st;
+    var y = function (v) { return T + (H - T - B) * (1 - v / haut); };
+    var larg = (W - G) / s.length, ecart = s.length > 40 ? 1 : 2, lb = Math.max(1, larg - ecart);
+    var NSs = 'http://www.w3.org/2000/svg';
+    var svg = '<svg xmlns="' + NSs + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Visites par jour sur ' + periode + ' jours">';
+    for (var v = 0; v <= haut; v += st) {
+      svg += '<line class="' + (v === 0 ? 'base' : 'grille') + '" x1="' + G + '" x2="' + W + '" y1="' + y(v) + '" y2="' + y(v) + '"/>';
+      svg += '<text class="axe" x="' + (G - 8) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + v + '</text>';
     }
-    document.getElementById('jours').innerHTML = html;
+    var tous = periode === 7 ? 1 : periode === 30 ? 5 : 14;   // une date sous l'axe tous les N jours
+    s.forEach(function (p, k) {
+      var x = G + k * larg + ecart / 2, h = Math.max(0, y(0) - y(p.v)), r = Math.min(4, lb / 2, h);
+      var yb = y(0) - h;
+      // Barre arrondie en haut seulement, posée sur la ligne de base
+      var d = h === 0
+        ? 'M' + x + ',' + (y(0) - 2) + 'h' + lb + 'v2h' + (-lb) + 'z'
+        : 'M' + x + ',' + y(0) + 'V' + (yb + r) + 'q0,' + (-r) + ' ' + r + ',' + (-r) + 'H' + (x + lb - r) + 'q' + r + ',0 ' + r + ',' + r + 'V' + y(0) + 'z';
+      svg += '<rect class="cible" data-k="' + k + '" x="' + (G + k * larg) + '" y="' + T + '" width="' + larg + '" height="' + (H - T - B) + '"/>';
+      svg += '<path class="barre' + (p.v ? '' : ' vide') + '" data-b="' + k + '" d="' + d + '"/>';
+      if ((s.length - 1 - k) % tous === 0) {
+        var lab = periode === 7 ? JOURS[p.d.getUTCDay()] + ' ' + p.d.getUTCDate() : p.d.getUTCDate() + ' ' + MOIS[p.d.getUTCMonth()];
+        svg += '<text class="axe" x="' + (x + lb / 2) + '" y="' + (H - 6) + '" text-anchor="middle">' + lab + '</text>';
+      }
+    });
+    var moy = s.reduce(function (a, p) { return a + p.v; }, 0) / s.length;
+    if (moy > 0) svg += '<line class="moy" x1="' + G + '" x2="' + W + '" y1="' + y(moy) + '" y2="' + y(moy) + '"/>';
+    svg += '</svg>';
+    box.innerHTML = svg;
+    box.appendChild(bulle);
+
+    var actif = null;
+    function montrer(k) {
+      if (actif) actif.classList.remove('actif');
+      actif = box.querySelector('[data-b="' + k + '"]');
+      actif.classList.add('actif');
+      var p = s[k];
+      bulle.innerHTML = nomJour(p.d) + ' : <b>' + p.v + '</b> visite' + (p.v > 1 ? 's' : '');
+      var xc = G + k * larg + larg / 2;
+      bulle.style.left = Math.min(Math.max(xc, 80), W - 80) + 'px';
+      bulle.style.top = (y(p.v) - 2) + 'px';
+      bulle.classList.add('on');
+    }
+    function cacher() { bulle.classList.remove('on'); if (actif) actif.classList.remove('actif'); actif = null; }
+    Array.prototype.forEach.call(box.querySelectorAll('.cible'), function (c) {
+      c.addEventListener('mouseenter', function () { montrer(+c.dataset.k); });
+      c.addEventListener('click', function () { montrer(+c.dataset.k); });   // au doigt sur téléphone
+    });
+    box.querySelector('svg').addEventListener('mouseleave', cacher);
   }
 
   essayer(0);
