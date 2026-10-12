@@ -163,16 +163,23 @@
   var iso = function (d) { return d.toISOString().slice(0, 10); };
   var nomJour = function (d) { return JOURS[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MOIS[d.getUTCMonth()]; };
 
-  var cles = ['total']
-    .concat(SOURCES.map(function (s) { return 'src-' + s[0]; }))
-    .concat(APPAREILS.map(function (a) { return 'app-' + a[0]; }))
-    .concat(dates.map(function (d) { return 'j-' + iso(d); }));
-
-  /* ---------- Lecture des compteurs : deux services, on garde le premier qui répond ---------- */
+  /* ---------- Lecture des compteurs ----------
+     Abacus limite à 30 requêtes par 10 secondes : on lit une clé toutes les 0,45 s et on affiche au fur et à mesure.
+     Les jours terminés ne changent plus : on les garde en mémoire dans ce navigateur pour ne pas les relire.
+     Un jour sans visite n'a pas de clé : le service répond par une erreur, comptée comme 0. */
   var SERVICES = [
     { nom: 'Abacus', url: function (k) { return 'https://abacus.jasoncameron.dev/get/' + NS + '/' + k; }, val: function (j) { return j && j.value; } },
     { nom: 'CounterAPI', url: function (k) { return 'https://api.counterapi.dev/v1/' + NS + '/' + k; }, val: function (j) { return j && j.count; } }
   ];
+  var CACHE = 'gs-visites-jours', cache = {};
+  try { cache = JSON.parse(localStorage.getItem(CACHE) || '{}') || {}; } catch (e) {}
+  var finis = {};   // jours terminés (avant hier) : leur chiffre ne bouge plus
+  dates.slice(0, -2).forEach(function (d) { finis['j-' + iso(d)] = true; });
+  var ordre = ['total']
+    .concat(SOURCES.map(function (x) { return 'src-' + x[0]; }))
+    .concat(APPAREILS.map(function (x) { return 'app-' + x[0]; }))
+    .concat(dates.slice().reverse().map(function (d) { return 'j-' + iso(d); }));   // du plus récent au plus ancien
+
   function lire(svc, k) {
     return fetch(svc.url(k)).then(function (r) {
       if (r.status === 404) return 0;
@@ -180,38 +187,52 @@
       return r.json().then(function (j) { var v = svc.val(j); return typeof v === 'number' ? v : 0; });
     });
   }
-  // 6 requêtes à la fois, pour ne pas se faire bloquer par le service
-  function toutLire(svc) {
-    var res = {}, idx = 0;
-    function suivant() {
-      if (idx >= cles.length) return Promise.resolve();
-      var k = cles[idx++];
-      return lire(svc, k).then(function (v) { res[k] = v; return suivant(); });
-    }
-    var fils = [];
-    for (var n = 0; n < 6; n++) fils.push(suivant());
-    return Promise.all(fils).then(function () { return res; });
+  function lireCle(svc, k) {   // erreur sur un jour = jour sans visite (clé jamais créée) : 0
+    return lire(svc, k).catch(function () { return 0; });
   }
-  function essayer(n) {
+
+  var donnees = {}, svc = null, periode = 30;
+  function charger(n) {
     if (n >= SERVICES.length) {
       $('etat').textContent = 'Les services de comptage ne répondent pas pour le moment. Réessayez dans quelques minutes.';
       return;
     }
-    toutLire(SERVICES[n]).then(function (res) { demarrer(res, SERVICES[n].nom); }).catch(function () { essayer(n + 1); });
+    // Le total sert de test : s'il ne répond pas, on passe au service suivant
+    lire(SERVICES[n], 'total').then(function (v) {
+      svc = SERVICES[n];
+      donnees.total = v;
+      $('contenu').hidden = false;
+      window.addEventListener('resize', function () { dessiner(); });
+      suite(1);
+    }).catch(function () { charger(n + 1); });
+  }
+  function suite(i) {
+    var lues = 0;
+    (function boucle() {
+      if (i >= ordre.length) {
+        $('etat').textContent = 'Compteur : ' + svc.nom + '. Chiffres à jour.';
+        rafraichir();
+        return;
+      }
+      var k = ordre[i++];
+      if (finis[k] && typeof cache[k] === 'number') { donnees[k] = cache[k]; boucle(); return; }
+      lireCle(svc, k).then(function (v) {
+        donnees[k] = v;
+        if (finis[k]) { cache[k] = v; try { localStorage.setItem(CACHE, JSON.stringify(cache)); } catch (e) {} }
+        if (++lues % 4 === 0 || i < 12) rafraichir();
+        $('etat').textContent = 'Chargement des chiffres… (' + i + ' sur ' + ordre.length + ')';
+        setTimeout(boucle, 450);
+      });
+    })();
   }
 
   /* ---------- Affichage ---------- */
-  var donnees, periode = 30;
-  function demarrer(res, nomSvc) {
-    donnees = res;
-    $('etat').textContent = 'Compteur : ' + nomSvc + '. Chiffres à jour au chargement de la page.';
-    $('contenu').hidden = false;
-    $('t-total').textContent = res.total || 0;
-    $('t-aujourdhui').textContent = res['j-' + iso(dates[dates.length - 1])] || 0;
+  function rafraichir() {
+    $('t-total').textContent = donnees.total || 0;
+    $('t-aujourdhui').textContent = donnees['j-' + iso(dates[dates.length - 1])] || 0;
     listeBarres('sources', SOURCES, 'src-');
     listeBarres('appareils', APPAREILS, 'app-');
     majPeriode();
-    window.addEventListener('resize', function () { dessiner(); });
   }
 
   function listeBarres(id, items, prefixe) {
@@ -312,7 +333,7 @@
     box.querySelector('svg').addEventListener('mouseleave', cacher);
   }
 
-  essayer(0);
+  charger(0);
 })();
 </script>
 </body>
