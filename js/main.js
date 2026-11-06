@@ -134,6 +134,14 @@
       alt: 'Démo de site pour un serrurier parisien : numéro d’appel, tarifs, méthode, zone d’intervention, avis et questions fréquentes.',
       altM: 'La même démo serrurier sur téléphone, avec le bouton d’appel toujours visible.',
       tour: [['Le numéro dès l’arrivée', 0, 0], ['Les prix annoncés', .2069, .2265], ['La méthode, en coupe', .3478, .3585], ['La zone d’intervention', .4545, .4659], ['Les avis clients', .5692, .5709], ['L’appel d’urgence', .6944, .6631], ['Les questions fréquentes', .8393, .8533]]
+    },
+    peintre: {
+      name: 'Atelier Morel', label: 'peintre', live: 'demos/peintre/index.html',
+      desktop: 'img/peintre-desktop.webp', desktopSm: 'img/peintre-desktop-sm.webp', mobile: 'img/peintre-mobile.webp',
+      dw: 1440, dh: 7449, mw: 585, mh: 14336,
+      alt: 'Démo de site pour un peintre en bâtiment parisien : avant / après, prix au mètre carré, estimation du budget, zone, avis et questions fréquentes.',
+      altM: 'La même démo peintre sur téléphone, avec les boutons d’appel et de visite toujours visibles.',
+      tour: [['La visite gratuite dès l’arrivée', 0, 0], ['L’avant / après', .1208, .0883], ['Les prix au mètre carré', .2224, .1903], ['L’estimation du budget', .3849, .3329], ['La zone d’intervention', .5079, .4623], ['Les avis clients', .6903, .6482], ['Les questions fréquentes', .882, .8895]]
     }
   };
   var currentDemo = 'plombier';
@@ -151,7 +159,7 @@
     liveEntries.forEach(liveName);
   });
 
-  /* ---------- Choix de la démo : plombier ou serrurier ---------- */
+  /* ---------- Choix de la démo : plombier, serrurier ou peintre ---------- */
   var pickerEl = $('.picker');
   var liveLink = $('[data-live]');
   function setDemo(key) {
@@ -374,7 +382,8 @@
      l'appareil demande moins d'animations), on garde les captures. */
   var LIVE_SECTIONS = {
     plombier: ['.hero', '.prices', '.zone', '.steps', '.reviews', '.quote', '.faq'],
-    serrurier: ['.hero', '.prices', '.method', '.zone', '.reviews', '.urgent', '.faq']
+    serrurier: ['.hero', '.prices', '.method', '.zone', '.reviews', '.urgent', '.faq'],
+    peintre: ['.hero', '.ba', '.prices', '.calc', '.zone', '.reviews', '.faq']
   };
   var liveEntries = [
     { view: viewD, base: 1440, frame: null, win: null, doc: null, ready: false, failed: false, tops: [], max: 0, h: 0, y: -1 },

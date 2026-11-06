@@ -75,6 +75,7 @@
           <div class="picker" role="group" aria-label="Choisir la démo" hidden>
             <button type="button" class="picker__btn" data-demo="plombier" aria-pressed="true">Plombier</button>
             <button type="button" class="picker__btn" data-demo="serrurier" aria-pressed="false">Serrurier</button>
+            <button type="button" class="picker__btn" data-demo="peintre" aria-pressed="false">Peintre</button>
           </div>
           <p class="live"><a href="demos/plombier/index.html" target="_blank" rel="noopener" data-live>Démo animée <span class="sr-only">en direct (s’ouvre dans un nouvel onglet)</span><span aria-hidden="true">↗</span></a></p>
         </div>
@@ -128,7 +129,7 @@
   <section class="cases" id="les-demos" aria-labelledby="titre-cases">
     <div class="cases__head">
       <h2 id="titre-cases" class="split">Les démos.</h2>
-      <p>Deux sites complets, chacun dans le style de son métier. Ils défilent ici tout seuls.</p>
+      <p>Trois sites complets, chacun dans le style de son métier. Ils défilent ici tout seuls.</p>
     </div>
 
     <article class="case" aria-labelledby="case-plombier">
@@ -178,6 +179,31 @@
         </ul>
         <p class="case__note">Entreprise, numéro et avis fictifs.</p>
         <p class="case__more"><a class="link" href="demos/serrurier/index.html" target="_blank" rel="noopener">Ouvrir la démo serrurier <span aria-hidden="true">↗</span></a></p>
+      </div>
+    </article>
+
+    <article class="case" aria-labelledby="case-peintre">
+      <div class="case__media reveal">
+        <figure class="browser case__browser">
+          <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url"><span>atelier-morel</span>.fr</span></div>
+          <video class="case__video" data-src="video/peintre-desktop" poster="img/peintre-desktop-poster.webp" width="1440" height="900" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </figure>
+        <figure class="phone case__phone">
+          <video class="case__video" data-src="video/peintre-mobile" poster="img/peintre-mobile-poster.webp" width="540" height="1168" muted loop playsinline preload="none" aria-hidden="true"></video>
+        </figure>
+        <button class="case__toggle" type="button" hidden><span class="case__icon" aria-hidden="true"></span><span class="case__state">Pause</span><span class="sr-only"> la vidéo de la démo peintre</span></button>
+      </div>
+      <div class="case__text">
+        <p class="case__kicker"><span>03</span>Peintre</p>
+        <h3 id="case-peintre" class="case__name">Atelier Morel</h3>
+        <p class="case__style">Pour un client qui compare trois devis avant de choisir.</p>
+        <ul class="case__list">
+          <li>Un avant / après qu’on fait glisser du doigt</li>
+          <li>Les prix au mètre carré, et une estimation du budget en dix secondes</li>
+          <li>La visite et le devis gratuits, mis en avant partout</li>
+        </ul>
+        <p class="case__note">Entreprise, numéro et avis fictifs.</p>
+        <p class="case__more"><a class="link" href="demos/peintre/index.html" target="_blank" rel="noopener">Ouvrir la démo peintre <span aria-hidden="true">↗</span></a></p>
       </div>
     </article>
 

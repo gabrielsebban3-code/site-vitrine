@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier Morel, peintre en bâtiment à Paris 17e (démo)</title>
+<meta name="description" content="Peintre en bâtiment aux Batignolles depuis 2012. Murs, plafonds, boiseries, papier peint : visite et devis gratuits sous 48 h, prix au mètre carré affichés. Site de démonstration.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4EFE6">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hanken.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/sections.css">
+<script>
+  /* Sans le script (réseau coupé, bloqueur), la page s'affiche en version fixe complète */
+  document.documentElement.classList.add('js');
+  setTimeout(function () { if (!window.morelReady) document.documentElement.classList.remove('js'); }, 4000);
+</script>
+<script src="js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0"/></filter>
+</svg>
+
+<!-- En-tête fixe : bandeau « démo » + barre avec le numéro toujours visible -->
+<header class="top">
+  <p class="banner">Site de démonstration&nbsp;: entreprise, numéro et avis fictifs.</p>
+  <div class="bar">
+    <a class="brand" href="#haut">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="20" height="9" rx="2.5"/><path d="M23 9.5h4v7H15v4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><rect x="12.5" y="20" width="5" height="9" rx="1.5"/></svg>
+      <span class="brand__name">Atelier Morel</span>
+      <span class="brand__sub">Peintre en bâtiment · Paris 17e</span>
+    </a>
+    <nav class="bar__nav" aria-label="Menu">
+      <a href="#avant-apres">Avant / après</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#estimer">Estimer</a>
+      <a href="#devis">Devis</a>
+    </nav>
+    <a class="btn bar__call" href="tel:+33199007364" aria-label="Appeler le 01 99 00 73 64">
+      <svg class="ico" aria-hidden="true"><use href="#phone"/></svg>
+      <span class="bar__num">01 99 00 73 64</span>
+    </a>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <!-- 1. ACCUEIL : le mur est en plâtre brut, le rouleau le peint au fil du scroll -->
+  <div class="wall">
+    <section class="hero" id="haut" aria-labelledby="titre">
+      <div class="hero__paint" aria-hidden="true">
+        <span class="hero__layer hero__layer--raw"></span>
+        <span class="hero__layer hero__layer--done"></span>
+        <div class="roller">
+          <svg class="roller__svg" viewBox="0 0 120 460" preserveAspectRatio="xMidYMin meet">
+            <rect class="roller__sleeve" x="6" y="0" width="108" height="300" rx="16"/>
+            <path class="roller__nap" d="M18 18 V282 M36 18 V282 M54 18 V282 M72 18 V282 M90 18 V282 M106 18 V282"/>
+            <path class="roller__frame" d="M114 150 H132 V340 H60 V372" transform="translate(-14 0)"/>
+            <rect class="roller__grip" x="34" y="368" width="24" height="92" rx="10"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero__in wrap">
+        <p class="hero__tag"><span class="dot" aria-hidden="true"></span><span class="hero__avail">Visite et devis gratuits sous 48&nbsp;h</span></p>
+        <h1 id="titre" class="hero__title">Vos murs refaits, <em>sans poussière ni surprise.</em></h1>
+        <div class="hero__foot">
+          <p class="hero__lead">Peinture intérieure, plafonds, boiseries et papier peint&nbsp;: peintre en bâtiment installé aux Batignolles depuis 2012. Les prix au mètre carré sont affichés, les meubles protégés, le chantier rendu propre.</p>
+          <div class="hero__ctas">
+            <a class="btn" href="#devis">Demander une visite gratuite</a>
+            <a class="btn btn--ghost" href="tel:+33199007364"><svg class="ico" aria-hidden="true"><use href="#phone"/></svg>01 99 00 73 64</a>
+          </div>
+          <ul class="facts">
+            <li><b>48&nbsp;h</b><span>pour la visite et le devis</span></li>
+            <li><b>4,9/5</b><span>sur 86 avis (exemple)</span></li>
+            <li><b>2012</b><span>installé dans le 17e</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 2. AVANT / APRÈS : on fait glisser la poignée (ou le scroll la fait avancer) -->
+  <section class="ba" id="avant-apres" aria-labelledby="titre-ba">
+    <div class="wrap ba__grid">
+      <div class="ba__text">
+        <p class="kicker"><span class="kicker__n">01</span>Avant / après</p>
+        <h2 id="titre-ba" class="split">Le même salon, trois jours plus tard.</h2>
+        <p class="ba__intro">Fissures rebouchées, enduit poncé, deux couches de peinture mate lessivable. Faites glisser pour comparer.</p>
+        <ul class="ba__list">
+          <li><b>Jour 1</b> Protection des sols et des meubles, rebouchage des fissures</li>
+          <li><b>Jour 2</b> Enduit, ponçage, sous-couche</li>
+          <li><b>Jour 3</b> Deux couches de finition, nettoyage, réception</li>
+        </ul>
+      </div>
+      <figure class="ba__frame" style="--x:50%">
+        <div class="ba__img ba__img--after" aria-hidden="true">
+          <svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice">
+            <rect width="800" height="560" fill="#B4C0A4"/>
+            <rect y="0" width="800" height="34" fill="#F4EFE6"/>
+            <path d="M0 34 H800" stroke="#E2DACB" stroke-width="10"/>
+            <rect x="470" y="96" width="210" height="290" fill="#E9EEF0" stroke="#F4EFE6" stroke-width="16"/>
+            <path d="M575 96 V386 M470 240 H680" stroke="#F4EFE6" stroke-width="10"/>
+            <rect x="452" y="386" width="246" height="14" fill="#F4EFE6"/>
+            <rect x="92" y="150" width="190" height="140" fill="#E2C27A"/>
+            <rect x="104" y="162" width="166" height="116" fill="#C9A35C"/>
+            <circle cx="160" cy="230" r="26" fill="#B85C32" opacity=".85"/>
+            <rect x="490" y="420" width="170" height="60" rx="6" fill="#F4EFE6"/>
+            <path d="M506 420 V480 M528 420 V480 M550 420 V480 M572 420 V480 M594 420 V480 M616 420 V480 M638 420 V480" stroke="#E2DACB" stroke-width="4"/>
+            <rect y="500" width="800" height="16" fill="#F4EFE6"/>
+            <rect y="516" width="800" height="44" fill="#9C7A58"/>
+            <path d="M0 530 H800 M0 546 H800" stroke="#8A6A4B" stroke-width="2"/>
+          </svg>
+          <span class="ba__label ba__label--after">Après</span>
+        </div>
+        <div class="ba__img ba__img--before" aria-hidden="true">
+          <svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice">
+            <rect width="800" height="560" fill="#CDBF9C"/>
+            <rect width="800" height="560" filter="url(#grain)" opacity=".35"/>
+            <rect y="0" width="800" height="34" fill="#D8CDB2"/>
+            <path d="M0 34 H800" stroke="#BBAE8D" stroke-width="10"/>
+            <ellipse cx="610" cy="40" rx="120" ry="34" fill="#A8946A" opacity=".55"/>
+            <rect x="470" y="96" width="210" height="290" fill="#D9DCD8" stroke="#D1C6A9" stroke-width="16"/>
+            <path d="M575 96 V386 M470 240 H680" stroke="#D1C6A9" stroke-width="10"/>
+            <rect x="452" y="386" width="246" height="14" fill="#C9BD9F"/>
+            <rect x="92" y="150" width="190" height="140" fill="none" stroke="#B9A77F" stroke-width="3" stroke-dasharray="6 6"/>
+            <path d="M210 40 L224 92 L214 130 L236 176 L228 214" fill="none" stroke="#7E6E52" stroke-width="2.5"/>
+            <path d="M330 300 L352 344 L344 380 L368 420 L360 470 L380 500" fill="none" stroke="#7E6E52" stroke-width="2.5"/>
+            <path d="M352 344 L384 352" fill="none" stroke="#7E6E52" stroke-width="2"/>
+            <path d="M40 330 q24 -18 52 -4 q30 16 18 44 q-10 26 -42 22 q-36 -6 -28 -62z" fill="#B3A27C"/>
+            <path d="M712 430 q20 -10 40 6 l-6 30 q-22 10 -36 -6z" fill="#EDE6D3" stroke="#B3A27C"/>
+            <rect x="490" y="420" width="170" height="60" rx="6" fill="#C8BB9C"/>
+            <path d="M506 420 V480 M528 420 V480 M550 420 V480 M572 420 V480 M594 420 V480 M616 420 V480 M638 420 V480" stroke="#B4A685" stroke-width="4"/>
+            <rect y="500" width="800" height="16" fill="#C2B593"/>
+            <rect y="516" width="800" height="44" fill="#8E7356"/>
+            <path d="M0 530 H800 M0 546 H800" stroke="#7D6449" stroke-width="2"/>
+          </svg>
+          <span class="ba__label">Avant</span>
+        </div>
+        <span class="ba__handle" aria-hidden="true"><span class="ba__knob"><svg viewBox="0 0 24 24"><path d="M9 6 3 12l6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+        <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Comparer avant et après : faites glisser">
+        <figcaption class="ba__cap">Illustration&nbsp;: séjour de 22&nbsp;m², rue Legendre (exemple).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3. TARIFS : un nuancier, chaque carte est une teinte -->
+  <section class="prices" id="tarifs" data-tone="dark" aria-labelledby="titre-tarifs">
+    <div class="wrap">
+      <div class="prices__head">
+        <p class="kicker"><span class="kicker__n">02</span>Tarifs</p>
+        <h2 id="titre-tarifs" class="split">Des prix au mètre carré, pas au doigt mouillé.</h2>
+        <p class="prices__intro">Prix TTC, peinture fournie (gamme professionnelle, mate ou satinée), TVA à 10&nbsp;% pour un logement de plus de 2 ans. Le prix exact est fixé après la visite, par écrit.</p>
+      </div>
+      <ol class="swatches">
+        <li class="swatch" style="--c:#B4C0A4" data-reveal><span class="swatch__chip" aria-hidden="true"><i>Sauge</i></span><h3>Murs, deux couches</h3><p class="swatch__price">dès 26&nbsp;€<small>/m²</small></p><p class="swatch__detail">Murs en bon état, lessivage et petites retouches compris.</p></li>
+        <li class="swatch" style="--c:#F4EFE6" data-reveal><span class="swatch__chip" aria-hidden="true"><i>Blanc chaux</i></span><h3>Plafonds</h3><p class="swatch__price">dès 30&nbsp;€<small>/m²</small></p><p class="swatch__detail">Mat profond, sans traces de reprise. Moulures sur devis.</p></li>
+        <li class="swatch" style="--c:#D6D0C4" data-reveal><span class="swatch__chip" aria-hidden="true"><i>Plâtre</i></span><h3>Préparation des murs</h3><p class="swatch__price">dès 12&nbsp;€<small>/m²</small></p><p class="swatch__detail">Rebouchage, bande, enduit et ponçage pour les murs abîmés.</p></li>
+        <li class="swatch" style="--c:#3D5161" data-reveal><span class="swatch__chip" aria-hidden="true"><i>Ardoise</i></span><h3>Portes et boiseries</h3><p class="swatch__price">dès 95&nbsp;€<small>/porte</small></p><p class="swatch__detail">Ponçage, sous-couche et laque des deux faces, chambranles compris.</p></li>
+        <li class="swatch" style="--c:#E2C27A" data-reveal><span class="swatch__chip" aria-hidden="true"><i>Blé</i></span><h3>Papier peint</h3><p class="swatch__price">dès 24&nbsp;€<small>/m²</small></p><p class="swatch__detail">Dépose de l’ancien et pose, raccords soignés. Papier fourni par vous ou par nous.</p></li>
+        <li class="swatch" style="--c:#B85C32" data-reveal><span class="swatch__chip" aria-hidden="true"><i>Ocre rouge</i></span><h3>Cage d’escalier, copropriété</h3><p class="swatch__price">sur devis</p><p class="swatch__detail">Pour les syndics et conseils syndicaux. Planning adapté aux résidents.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. ESTIMATION : la fourchette se calcule en direct -->
+  <section class="calc" id="estimer" aria-labelledby="titre-calc">
+    <div class="wrap calc__grid">
+      <div class="calc__text">
+        <p class="kicker"><span class="kicker__n">03</span>Estimer</p>
+        <h2 id="titre-calc" class="split">Votre budget, en dix secondes.</h2>
+        <p class="calc__intro">Une première idée avant même d’appeler. Le prix exact est donné après la visite, gratuite et sans engagement.</p>
+      </div>
+      <form class="calc__box" id="calc" aria-describedby="calc-note">
+        <fieldset class="chips">
+          <legend>La pièce</legend>
+          <label><input type="radio" name="piece" value="chambre" data-s="12" checked><span>Chambre</span></label>
+          <label><input type="radio" name="piece" value="sejour" data-s="24"><span>Séjour</span></label>
+          <label><input type="radio" name="piece" value="cuisine" data-s="9"><span>Cuisine</span></label>
+          <label><input type="radio" name="piece" value="appart" data-s="55"><span>Tout l’appartement</span></label>
+        </fieldset>
+        <label class="range">
+          <span class="range__top"><span>Surface au sol</span><output class="range__val" for="surface"><b data-surface>12</b>&nbsp;m²</output></span>
+          <input id="surface" name="surface" type="range" min="5" max="120" step="1" value="12">
+        </label>
+        <fieldset class="chips">
+          <legend>L’état des murs</legend>
+          <label><input type="radio" name="etat" value="0" checked><span>Bon</span></label>
+          <label><input type="radio" name="etat" value="7"><span>Quelques trous</span></label>
+          <label><input type="radio" name="etat" value="14"><span>Abîmés, fissurés</span></label>
+        </fieldset>
+        <label class="check"><input type="checkbox" name="plafond" checked><span>Plafond compris</span></label>
+        <div class="calc__out" aria-live="polite">
+          <p class="calc__label">Estimation, peinture et main-d’œuvre</p>
+          <p class="calc__price">entre <b data-min>1&nbsp;150&nbsp;€</b> et <b data-max>1&nbsp;450&nbsp;€</b></p>
+          <p class="calc__note" id="calc-note">Environ <span data-area>41</span>&nbsp;m² à peindre, plafond de 2,60&nbsp;m. Prix TTC, TVA à 10&nbsp;%.</p>
+          <a class="btn" href="#devis" data-calc-cta>Demander la visite gratuite</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 5. ZONE : la teinte part de l'atelier (17e) et gagne tout Paris -->
+  <section class="zone" id="zone" aria-labelledby="titre-zone">
+    <div class="zone__pin wrap">
+      <div class="zone__text">
+        <p class="kicker"><span class="kicker__n">04</span>Zone d’intervention</p>
+        <h2 id="titre-zone" class="split">Tout Paris, depuis les Batignolles.</h2>
+        <p class="zone__intro">L’atelier est rue des Dames, dans le 17e. La visite et le devis sont gratuits partout dans Paris.</p>
+        <ul class="legend">
+          <li class="legend__item legend__item--near"><span class="legend__dot" aria-hidden="true"></span><div><b>Visite sous 48&nbsp;h</b><span>8e, 9e, 17e et 18e</span></div></li>
+          <li class="legend__item legend__item--far"><span class="legend__dot" aria-hidden="true"></span><div><b>Visite sous 4 jours</b><span>Le reste de Paris</span></div></li>
+        </ul>
+      </div>
+      <figure class="map" aria-hidden="true">
+        <svg class="map__svg" viewBox="0 0 739 591">
+          <defs><clipPath id="paris"><path d="M146.5,169.3 C158.2,153.6 165.5,136.4 188.2,118.2 C210.9,100.0 255.6,72.9 282.7,59.9 C309.8,46.9 327.9,44.6 350.8,40.0 C373.7,35.4 397.8,33.0 420.2,32.0 C442.6,31.0 466.8,34.3 485.3,34.0 C503.8,33.7 511.8,29.0 531.0,30.0 C550.2,31.0 583.9,28.4 600.4,40.0 C616.9,51.6 614.7,77.0 629.9,99.7 C645.1,122.4 679.3,148.9 691.4,176.0 C703.5,203.1 699.5,229.0 702.4,262.2 C705.3,295.4 711.6,343.5 709.0,375.0 C706.4,406.5 695.1,428.6 687.0,451.3 C678.9,474.0 686.6,495.0 660.6,511.0 C634.6,527.0 560.3,539.2 531.0,547.5 C501.7,555.8 517.4,562.4 484.8,560.7 C452.2,559.0 374.9,546.9 335.4,537.5 C295.8,528.1 275.0,514.8 247.5,504.3 C220.0,493.8 206.1,486.1 170.6,474.5 C135.1,462.9 57.8,452.4 34.4,434.7 C11.0,417.0 21.2,397.1 30.0,368.3 C38.8,339.6 72.4,288.2 87.1,262.2 C101.8,236.2 108.0,227.9 117.9,212.4 C127.8,196.9 134.8,185.0 146.5,169.3 Z"/></clipPath></defs>
+          <path class="map__fill" d="M146.5,169.3 C158.2,153.6 165.5,136.4 188.2,118.2 C210.9,100.0 255.6,72.9 282.7,59.9 C309.8,46.9 327.9,44.6 350.8,40.0 C373.7,35.4 397.8,33.0 420.2,32.0 C442.6,31.0 466.8,34.3 485.3,34.0 C503.8,33.7 511.8,29.0 531.0,30.0 C550.2,31.0 583.9,28.4 600.4,40.0 C616.9,51.6 614.7,77.0 629.9,99.7 C645.1,122.4 679.3,148.9 691.4,176.0 C703.5,203.1 699.5,229.0 702.4,262.2 C705.3,295.4 711.6,343.5 709.0,375.0 C706.4,406.5 695.1,428.6 687.0,451.3 C678.9,474.0 686.6,495.0 660.6,511.0 C634.6,527.0 560.3,539.2 531.0,547.5 C501.7,555.8 517.4,562.4 484.8,560.7 C452.2,559.0 374.9,546.9 335.4,537.5 C295.8,528.1 275.0,514.8 247.5,504.3 C220.0,493.8 206.1,486.1 170.6,474.5 C135.1,462.9 57.8,452.4 34.4,434.7 C11.0,417.0 21.2,397.1 30.0,368.3 C38.8,339.6 72.4,288.2 87.1,262.2 C101.8,236.2 108.0,227.9 117.9,212.4 C127.8,196.9 134.8,185.0 146.5,169.3 Z"/>
+          <g clip-path="url(#paris)">
+            <circle class="map__ring map__ring--far" cx="252.8" cy="107.6" r="660"/>
+            <circle class="map__ring map__ring--near" cx="252.8" cy="107.6" r="198"/>
+          </g>
+          <path class="map__outline" d="M146.5,169.3 C158.2,153.6 165.5,136.4 188.2,118.2 C210.9,100.0 255.6,72.9 282.7,59.9 C309.8,46.9 327.9,44.6 350.8,40.0 C373.7,35.4 397.8,33.0 420.2,32.0 C442.6,31.0 466.8,34.3 485.3,34.0 C503.8,33.7 511.8,29.0 531.0,30.0 C550.2,31.0 583.9,28.4 600.4,40.0 C616.9,51.6 614.7,77.0 629.9,99.7 C645.1,122.4 679.3,148.9 691.4,176.0 C703.5,203.1 699.5,229.0 702.4,262.2 C705.3,295.4 711.6,343.5 709.0,375.0 C706.4,406.5 695.1,428.6 687.0,451.3 C678.9,474.0 686.6,495.0 660.6,511.0 C634.6,527.0 560.3,539.2 531.0,547.5 C501.7,555.8 517.4,562.4 484.8,560.7 C452.2,559.0 374.9,546.9 335.4,537.5 C295.8,528.1 275.0,514.8 247.5,504.3 C220.0,493.8 206.1,486.1 170.6,474.5 C135.1,462.9 57.8,452.4 34.4,434.7 C11.0,417.0 21.2,397.1 30.0,368.3 C38.8,339.6 72.4,288.2 87.1,262.2 C101.8,236.2 108.0,227.9 117.9,212.4 C127.8,196.9 134.8,185.0 146.5,169.3 Z"/>
+          <path class="map__seine" clip-path="url(#paris)" d="M632.1,520.9 C628.4,517.0 621.1,512.6 610.1,497.7 C599.1,482.8 581.9,450.2 566.1,431.4 C550.4,412.6 531.0,398.2 515.6,384.9 C500.2,371.6 487.4,360.6 473.8,351.8 C460.2,343.0 445.7,339.3 434.3,331.9 C422.9,324.5 413.4,312.8 405.7,307.3 C398.0,301.8 404.3,306.0 388.2,298.7 C372.1,291.4 326.7,269.8 309.1,263.5 C291.5,257.2 295.5,260.7 282.7,260.9 C269.9,261.1 247.5,259.7 232.1,264.9 C216.7,270.1 202.8,282.1 190.4,292.1 C178.0,302.2 166.9,315.2 157.4,325.2 C147.9,335.1 140.6,342.6 133.3,351.8 C126.0,361.0 120.5,368.2 113.5,380.3 C106.5,392.4 101.0,409.0 91.5,424.7 C82.0,440.4 62.2,466.2 56.4,474.5"/>
+          <g class="map__arr is-far" data-d="3.50" transform="translate(383.3 272.1)"><circle class="map__dot"/><text dy=".36em">1er</text></g>
+          <g class="map__arr is-far" data-d="3.38" transform="translate(411.4 233.7)"><circle class="map__dot"/><text dy=".36em">2e</text></g>
+          <g class="map__arr is-far" data-d="4.74" transform="translate(487.0 268.8)"><circle class="map__dot"/><text dy=".36em">3e</text></g>
+          <g class="map__arr is-far" data-d="5.22" transform="translate(476.5 326.5)"><circle class="map__dot"/><text dy=".36em">4e</text></g>
+          <g class="map__arr is-far" data-d="5.73" transform="translate(446.2 392.2)"><circle class="map__dot"/><text dy=".36em">5e</text></g>
+          <g class="map__arr is-far" data-d="4.64" transform="translate(367.9 361.0)"><circle class="map__dot"/><text dy=".36em">6e</text></g>
+          <g class="map__arr is-far" data-d="3.46" transform="translate(277.0 313.9)"><circle class="map__dot"/><text dy=".36em">7e</text></g>
+          <g class="map__arr is-near" data-d="1.67" transform="translate(278.3 204.5)"><circle class="map__dot"/><text dy=".36em">8e</text></g>
+          <g class="map__arr is-near" data-d="2.52" transform="translate(388.2 175.3)"><circle class="map__dot"/><text dy=".36em">9e</text></g>
+          <g class="map__arr is-far" data-d="4.14" transform="translate(490.1 181.3)"><circle class="map__dot"/><text dy=".36em">10e</text></g>
+          <g class="map__arr is-far" data-d="6.21" transform="translate(574.9 294.7)"><circle class="map__dot"/><text dy=".36em">11e</text></g>
+          <g class="map__arr is-far" data-d="7.93" transform="translate(610.1 421.4)"><circle class="map__dot"/><text dy=".36em">12e</text></g>
+          <g class="map__arr is-far" data-d="7.69" transform="translate(497.1 499.0)"><circle class="map__dot"/><text dy=".36em">13e</text></g>
+          <g class="map__arr is-far" data-d="6.59" transform="translate(340.3 493.1)"><circle class="map__dot"/><text dy=".36em">14e</text></g>
+          <g class="map__arr is-far" data-d="5.32" transform="translate(191.7 420.8)"><circle class="map__dot"/><text dy=".36em">15e</text></g>
+          <g class="map__arr is-far" data-d="4.04" transform="translate(91.5 288.7)"><circle class="map__dot"/><text dy=".36em">16e</text></g>
+          <g class="map__arr map__arr--home is-near" data-d="0.00" transform="translate(252.8 107.6)"><circle class="map__pulse"/><circle class="map__dot"/><text dy=".36em">17e</text></g>
+          <g class="map__arr is-near" data-d="3.11" transform="translate(436.1 73.1)"><circle class="map__dot"/><text dy=".36em">18e</text></g>
+          <g class="map__arr is-far" data-d="5.72" transform="translate(596.0 108.9)"><circle class="map__dot"/><text dy=".36em">19e</text></g>
+          <g class="map__arr is-far" data-d="7.40" transform="translate(667.6 266.2)"><circle class="map__dot"/><text dy=".36em">20e</text></g>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 6. DÉROULÉ : un coup de pinceau relie les étapes -->
+  <section class="steps" aria-labelledby="titre-etapes">
+    <div class="wrap">
+      <div class="steps__head">
+        <p class="kicker"><span class="kicker__n">05</span>Comment ça se passe</p>
+        <h2 id="titre-etapes" class="split">Un chantier propre, du premier au dernier jour.</h2>
+      </div>
+      <div class="steps__body">
+        <svg class="stroke" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path class="stroke__path" d="M6 22 C 120 8, 220 34, 340 20 S 560 8, 680 22 S 880 34, 994 18" pathLength="1"/></svg>
+        <ol class="steps__list">
+          <li class="step"><span class="step__node" aria-hidden="true">1</span><h3>Visite gratuite</h3><p>On mesure, on regarde l’état des murs, vous choisissez les teintes. Devis écrit sous 48&nbsp;h.</p></li>
+          <li class="step"><span class="step__node" aria-hidden="true">2</span><h3>Protection</h3><p>Sols bâchés, meubles regroupés et couverts, prises et plinthes masquées.</p></li>
+          <li class="step"><span class="step__node" aria-hidden="true">3</span><h3>Préparation et peinture</h3><p>Rebouchage, ponçage avec aspiration, puis deux couches. Vous gardez l’accès au logement.</p></li>
+          <li class="step"><span class="step__node" aria-hidden="true">4</span><h3>Nettoyage et réception</h3><p>On fait le tour ensemble, on reprend ce qui ne vous plaît pas, on laisse les pots de retouche.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. AVIS -->
+  <section class="reviews" id="avis" data-tone="sauge" aria-labelledby="titre-avis">
+    <div class="wrap">
+      <div class="reviews__head">
+        <p class="kicker"><span class="kicker__n">06</span>Avis clients</p>
+        <h2 id="titre-avis" class="split">Ce qu’en disent les voisins.</h2>
+        <p class="reviews__note">Exemples d’avis pour la démonstration.</p>
+      </div>
+      <div class="reviews__list">
+        <figure class="review" data-reveal>
+          <p class="review__stars"><span aria-hidden="true"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+          <blockquote><p>Trois pièces refaites en une semaine. Pas une goutte sur le parquet, et le devis a été respecté à l’euro près.</p></blockquote>
+          <figcaption>Sophie L. · Paris 17e</figcaption>
+        </figure>
+        <figure class="review" data-reveal>
+          <p class="review__stars"><span aria-hidden="true"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span><span class="sr-only">5 étoiles sur 5</span></p>
+          <blockquote><p>Il m’a aidé à choisir la couleur du salon avec de vrais échantillons au mur. Résultat parfait.</p></blockquote>
+          <figcaption>Mehdi A. · Paris 18e</figcaption>
+        </figure>
+        <figure class="review" data-reveal>
+          <p class="review__stars"><span aria-hidden="true"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg class="is-empty"><use href="#star"/></svg></span><span class="sr-only">4 étoiles sur 5</span></p>
+          <blockquote><p>Travail très soigné sur la cage d’escalier de l’immeuble. Un peu de retard au démarrage, mais bien prévenu.</p></blockquote>
+          <figcaption>Conseil syndical · Paris 9e</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. DEVIS -->
+  <section class="quote" id="devis" data-tone="dark" aria-labelledby="titre-devis">
+    <div class="wrap quote__grid">
+      <div class="quote__call">
+        <p class="kicker"><span class="kicker__n">07</span>Visite et devis gratuits</p>
+        <h2 id="titre-devis" class="split">Parlons de vos murs.</h2>
+        <p class="quote__text">Décrivez votre projet, on vous rappelle pour fixer la visite. Réponse sous 24&nbsp;h ouvrées.</p>
+        <a class="quote__phone" href="tel:+33199007364" aria-label="Appeler le 01 99 00 73 64">01 99 00 73 64</a>
+        <p class="quote__hours">Du lundi au samedi, 8&nbsp;h à 19&nbsp;h</p>
+      </div>
+      <form class="form" id="formulaire" novalidate>
+        <fieldset class="chips">
+          <legend>Vos travaux</legend>
+          <label><input type="radio" name="type" value="Murs et plafonds" required><span>Murs et plafonds</span></label>
+          <label><input type="radio" name="type" value="Boiseries"><span>Portes, boiseries</span></label>
+          <label><input type="radio" name="type" value="Papier peint"><span>Papier peint</span></label>
+          <label><input type="radio" name="type" value="Copropriété"><span>Copropriété</span></label>
+        </fieldset>
+        <div class="form__row">
+          <label class="field"><span>Nom <small>(obligatoire)</small></span><input name="nom" autocomplete="name" required></label>
+          <label class="field"><span>Téléphone <small>(obligatoire)</small></span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" required></label>
+        </div>
+        <div class="form__row">
+          <label class="field"><span>Arrondissement</span>
+            <select name="arr">
+              <option value="" selected>Choisir…</option><option>1er</option><option>2e</option><option>3e</option><option>4e</option><option>5e</option><option>6e</option><option>7e</option><option>8e</option><option>9e</option><option>10e</option><option>11e</option><option>12e</option><option>13e</option><option>14e</option><option>15e</option><option>16e</option><option>17e</option><option>18e</option><option>19e</option><option>20e</option><option>Hors Paris</option>
+            </select>
+          </label>
+          <label class="field"><span>Surface approximative</span><input name="surface" inputmode="numeric" placeholder="Ex. : 45 m²" data-calc-surface></label>
+        </div>
+        <label class="field"><span>Votre projet</span><textarea name="msg" rows="3" placeholder="Ex. : séjour et couloir, murs fissurés, à faire avant fin mars"></textarea></label>
+        <button class="btn form__send" type="submit">Envoyer ma demande</button>
+        <p class="form__sent" role="status" hidden>Démonstration&nbsp;: sur le vrai site, la demande arrive par e-mail ou SMS à l’artisan.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 9. QUESTIONS -->
+  <section class="faq" aria-labelledby="titre-faq">
+    <div class="wrap faq__grid">
+      <div class="faq__head">
+        <p class="kicker"><span class="kicker__n">08</span>Questions fréquentes</p>
+        <h2 id="titre-faq" class="split">Avant de nous appeler.</h2>
+      </div>
+      <div class="faq__list">
+        <details><summary>Faut-il vider la pièce&nbsp;?</summary><div class="faq__a"><p>Non. On regroupe les meubles au centre et on les couvre. Pensez seulement à ranger les objets fragiles et à décrocher vos cadres.</p></div></details>
+        <details><summary>Combien de temps dure un chantier&nbsp;?</summary><div class="faq__a"><p>Deux à trois jours pour une pièce, une à deux semaines pour un appartement entier. La durée est écrite sur le devis.</p></div></details>
+        <details><summary>Fournissez-vous la peinture&nbsp;?</summary><div class="faq__a"><p>Oui, une peinture professionnelle est comprise dans nos prix. Si vous tenez à une marque ou une teinte précise, on s’adapte.</p></div></details>
+        <details><summary>Et l’odeur&nbsp;?</summary><div class="faq__a"><p>On utilise des peintures à l’eau, classées A+ pour l’air intérieur. L’odeur disparaît en un ou deux jours ; une chambre peut être réutilisée le soir même.</p></div></details>
+        <details><summary>Êtes-vous assurés&nbsp;?</summary><div class="faq__a"><p>Oui&nbsp;: responsabilité civile professionnelle et garantie décennale. L’attestation est jointe à chaque devis.</p></div></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" data-tone="dark">
+  <div class="wrap foot__grid">
+    <a class="foot__phone" href="tel:+33199007364" aria-label="Appeler le 01 99 00 73 64">01 99 00 73 64</a>
+    <div class="foot__info">
+      <p class="foot__name">Atelier Morel</p>
+      <p>00 rue des Dames, 75017 Paris (adresse fictive)<br>Du lundi au samedi, 8&nbsp;h à 19&nbsp;h</p>
+      <p class="foot__legal">Mentions légales&nbsp;: SIRET et assurance décennale à renseigner pour le vrai client.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Démo : les boutons d'appel n'appellent personne -->
+<p class="toast" role="status" aria-live="polite" hidden>Démonstration&nbsp;: sur le vrai site, ce bouton appelle directement l’artisan.</p>
+
+<!-- Mobile : appel et devis toujours à portée de pouce -->
+<nav class="callbar" data-tone="dark" aria-label="Contact rapide">
+  <a class="btn" href="tel:+33199007364"><svg class="ico" aria-hidden="true"><use href="#phone"/></svg>Appeler</a>
+  <a class="btn btn--ghost" href="#devis">Visite gratuite</a>
+</nav>
+</body>
+</html>
