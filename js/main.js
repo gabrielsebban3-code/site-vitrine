@@ -485,7 +485,10 @@
 
     if (!reduced.matches) {
       // Accueil : 0 → 0,28 la démo grandit, 0,3 → 0,92 la capture défile
-      if (scene) {
+      // Téléphones : l'accueil n'est plus épinglé (la démo est visible dès l'arrivée), pas de visite pilotée par le scroll
+      var phoneHero = window.innerWidth < 900;
+      if (scene && phoneHero) { var introM = $('.scene__intro'); if (introM) introM.style.pointerEvents = ''; }
+      if (scene && !phoneHero) {
         var p = progress(scene);
         var live = scene.classList.contains('is-live');
         // En direct : la démo grandit plus vite (0 → 0,14) et la visite occupe le reste de la scène, qui est plus longue

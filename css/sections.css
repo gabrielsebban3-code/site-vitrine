@@ -637,3 +637,69 @@
   .faq { grid-template-columns: 1fr; }
   .faq__head { position: static; }
 }
+
+/* Téléphones : accueil non épinglé (05/11/2026).
+   Avant : 4 écrans où l'on faisait défiler une démo déjà montrée plus bas, et le téléphone de la démo
+   commençait sous la barre d'appel. Maintenant le premier écran montre le titre, le champ « votre nom »
+   et le haut de la démo juste en dessous : le nom tapé apparaît tout de suite dans la démo. */
+.hero-kicker { display: none; }
+@media (max-width: 899px) {
+  .hero-kicker { display: block; order: 1; margin: 0 0 .75rem; font-size: var(--t-xs); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .hero-title { order: 2; font-size: clamp(2.25rem, 10.5vw, 3.25rem); }
+  .js .scene, .js .scene.is-live { height: auto; }
+  .scene__pin, .js .scene__pin { position: static; height: auto; overflow: visible; display: flex; flex-direction: column; padding-bottom: 2.5rem; }
+  .scene__intro, .js .scene__intro { display: contents; }
+  .namer { order: 3; margin-top: 1.25rem; }
+  .stage, .js .stage { order: 4; position: relative; inset: auto; margin: 1.25rem 0 0; height: min(60svh, 500px); transform: none; }
+  .phone, .js .phone { height: 100%; width: auto; aspect-ratio: 390 / 800; margin-inline: auto; }
+  .js .shot--mobile { transform: none; }
+  .controls { order: 5; justify-content: center; margin-top: 1.25rem; }
+  .hero-offer { order: 6; margin-top: 1.5rem; }
+  .tour, .js .tour, .tour-now, .js .tour-now { display: none; }
+}
+
+/* Téléphones : « Les démos » côte à côte (05/11/2026). Les deux vidéos restent visibles sans clic,
+   en un écran et demi au lieu de quatre ; le détail de chaque démo se voit dans la démo elle-même. */
+@media (max-width: 899px) {
+  .cases { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 .75rem; padding-block: 3.5rem 2.5rem; }
+  .cases__head { grid-column: 1 / -1; margin-bottom: 1.5rem; }
+  .case, .case--flip { padding-block: 1.25rem 0; align-content: start; }
+  .case__style, .case__list { display: none; }
+  .case__media, .case--flip .case__media { order: 1; margin-top: 0; gap: .75rem; }
+  .case .phone, .case--flip .phone, .js .case .phone { width: 100%; max-width: 290px; margin-inline: auto; }
+  .case__kicker { order: 2; margin-top: 1rem; }
+  .case__name { order: 3; margin-top: .35rem; font-size: 1.45rem; }
+  .case__more { order: 4; margin-top: .25rem; font-size: var(--t-s, 1rem); }
+  .case__more .link { display: inline-flex; align-items: center; min-height: 44px; }
+  .case__note { order: 5; margin-top: .25rem; }
+}
+
+/* Téléphones : page resserrée (05/11/2026, suite). Même contenu, moins de vide entre les blocs,
+   et « un mois » sur une seule ligne, sur toute la largeur, comme sur ordinateur. */
+@media (max-width: 899px) {
+  :root { --section: 3.5rem; }
+  .offer__panel, .js .offer__panel { min-height: 0; padding-block: var(--section); gap: 1.5rem; }
+  .offer__title { gap: .5rem; }
+  .offer__big, .js .offer__big { font-size: calc((100vw - 2 * var(--gutter)) / 3.55); white-space: nowrap; }
+  .offer__big .ow { display: inline-block; }
+  .offer__body { gap: .85rem; }
+  .pricing__head { margin-bottom: 1.75rem; }
+  .plan { gap: 1rem; padding: 1.25rem; }
+  .plan__list li { padding: .5rem 0; }
+  .contact { min-height: 0; }
+  .js .quote, .quote__row { gap: 1.1rem; }
+  .contact__or { margin-top: 2.5rem; }
+  .included { gap: 1.5rem; }
+  .checklist li { padding: 1.1rem 0; }
+  .steps h2 { margin-bottom: 2.25rem; }
+  .steps__list { gap: 2.25rem; }
+  .step > div { min-height: 0; }
+  .faq { gap: 1.25rem; }
+  .faq__item summary { padding: .95rem 0; }
+  :root { --t-h2: 2.6rem; }
+  .checklist li { padding: .9rem 0; }
+  .step h3 { font-size: 1.75rem; }
+  .field textarea { min-height: 6.5rem; }
+  /* Carte « L'essai » : on garde le « 0 € » ; sa liste répète mot pour mot le bloc de l'offre juste au-dessus */
+  .plans > .plan:first-child .plan__list { display: none; }
+}
