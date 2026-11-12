@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /demos/
+Disallow: /apercu/
 
 Sitemap: https://gs-web.fr/sitemap.xml
