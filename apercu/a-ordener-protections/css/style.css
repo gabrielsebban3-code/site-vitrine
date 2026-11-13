@@ -1,0 +1,299 @@
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("../fonts/source-serif-4.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../fonts/source-sans-3.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("../fonts/barlow-condensed-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #16181D;
+  --text: #2B3038;
+  --muted: #5B6270;
+  --paper: #FFFFFF;
+  --grey: #F1F2F4;
+  --line: #D9DCE1;
+  --blue: #1E4D8F;
+  --blue-dark: #163A6B;
+  --green: #2F6B4F;
+  --max: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+}
+h1, h2, h3, .fiche strong, .brand strong { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; }
+h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: 0; font-weight: 600; }
+p { margin: 0; }
+a { color: inherit; }
+sup { font-size: 0.6em; line-height: 0; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.small { font-size: 14px; color: var(--muted); }
+
+/* bandeau d'aperçu */
+.apercu {
+  margin: 0;
+  padding: 7px 20px;
+  background: var(--grey);
+  color: var(--text);
+  font-size: 13px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+/* barre d'information */
+.infobar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 24px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 14px;
+}
+.infobar a { color: #fff; font-weight: 700; text-decoration: none; }
+
+/* en-tête */
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 12px 24px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.brand { text-decoration: none; display: block; }
+.brand strong { display: block; font-size: 22px; font-weight: 700; line-height: 1.1; }
+.brand small { display: block; font-size: 13px; color: var(--muted); }
+.nav { display: flex; gap: 24px; justify-content: center; }
+.nav a { font-size: 15px; font-weight: 500; text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { border-bottom-color: var(--ink); }
+.head-tel {
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.head-tel:hover { background: var(--ink); color: #fff; }
+
+/* boutons */
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  border: 1.5px solid var(--blue);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+.btn-line { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-line:hover { background: var(--ink); color: #fff; }
+.btn-white { background: #fff; color: var(--blue-dark); border-color: #fff; font-size: 22px; font-weight: 700; padding: 14px 22px; }
+.btn-white:hover { background: var(--grey); border-color: var(--grey); }
+
+/* premier écran */
+.front {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 56px 24px 48px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+.since { font-size: 15px; font-weight: 500; color: var(--blue); margin-bottom: 14px; }
+.front h1 { font-size: 44px; font-weight: 600; line-height: 1.1; }
+.intro { font-size: 18px; color: var(--text); margin-top: 18px; max-width: 34em; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.practical { margin: 30px 0 0; border-top: 1px solid var(--line); }
+.practical div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.practical dt { font-size: 14px; color: var(--muted); }
+.practical dd { margin: 0; font-size: 16px; }
+#etat.ouvert { color: var(--green); font-weight: 600; }
+#etat.ouvert::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-right: 8px; vertical-align: 2px; }
+
+.front-plaque { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.plaque {
+  width: 100%;
+  max-width: 430px;
+  background: var(--blue);
+  border: 7px solid var(--green);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45), 0 1px 2px rgba(0,0,0,0.15);
+  color: #fff;
+  text-align: center;
+  padding: 16px 24px 20px;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+}
+.plaque-arr { display: block; font-size: 20px; letter-spacing: 0.06em; opacity: 0.95; }
+.plaque-rue { display: block; font-size: 60px; line-height: 1; letter-spacing: 0.03em; margin-top: 6px; }
+.numero {
+  margin-top: 14px;
+  background: var(--blue);
+  border: 4px solid var(--green);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.45);
+  color: #fff;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  padding: 6px 18px 7px;
+  border-radius: 4px;
+}
+.front-plaque figcaption { margin-top: 18px; font-size: 14px; color: var(--muted); text-align: center; max-width: 30em; }
+
+/* catalogue */
+.catalog { background: var(--grey); padding: 56px 24px; }
+.catalog-head, .rows, .catalog-note { max-width: var(--max); margin-left: auto; margin-right: auto; }
+.catalog-head { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: 28px; }
+.catalog-head h2, .maison h2, .urgent h2, .contact h2 { font-size: 32px; font-weight: 600; }
+.catalog-head p { color: var(--muted); font-size: 17px; }
+.rows { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.rows li {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: baseline;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.rows h3 { font-size: 21px; font-weight: 600; }
+.rows p { font-size: 16px; color: var(--text); }
+.tag { font-size: 13px; color: var(--muted); background: #fff; border: 1px solid var(--line); padding: 3px 8px; border-radius: 3px; white-space: nowrap; }
+.catalog-note { margin-top: 22px; font-size: 15px; color: var(--muted); max-width: var(--max); }
+
+/* dépannage */
+.urgent { background: var(--blue-dark); color: #fff; padding: 56px 24px; }
+.urgent-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; align-items: center; }
+.urgent p { font-size: 18px; opacity: 0.92; margin-top: 10px; max-width: 34em; }
+.urgent-tip { grid-column: 1 / -1; font-size: 15px !important; opacity: 0.85 !important; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 16px; margin-top: 8px !important; max-width: 46em; }
+
+/* la maison */
+.maison { max-width: var(--max); margin: 0 auto; padding: 56px 24px; }
+.fiche { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 28px; }
+.fiche div { border-left: 1px solid var(--line); padding: 4px 22px; }
+.fiche div:first-child { padding-left: 0; border-left: 0; }
+.fiche strong { display: block; font-size: 32px; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
+.fiche span { font-size: 15.5px; color: var(--text); }
+
+/* contact */
+.contact { background: var(--grey); padding: 56px 24px; }
+.contact > * { max-width: var(--max); }
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.contact-info { margin-left: auto; width: 100%; max-width: calc(var(--max) / 2 - 24px); }
+.form { margin-right: auto; width: 100%; max-width: calc(var(--max) / 2 - 24px); }
+address { font-style: normal; font-size: 17px; line-height: 1.5; margin: 18px 0 22px; }
+address a { font-weight: 700; text-decoration: none; }
+.horaires { width: 100%; border-collapse: collapse; font-size: 16px; }
+.horaires th, .horaires td { padding: 8px 0; border-bottom: 1px solid var(--line); text-align: left; }
+.horaires th { font-weight: 500; width: 40%; }
+.horaires tr.auj th, .horaires tr.auj td { font-weight: 700; color: var(--blue); }
+.contact .small { margin-top: 14px; }
+.form { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 28px; }
+.form h3 { font-size: 24px; font-weight: 600; }
+.form > p { color: var(--muted); font-size: 15px; margin: 8px 0 18px; }
+.form label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 14px; }
+.form input, .form textarea {
+  display: block; width: 100%; margin-top: 6px; padding: 10px 12px;
+  font: inherit; font-size: 16px; color: var(--ink);
+  border: 1px solid #B8BEC8; border-radius: 4px; background: #fff;
+}
+.form input:focus, .form textarea:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 2px rgba(30,77,143,0.2); }
+.form .btn { margin-top: 4px; }
+.form .small { margin-top: 14px; }
+
+/* notes */
+.notes { max-width: var(--max); margin: 48px auto; padding: 20px 24px; border: 1px dashed #9AA3B2; border-radius: 6px; }
+.notes h2 { font-size: 19px; font-weight: 600; }
+.notes ul { margin: 10px 0 0; padding-left: 20px; font-size: 15px; color: var(--text); }
+.notes li + li { margin-top: 4px; }
+
+/* pied de page */
+.foot { border-top: 1px solid var(--line); padding: 24px; font-size: 14px; color: var(--muted); }
+.foot p { max-width: var(--max); margin: 0 auto; }
+.foot p + p { margin-top: 4px; }
+.foot strong { color: var(--ink); }
+
+@media (max-width: 960px) {
+  .front { grid-template-columns: 1fr; gap: 40px; }
+  .front-plaque { align-items: flex-start; }
+  .front-plaque figcaption { text-align: left; }
+  .rows li { grid-template-columns: 240px 1fr; }
+  .fiche { grid-template-columns: 1fr 1fr; gap: 24px 0; }
+  .fiche div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .contact { grid-template-columns: 1fr; gap: 36px; }
+  .contact-info, .form { max-width: 640px; margin: 0; }
+}
+
+@media (max-width: 760px) {
+  body { font-size: 17px; }
+  .apercu { font-size: 12px; padding: 6px 16px; }
+  .infobar { justify-content: center; text-align: center; font-size: 14px; padding: 8px 16px; }
+  .infobar-h { display: none; }
+  .head { grid-template-columns: 1fr auto; gap: 8px 16px; padding: 10px 16px; }
+  .brand strong { font-size: 18px; }
+  .brand small { font-size: 12px; }
+  .head-tel { font-size: 15px; padding: 7px 10px; }
+  .nav { order: 2; grid-column: 1 / -1; justify-content: flex-start; gap: 18px; overflow-x: auto; white-space: nowrap; padding-bottom: 2px; }
+  .nav a { font-size: 14px; }
+  .front { padding: 32px 16px 36px; gap: 32px; }
+  .since { font-size: 14px; margin-bottom: 10px; }
+  .front h1 { font-size: 33px; }
+  .intro { font-size: 17px; margin-top: 14px; }
+  .actions { margin-top: 20px; }
+  .actions .btn { flex: 1 1 auto; text-align: center; }
+  .practical { margin-top: 24px; }
+  .practical div { grid-template-columns: 92px 1fr; }
+  .plaque { padding: 12px 18px 16px; }
+  .plaque-arr { font-size: 16px; }
+  .plaque-rue { font-size: 42px; }
+  .numero { font-size: 28px; }
+  .catalog, .urgent, .maison, .contact { padding: 40px 16px; }
+  .catalog-head { grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+  .catalog-head h2, .maison h2, .urgent h2, .contact h2 { font-size: 27px; }
+  .rows li { grid-template-columns: 1fr; gap: 6px; padding: 16px 0; }
+  .rows h3 { font-size: 18px; }
+  .tag { justify-self: start; margin-top: 4px; }
+  .urgent-inner { grid-template-columns: 1fr; gap: 18px; }
+  .btn-white { font-size: 20px; text-align: center; }
+  .fiche { grid-template-columns: 1fr; gap: 0; margin-top: 20px; }
+  .fiche div { border-left: 0; padding: 16px 0; border-top: 1px solid var(--line); }
+  .fiche div:first-child { border-top: 0; padding-top: 4px; }
+  .fiche strong { font-size: 26px; margin-bottom: 4px; }
+  .form { padding: 20px; }
+  .notes { margin: 32px 16px; padding: 16px; }
+  .foot { padding: 20px 16px; }
+}
